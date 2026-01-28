@@ -26,13 +26,24 @@ Try out the following as you work on this exercise:
 Carryout the following steps to clean and save the San Francisco Weather data.  Make sure to download and add the data file to your portfolio repository as instructed.
 
 1. Read in the weather data in this file with the correct relative file path after you move it to the instructed location.
+```{r}
+library(tidyverse)
+
+# weather <- read_csv("~/Documents/ds212/portfolio-yeshedj/ica/data/raw/weather.csv")
+weather <- read_csv("data/raw/weather.csv")
+```
+
+
 2. There is a variable that has values that don't make sense in the data context. Figure out which variable this is and clean it up by making those values missing using `na_if()`.
+```{r}
+# na.if
+
+```
+
+
 3. Create a variable called `dateInYear` that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).
 4. Create a variable called `month_name` that shows the 3-letter abbreviation for each case.
 5. Save the wrangled data to the `data/processed/` folder using `write_csv()`. Name this file `weather_clean.csv`. Look up the documentation for this function by typing `?write_csv` in the Console. You'll need to write an appropriate relative path.
 
 
-```{r}
-
-```
 
