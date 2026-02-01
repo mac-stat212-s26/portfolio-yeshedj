@@ -21,14 +21,47 @@
     ]
   },
   {
-    "objectID": "tt/2025-07-08.html",
-    "href": "tt/2025-07-08.html",
-    "title": "TidyTuesday Sample 1",
+    "objectID": "tt/2026-02-03.html",
+    "href": "tt/2026-02-03.html",
+    "title": "HW1 TidyTuesday Brazilian Companies",
     "section": "",
-    "text": "Add content here",
+    "text": "Introduction\nBrazilian companies work under different legal natures/structures (e.g., “Limited Liability Business Company (LLC)”, and are classified into size categories ranging from micro-enterprises to large enterprises. For this Tidy Tuesday analysis, we explore how capital levels vary across both the legal structure and company sizes.\nCodeoptions(repos = c(CRAN = \"https://cloud.r-project.org\"))\n\nlibrary(tidyverse)\n\ncompanies &lt;- read_csv(\n  \"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv\",\n  show_col_types = FALSE\n) %&gt;%\n  mutate(capital_millions = capital_stock / 1e6)",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>TidyTuesday Sample 1</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW1 TidyTuesday Brazilian Companies</span>"
+    ]
+  },
+  {
+    "objectID": "tt/2026-02-03.html#average-capital-by-legal-structure",
+    "href": "tt/2026-02-03.html#average-capital-by-legal-structure",
+    "title": "HW1 TidyTuesday Brazilian Companies",
+    "section": "Average Capital by Legal Structure",
+    "text": "Average Capital by Legal Structure\n\nCodetop_legal &lt;- companies %&gt;%\n  count(legal_nature, sort = TRUE) %&gt;%\n  head(3) %&gt;%\n  pull(legal_nature)\n\ncompanies %&gt;%\n  filter(legal_nature %in% top_legal) %&gt;%\n  group_by(legal_nature, company_size) %&gt;%\n  summarise(avg_capital = mean(capital_millions, na.rm = TRUE), .groups = \"drop\") %&gt;%\n  ggplot(aes(x = reorder(legal_nature, avg_capital), y = avg_capital, fill = company_size)) +\n  geom_col(position = \"dodge\") +\n  scale_fill_viridis_d(option = \"plasma\") +\n  coord_flip() +\n  labs(\n    title = \"Average Capital by Legal Nature & Company Size\",\n    subtitle = \"Top 3 most common company legal structures in Brazil\",\n    x = \"Legal Nature\",\n    y = \"Average Capital Stock (millions of BRL)\",\n    fill = \"Company Size\"\n  ) +\n  theme_minimal() +\n   theme(\n    legend.position = \"right\",\n    plot.title = element_text(hjust = 1.1),\n    plot.subtitle = element_text(hjust = 1.5)\n  )",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW1 TidyTuesday Brazilian Companies</span>"
+    ]
+  },
+  {
+    "objectID": "tt/2026-02-03.html#results",
+    "href": "tt/2026-02-03.html#results",
+    "title": "HW1 TidyTuesday Brazilian Companies",
+    "section": "Results",
+    "text": "Results\nThe grouped bar chart shows us how capital levels vary across both legal nature and company size. Within each of the legal natures, we see distinct differences between the size categories, with larger enterprises generally holding more capital than micro or smaller enterprises. We also see that certain legal structures are more common for specific sized categories, and that the relationship between size and capital differs a bit by its legal structure.",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW1 TidyTuesday Brazilian Companies</span>"
+    ]
+  },
+  {
+    "objectID": "tt/2026-02-03.html#conclusion",
+    "href": "tt/2026-02-03.html#conclusion",
+    "title": "HW1 TidyTuesday Brazilian Companies",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis analysis reveals that both the legal nature and the company size are associated with different capital levels among Brazilian companies. Based on the way these two factors interacted, we can understand that business capital in Brazil has to consider multiple different factors of how the companies are organized and classified. These patterns can help policymakers and investors better interpret business classifications and make more informed decisions.",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW1 TidyTuesday Brazilian Companies</span>"
     ]
   },
   {
@@ -91,7 +124,7 @@
     "href": "ica/cleaning.html",
     "title": "Cleaning SFO Weather Data",
     "section": "",
-    "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.\nProblem 1\nCodelibrary(tidyverse)\n\n# weather &lt;- read_csv(\"~/Documents/ds212/portfolio-yeshedj/ica/data/raw/weather.csv\")\nweather &lt;- read_csv(\"data/raw/weather.csv\")\nProblem 2\nCode# na.if",
+    "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.\nCodelibrary(tidyverse)\n\n# weather &lt;- read_csv(\"~/Documents/ds212/portfolio-yeshedj/ica/data/raw/weather.csv\")\nweather &lt;- read_csv(\"data/raw/weather.csv\")\nCode# na.if",
     "crumbs": [
       "In-Class Activities",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
@@ -102,7 +135,7 @@
     "href": "ica/cleaning.html#exercise",
     "title": "Cleaning SFO Weather Data",
     "section": "",
-    "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
+    "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\n\n\n\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\n\n\n\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
     "crumbs": [
       "In-Class Activities",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"

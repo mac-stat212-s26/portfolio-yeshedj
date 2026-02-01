@@ -354,7 +354,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tt/2025-07-08.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">TidyTuesday Sample 1</span></a>
+  <a href="../tt/2026-02-03.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW1 TidyTuesday Brazilian Companies</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -499,12 +499,7 @@ cookieconsent.run({
 <p>Carryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.</p>
 <ol type="1">
 <li>Read in the weather data in this file with the correct relative file path after you move it to the instructed location.</li>
-<li>There is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using <code>na_if()</code>.</li>
-<li>Create a variable called <code>dateInYear</code> that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).</li>
-<li>Create a variable called <code>month_name</code> that shows the 3-letter abbreviation for each case.</li>
-<li>Save the wrangled data to the <code>data/processed/</code> folder using <code>write_csv()</code>. Name this file <code>weather_clean.csv</code>. Look up the documentation for this function by typing <code>?write_csv</code> in the Console. You’ll need to write an appropriate relative path.</li>
 </ol>
-<p>Problem 1</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
@@ -512,11 +507,18 @@ cookieconsent.run({
 <span id="cb1-4"><a href="#cb1-4"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/weather.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Problem 2</p>
+<ol start="2" type="1">
+<li>There is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using <code>na_if()</code>.</li>
+</ol>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># na.if</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<ol start="3" type="1">
+<li>Create a variable called <code>dateInYear</code> that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).</li>
+<li>Create a variable called <code>month_name</code> that shows the 3-letter abbreviation for each case.</li>
+<li>Save the wrangled data to the <code>data/processed/</code> folder using <code>write_csv()</code>. Name this file <code>weather_clean.csv</code>. Look up the documentation for this function by typing <code>?write_csv</code> in the Console. You’ll need to write an appropriate relative path.</li>
+</ol>
 
 
 <!-- -->
@@ -1028,24 +1030,26 @@ cookieconsent.run({
 <span id="cb3-26"><a href="#cb3-26"></a>Carryout the following steps to clean and save the San Francisco Weather data.  Make sure to download and add the data file to your portfolio repository as instructed.</span>
 <span id="cb3-27"><a href="#cb3-27"></a></span>
 <span id="cb3-28"><a href="#cb3-28"></a><span class="ss">1. </span>Read in the weather data in this file with the correct relative file path after you move it to the instructed location.</span>
-<span id="cb3-29"><a href="#cb3-29"></a><span class="ss">2. </span>There is a variable that has values that don't make sense in the data context. Figure out which variable this is and clean it up by making those values missing using <span class="in">`na_if()`</span>.</span>
-<span id="cb3-30"><a href="#cb3-30"></a><span class="ss">3. </span>Create a variable called <span class="in">`dateInYear`</span> that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).</span>
-<span id="cb3-31"><a href="#cb3-31"></a><span class="ss">4. </span>Create a variable called <span class="in">`month_name`</span> that shows the 3-letter abbreviation for each case.</span>
-<span id="cb3-32"><a href="#cb3-32"></a><span class="ss">5. </span>Save the wrangled data to the <span class="in">`data/processed/`</span> folder using <span class="in">`write_csv()`</span>. Name this file <span class="in">`weather_clean.csv`</span>. Look up the documentation for this function by typing <span class="in">`?write_csv`</span> in the Console. You'll need to write an appropriate relative path.</span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="in">```{r}</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb3-33"><a href="#cb3-33"></a></span>
-<span id="cb3-34"><a href="#cb3-34"></a>Problem 1</span>
-<span id="cb3-37"><a href="#cb3-37"></a><span class="in">```{r}</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-39"><a href="#cb3-39"></a></span>
-<span id="cb3-40"><a href="#cb3-40"></a><span class="co"># weather &lt;- read_csv("~/Documents/ds212/portfolio-yeshedj/ica/data/raw/weather.csv")</span></span>
-<span id="cb3-41"><a href="#cb3-41"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/weather.csv"</span>)</span>
-<span id="cb3-42"><a href="#cb3-42"></a><span class="in">```</span></span>
-<span id="cb3-43"><a href="#cb3-43"></a></span>
-<span id="cb3-44"><a href="#cb3-44"></a>Problem 2</span>
-<span id="cb3-47"><a href="#cb3-47"></a><span class="in">```{r}</span></span>
-<span id="cb3-48"><a href="#cb3-48"></a><span class="co"># na.if</span></span>
-<span id="cb3-49"><a href="#cb3-49"></a></span>
-<span id="cb3-50"><a href="#cb3-50"></a><span class="in">```</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="co"># weather &lt;- read_csv("~/Documents/ds212/portfolio-yeshedj/ica/data/raw/weather.csv")</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/weather.csv"</span>)</span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="in">```</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a></span>
+<span id="cb3-38"><a href="#cb3-38"></a></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="ss">2. </span>There is a variable that has values that don't make sense in the data context. Figure out which variable this is and clean it up by making those values missing using <span class="in">`na_if()`</span>.</span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="in">```{r}</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="co"># na.if</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a></span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="in">```</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a></span>
+<span id="cb3-47"><a href="#cb3-47"></a></span>
+<span id="cb3-48"><a href="#cb3-48"></a><span class="ss">3. </span>Create a variable called <span class="in">`dateInYear`</span> that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).</span>
+<span id="cb3-49"><a href="#cb3-49"></a><span class="ss">4. </span>Create a variable called <span class="in">`month_name`</span> that shows the 3-letter abbreviation for each case.</span>
+<span id="cb3-50"><a href="#cb3-50"></a><span class="ss">5. </span>Save the wrangled data to the <span class="in">`data/processed/`</span> folder using <span class="in">`write_csv()`</span>. Name this file <span class="in">`weather_clean.csv`</span>. Look up the documentation for this function by typing <span class="in">`?write_csv`</span> in the Console. You'll need to write an appropriate relative path.</span>
+<span id="cb3-51"><a href="#cb3-51"></a></span>
+<span id="cb3-52"><a href="#cb3-52"></a></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
