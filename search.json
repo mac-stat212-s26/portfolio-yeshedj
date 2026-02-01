@@ -21,8 +21,8 @@
     ]
   },
   {
-    "objectID": "tt/2026-02-03.html",
-    "href": "tt/2026-02-03.html",
+    "objectID": "tt/hw1-tt.html",
+    "href": "tt/hw1-tt.html",
     "title": "HW1 TidyTuesday Brazilian Companies",
     "section": "",
     "text": "Introduction\nBrazilian companies work under different legal natures/structures (e.g., “Limited Liability Business Company (LLC)”, and are classified into size categories ranging from micro-enterprises to large enterprises. For this Tidy Tuesday analysis, we explore how capital levels vary across both the legal structure and company sizes.\nCodeoptions(repos = c(CRAN = \"https://cloud.r-project.org\"))\n\nlibrary(tidyverse)\n\ncompanies &lt;- read_csv(\n  \"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv\",\n  show_col_types = FALSE\n) %&gt;%\n  mutate(capital_millions = capital_stock / 1e6)",
@@ -32,8 +32,8 @@
     ]
   },
   {
-    "objectID": "tt/2026-02-03.html#average-capital-by-legal-structure",
-    "href": "tt/2026-02-03.html#average-capital-by-legal-structure",
+    "objectID": "tt/hw1-tt.html#average-capital-by-legal-structure",
+    "href": "tt/hw1-tt.html#average-capital-by-legal-structure",
     "title": "HW1 TidyTuesday Brazilian Companies",
     "section": "Average Capital by Legal Structure",
     "text": "Average Capital by Legal Structure\n\nCodetop_legal &lt;- companies %&gt;%\n  count(legal_nature, sort = TRUE) %&gt;%\n  head(3) %&gt;%\n  pull(legal_nature)\n\ncompanies %&gt;%\n  filter(legal_nature %in% top_legal) %&gt;%\n  group_by(legal_nature, company_size) %&gt;%\n  summarise(avg_capital = mean(capital_millions, na.rm = TRUE), .groups = \"drop\") %&gt;%\n  ggplot(aes(x = reorder(legal_nature, avg_capital), y = avg_capital, fill = company_size)) +\n  geom_col(position = \"dodge\") +\n  scale_fill_viridis_d(option = \"plasma\") +\n  coord_flip() +\n  labs(\n    title = \"Average Capital by Legal Nature & Company Size\",\n    subtitle = \"Top 3 most common company legal structures in Brazil\",\n    x = \"Legal Nature\",\n    y = \"Average Capital Stock (millions of BRL)\",\n    fill = \"Company Size\"\n  ) +\n  theme_minimal() +\n   theme(\n    legend.position = \"right\",\n    plot.title = element_text(hjust = 1.1),\n    plot.subtitle = element_text(hjust = 1.5)\n  )",
@@ -43,8 +43,8 @@
     ]
   },
   {
-    "objectID": "tt/2026-02-03.html#results",
-    "href": "tt/2026-02-03.html#results",
+    "objectID": "tt/hw1-tt.html#results",
+    "href": "tt/hw1-tt.html#results",
     "title": "HW1 TidyTuesday Brazilian Companies",
     "section": "Results",
     "text": "Results\nThe grouped bar chart shows us how capital levels vary across both legal nature and company size. Within each of the legal natures, we see distinct differences between the size categories, with larger enterprises generally holding more capital than micro or smaller enterprises. We also see that certain legal structures are more common for specific sized categories, and that the relationship between size and capital differs a bit by its legal structure.",
@@ -54,8 +54,8 @@
     ]
   },
   {
-    "objectID": "tt/2026-02-03.html#conclusion",
-    "href": "tt/2026-02-03.html#conclusion",
+    "objectID": "tt/hw1-tt.html#conclusion",
+    "href": "tt/hw1-tt.html#conclusion",
     "title": "HW1 TidyTuesday Brazilian Companies",
     "section": "Conclusion",
     "text": "Conclusion\nThis analysis reveals that both the legal nature and the company size are associated with different capital levels among Brazilian companies. Based on the way these two factors interacted, we can understand that business capital in Brazil has to consider multiple different factors of how the companies are organized and classified. These patterns can help policymakers and investors better interpret business classifications and make more informed decisions.",
