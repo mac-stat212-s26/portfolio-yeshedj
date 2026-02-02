@@ -1,0 +1,58 @@
+---
+title: "HW1 TidyTuesday Brazilian Companies"
+date: "Febuary 3, 2026"
+author: "Yeshe Jangchup"
+---
+
+## Introduction
+Brazilian companies work under different legal natures/structures (e.g., “Limited Liability Business Company (LLC)”, and are classified into size categories ranging from micro-enterprises to large enterprises. For this Tidy Tuesday analysis, we explore how capital levels vary across both the legal structure and company sizes.
+
+```{r}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+library(tidyverse)
+
+companies <- read_csv(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv",
+  show_col_types = FALSE
+) %>%
+  mutate(capital_millions = capital_stock / 1e6)
+```
+
+
+## Average Capital by Legal Structure
+```{r}
+top_legal <- companies %>%
+  count(legal_nature, sort = TRUE) %>%
+  head(3) %>%
+  pull(legal_nature)
+
+companies %>%
+  filter(legal_nature %in% top_legal) %>%
+  group_by(legal_nature, company_size) %>%
+  summarise(avg_capital = mean(capital_millions, na.rm = TRUE), .groups = "drop") %>%
+  ggplot(aes(x = reorder(legal_nature, avg_capital), y = avg_capital, fill = company_size)) +
+  geom_col(position = "dodge") +
+  scale_fill_viridis_d(option = "plasma") +
+  coord_flip() +
+  labs(
+    title = "Average Capital by Legal Nature & Company Size",
+    subtitle = "Top 3 most common company legal structures in Brazil",
+    x = "Legal Nature",
+    y = "Average Capital Stock (millions of BRL)",
+    fill = "Company Size"
+  ) +
+  theme_minimal() +
+   theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 1.1),
+    plot.subtitle = element_text(hjust = 1.5)
+  )
+```
+
+
+## Results
+The grouped bar chart shows us how capital levels vary across both legal nature and company size. Within each of the legal natures, we see distinct differences between the size categories, with larger enterprises generally holding more capital than micro or smaller enterprises. We also see that certain legal structures are more common for specific sized categories, and that the relationship between size and capital differs a bit by its legal structure.
+
+## Conclusion
+This analysis reveals that both the legal nature and the company size are associated with different capital levels among Brazilian companies. Based on the way these two factors interacted, we can understand that business capital in Brazil has to consider multiple different factors of how the companies are organized and classified. These patterns can help policymakers and investors better interpret business classifications and make more informed decisions.
