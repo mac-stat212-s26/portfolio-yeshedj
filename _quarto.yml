@@ -64,6 +64,11 @@ book:
       chapters:
       - pv/pv-01.qmd
 
+    - part: "Homework"
+      chapters:
+      - tt/hw1-tt.qmd
+      - hw/hw2/hw02-p1.qmd
+
     - part: "TidyTuesday"
       chapters:
       - tt/hw1-tt.qmd
@@ -75,8 +80,6 @@ book:
 
     - part: "In-Class Activities"
       chapters:
-      - ica/ica-sample1.qmd
-      - ica/ica-sample2.qmd
       - ica/03_adv_ggplot/code/03-adv-ggplot-notes.qmd
       - ica/04_adv_maps/code/04-adv-maps-1-notes.qmd
       - ica/cleaning.qmd
