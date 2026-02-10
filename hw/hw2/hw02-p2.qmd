@@ -1,0 +1,171 @@
+---
+title: "HW02-P2 Adv Data Viz"
+---
+
+## Instructions
+
+**Task:** Open up the New York Times article [A Summer of Strikes](https://www.nytimes.com/interactive/2023/09/03/business/economy/strikes-union-sag-uaw.html), and scroll down to the plot titled "Union membership has fallen sharply over the past four decades (Share of the work force in a union, by industry)".
+
+![](https://hash-mac.github.io/stat212site-sp26/images/challenge-2-goal.png)
+
+Using `ggplot2` and other tools in R, recreate this plot. Note that you will need to create the data underlying the plot yourself. You can create this data in R with `tibble()`. You can also write the data in Excel or Google Sheets and export it as a CSV file.
+
+**Requirements:**
+
+- Overall
+  - Panels for "All workers", "By Sector", and "By Industry" are shown.
+  - Arrows showing the change from 1983 to 2022 are shown.
+    - Note: be sure that the arrows all point in the correct direction!
+  - The actual percentages in 1983 and 2022 are shown as text.
+  - X-axis tick marks are at 0, 25, and 50.
+  - Plot title says "Union membership has fallen sharply over the past four decades".
+  - Plot subtitle says "Share of the work force in a union, by industry".
+- Resource reflection
+    - At least 1 resource is listed
+    - At least 3 sentences about resources and their helpfulness in the task
+
+**Bonus**: Additional possibilities to enhance your visualization include adjusting the default aesthetics of the arrows, aligning your plots neatly, and adding margins in order to left-align the y-axis text. 
+
+
+
+
+
+## Setup
+
+```{r}
+# loading packages
+library(tidyverse)
+library(patchwork)
+```
+
+```{r}
+# generating data
+union_data <- tibble(
+  category = c(
+    "All workers",
+    "Private sector", "Public sector",
+    "Transportation and utilities", "Manufacturing", "Mining",
+    "Construction", "Education and health", "Arts, entertainment and recreation",
+    "Business services", "Retail, food and hospitality", "Public administration",
+    "Agriculture"
+  ),
+  percent_1983 = c(20, 17, 37, 47, 28, 27, 28, 26, 17, 10, 8, 30, 5),
+  percent_2022 = c(10,6, 33,16, 8, 7, 13, 17, 7, 3, 3, 28, 4),
+  panel = c(
+    "All workers",
+    "By Sector", "By Sector",
+    rep("By Industry", 10)
+  )
+)
+
+union_data <- union_data %>%
+  mutate(
+    category = fct_inorder(category),
+    panel = factor(panel, levels = c("All workers", "By Sector", "By Industry"))
+  )
+```
+
+
+
+
+## Visualization
+
+```{r, fig.height=8, fig.width=7}
+# recreating the visualization
+
+create_panel <- function(data, panel_name) {
+  data_subset <- data %>% filter(panel == panel_name)
+  
+  ggplot(data_subset, aes(y = category)) +
+    geom_segment(
+      aes(x = percent_1983, xend = percent_2022, 
+          y = category, yend = category),
+      arrow = arrow(length = unit(0.2, "cm"), type = "closed"),
+      color = "#1f4788", 
+      linewidth = 0.8
+    ) +
+    geom_text(
+      aes(x = percent_2022, label = paste(percent_2022, "%", sep="")),
+      hjust = 1.3,
+      size = 3.5,
+      fontface = "bold"
+    ) +
+    geom_text(
+      aes(x = percent_1983, label = paste(percent_1983, "%", sep="")), 
+      hjust = -0.3,
+      size = 3.5,
+      fontface = "bold"
+    ) +
+    scale_x_continuous(
+      breaks = c(0, 25, 50),
+      limits = c(0, 52),
+      labels = function(x) paste(x, "%", sep=""),
+      expand = c(0, 0)
+    ) +
+    labs(
+      title = if(panel_name == "All workers") NULL else toupper(panel_name),
+      x = NULL,
+      y = NULL
+    ) +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(color = "gray85", linewidth = 0.3),
+      axis.text.y = element_text(hjust = 0, size = 10),
+      axis.text.x = element_text(size = 9, color = "gray50"),
+      plot.title = element_text(face = "bold", size = 10, margin = margin(b = 10), hjust = 0),
+      plot.title.position = "plot",  
+      plot.margin = margin(15, 10, 10, 10)
+    )
+}
+
+panel1 <- create_panel(union_data, "All workers") +
+  annotate("text", 
+           x = 10, y = 1.5, 
+           label = "2022", 
+           size = 3, 
+           color = "gray50") +
+  annotate("text", 
+           x = 20, y = 1.5, 
+           label = "1983", 
+           size = 3, 
+           color = "gray50")
+
+panel2 <- create_panel(union_data, "By Sector")
+panel3 <- create_panel(union_data, "By Industry")
+
+final_plot <- panel1 / panel2 / panel3 +
+  plot_layout(heights = c(1, 2, 10)) +  
+  plot_annotation(
+    title = "Union membership has fallen sharply over the past four decades",
+    subtitle = "Share of the work force in a union, by industry",
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 14),
+      plot.subtitle = element_text(size = 12, color = "gray50")
+    )
+  )
+
+final_plot
+```
+
+
+
+## Resources Reflection (required)
+
+List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.
+
+**Resources:**
+
+-   03 Adv Data Viz & 04 Adv Spatial Viz in class activity
+
+-   ggplot2 documentation
+
+-   Stack Overflow
+
+**Reflection:** Similarly to HW 2 pt 1, the most helpful resource for this assignment was the ggplot2 documentation since it explains what different functions are and how they work, by providing example code and visualizations. The in class activities were also useful to reference back since you can review the steps of creating a multi-pieced graph with different parts to it. I, again, used Stack Overflow a few times to understand some errors that helped to resolve confusion.
+
+
+
+
+
