@@ -1,0 +1,72 @@
+---
+title: "HW02-P2 Adv Data Viz"
+---
+
+## Instructions
+
+**Task:** Open up the New York Times article [A Summer of Strikes](https://www.nytimes.com/interactive/2023/09/03/business/economy/strikes-union-sag-uaw.html), and scroll down to the plot titled "Union membership has fallen sharply over the past four decades (Share of the work force in a union, by industry)".
+
+![](https://hash-mac.github.io/stat212site-sp26/images/challenge-2-goal.png)
+
+Using `ggplot2` and other tools in R, recreate this plot. Note that you will need to create the data underlying the plot yourself. You can create this data in R with `tibble()`. You can also write the data in Excel or Google Sheets and export it as a CSV file.
+
+**Requirements:**
+
+- Overall
+  - Panels for "All workers", "By Sector", and "By Industry" are shown.
+  - Arrows showing the change from 1983 to 2022 are shown.
+    - Note: be sure that the arrows all point in the correct direction!
+  - The actual percentages in 1983 and 2022 are shown as text.
+  - X-axis tick marks are at 0, 25, and 50.
+  - Plot title says "Union membership has fallen sharply over the past four decades".
+  - Plot subtitle says "Share of the work force in a union, by industry".
+- Resource reflection
+    - At least 1 resource is listed
+    - At least 3 sentences about resources and their helpfulness in the task
+
+**Bonus**: Additional possibilities to enhance your visualization include adjusting the default aesthetics of the arrows, aligning your plots neatly, and adding margins in order to left-align the y-axis text. 
+
+
+
+
+
+## Setup
+
+```{r}
+# Code for loading packages
+# And code for reading in data if using the Excel/Google Sheets-->CSV approach
+```
+
+```{r}
+# Code for generating the data (if using the tibble() approach)
+```
+
+
+
+
+## Visualization
+
+
+```{r}
+# Code for recreating the visualization
+# Use as many code chunks as you need to organize your work well
+```
+
+
+
+## Resources Reflection (required)
+
+List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.
+
+**Resources:**
+
+-
+-
+-
+
+**Reflection:**
+
+
+
+
+
