@@ -66,12 +66,16 @@ book:
 
     - part: "Homework"
       chapters:
-      - tt/hw1-tt.qmd
-      - hw/hw2/hw02-p1.qmd
+      - homework-yeshedj/hw01/src/hw1-tt.qmd
+      - homework-yeshedj/hw02/src/hw02-p1.qmd
+      - homework-yeshedj/hw02/src/hw02-p2.qmd
+      - homework-yeshedj/hw03/src/hw03-p1.qmd
+      - homework-yeshedj/hw03/src/hw03-p2.qmd
+
 
     - part: "TidyTuesday"
       chapters:
-      - tt/hw1-tt.qmd
+      - homework-yeshedj/hw01/src/hw1-tt.qmd
       - tt/2025-07-15.qmd
 
     - part: "Pre-Class Learnings"
@@ -82,11 +86,10 @@ book:
       chapters:
       - ica/03_adv_ggplot/code/03-adv-ggplot-notes.qmd
       - ica/04_adv_maps/code/04-adv-maps-1-notes.qmd
-      - ica/cleaning.qmd
+
 
     - part: "Extras"
       chapters:
-      - extra/extra-sample1.qmd
       - extra/extra-sample2.qmd
 
 
