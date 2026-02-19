@@ -514,21 +514,25 @@ cookieconsent.run({
 <span id="cb2-9"><a href="#cb2-9"></a>  <span class="fu">summarise</span>(<span class="at">avg_capital =</span> <span class="fu">mean</span>(capital_millions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, avg_capital), <span class="at">y =</span> avg_capital, <span class="at">fill =</span> company_size)) <span class="sc">+</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"plasma"</span>) <span class="sc">+</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="at">title =</span> <span class="st">"Average Capital by Legal Nature &amp; Company Size"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16"></a>    <span class="at">subtitle =</span> <span class="st">"Top 3 most common company legal structures in Brazil"</span>,</span>
-<span id="cb2-17"><a href="#cb2-17"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb2-18"><a href="#cb2-18"></a>    <span class="at">y =</span> <span class="st">"Average Capital Stock (millions of BRL)"</span>,</span>
-<span id="cb2-19"><a href="#cb2-19"></a>    <span class="at">fill =</span> <span class="st">"Company Size"</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>   <span class="fu">theme</span>(</span>
-<span id="cb2-23"><a href="#cb2-23"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb2-24"><a href="#cb2-24"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">1.1</span>),</span>
-<span id="cb2-25"><a href="#cb2-25"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">1.5</span>)</span>
-<span id="cb2-26"><a href="#cb2-26"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-12"><a href="#cb2-12"></a>  <span class="fu">scale_fill_viridis_d</span>(</span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="at">option =</span> <span class="st">"plasma"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Micro Enterprise"</span>, <span class="st">"Other"</span>, <span class="st">"Small Enterprise"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15"></a>) <span class="sc">+</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-18"><a href="#cb2-18"></a>    <span class="at">title =</span> <span class="st">"Average Capital Across Legal Nature &amp; Company Size in Brazil"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19"></a>    <span class="at">caption =</span> <span class="st">"Top 3 most common company legal structures from the dataset"</span>,</span>
+<span id="cb2-20"><a href="#cb2-20"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
+<span id="cb2-21"><a href="#cb2-21"></a>    <span class="at">y =</span> <span class="st">"Average # of Capital Stock (Millions of BRL)"</span>,</span>
+<span id="cb2-22"><a href="#cb2-22"></a>    <span class="at">fill =</span> <span class="st">"Company Size"</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>   <span class="fu">theme</span>(</span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb2-27"><a href="#cb2-27"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">1.1</span>),</span>
+<span id="cb2-28"><a href="#cb2-28"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">1.5</span>),</span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb2-30"><a href="#cb2-30"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="hw1-tt_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
@@ -1030,57 +1034,63 @@ cookieconsent.run({
 <span id="cb3-5"><a href="#cb3-5"></a><span class="co">---</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a></span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="fu">## Introduction</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>Brazilian companies work under different legal natures/structures (e.g., “Limited Liability Business Company (LLC)”, and are classified into size categories ranging from micro-enterprises to large enterprises. For this Tidy Tuesday analysis, we explore how capital levels vary across both the legal structure and company sizes.</span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="in">```{r}</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cloud.r-project.org"</span>))</span>
-<span id="cb3-14"><a href="#cb3-14"></a></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-16"><a href="#cb3-16"></a></span>
-<span id="cb3-17"><a href="#cb3-17"></a>companies <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb3-18"><a href="#cb3-18"></a>  <span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv"</span>,</span>
-<span id="cb3-19"><a href="#cb3-19"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a>  <span class="fu">mutate</span>(<span class="at">capital_millions =</span> capital_stock <span class="sc">/</span> <span class="fl">1e6</span>)</span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="in">```</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a>Brazilian companies work under different legal natures/structures (e.g., “Limited Liability Business Company (LLC)”, and are classified into size categories ranging from micro-enterprises to large enterprises. For this Tidy Tuesday analysis, we explore how capital levels vary across both the legal structure and company sizes.</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="in">```{r}</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cloud.r-project.org"</span>))</span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-17"><a href="#cb3-17"></a></span>
+<span id="cb3-18"><a href="#cb3-18"></a>companies <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv"</span>,</span>
+<span id="cb3-20"><a href="#cb3-20"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>  <span class="fu">mutate</span>(<span class="at">capital_millions =</span> capital_stock <span class="sc">/</span> <span class="fl">1e6</span>)</span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="in">```</span></span>
 <span id="cb3-24"><a href="#cb3-24"></a></span>
 <span id="cb3-25"><a href="#cb3-25"></a><span class="fu">## Average Capital by Legal Structure</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="in">```{r}</span></span>
-<span id="cb3-29"><a href="#cb3-29"></a>top_legal <span class="ot">&lt;-</span> companies <span class="sc">%&gt;%</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a>  <span class="fu">count</span>(legal_nature, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-31"><a href="#cb3-31"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-32"><a href="#cb3-32"></a>  <span class="fu">pull</span>(legal_nature)</span>
-<span id="cb3-33"><a href="#cb3-33"></a></span>
-<span id="cb3-34"><a href="#cb3-34"></a>companies <span class="sc">%&gt;%</span></span>
-<span id="cb3-35"><a href="#cb3-35"></a>  <span class="fu">filter</span>(legal_nature <span class="sc">%in%</span> top_legal) <span class="sc">%&gt;%</span></span>
-<span id="cb3-36"><a href="#cb3-36"></a>  <span class="fu">group_by</span>(legal_nature, company_size) <span class="sc">%&gt;%</span></span>
-<span id="cb3-37"><a href="#cb3-37"></a>  <span class="fu">summarise</span>(<span class="at">avg_capital =</span> <span class="fu">mean</span>(capital_millions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, avg_capital), <span class="at">y =</span> avg_capital, <span class="at">fill =</span> company_size)) <span class="sc">+</span></span>
-<span id="cb3-39"><a href="#cb3-39"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb3-40"><a href="#cb3-40"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"plasma"</span>) <span class="sc">+</span></span>
-<span id="cb3-41"><a href="#cb3-41"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-43"><a href="#cb3-43"></a>    <span class="at">title =</span> <span class="st">"Average Capital by Legal Nature &amp; Company Size"</span>,</span>
-<span id="cb3-44"><a href="#cb3-44"></a>    <span class="at">subtitle =</span> <span class="st">"Top 3 most common company legal structures in Brazil"</span>,</span>
-<span id="cb3-45"><a href="#cb3-45"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
-<span id="cb3-46"><a href="#cb3-46"></a>    <span class="at">y =</span> <span class="st">"Average Capital Stock (millions of BRL)"</span>,</span>
-<span id="cb3-47"><a href="#cb3-47"></a>    <span class="at">fill =</span> <span class="st">"Company Size"</span></span>
-<span id="cb3-48"><a href="#cb3-48"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-49"><a href="#cb3-49"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb3-50"><a href="#cb3-50"></a>   <span class="fu">theme</span>(</span>
-<span id="cb3-51"><a href="#cb3-51"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb3-52"><a href="#cb3-52"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">1.1</span>),</span>
-<span id="cb3-53"><a href="#cb3-53"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">1.5</span>)</span>
-<span id="cb3-54"><a href="#cb3-54"></a>  )</span>
-<span id="cb3-55"><a href="#cb3-55"></a><span class="in">```</span></span>
-<span id="cb3-56"><a href="#cb3-56"></a></span>
-<span id="cb3-57"><a href="#cb3-57"></a></span>
-<span id="cb3-58"><a href="#cb3-58"></a><span class="fu">## Results</span></span>
-<span id="cb3-59"><a href="#cb3-59"></a>The grouped bar chart shows us how capital levels vary across both legal nature and company size. Within each of the legal natures, we see distinct differences between the size categories, with larger enterprises generally holding more capital than micro or smaller enterprises. We also see that certain legal structures are more common for specific sized categories, and that the relationship between size and capital differs a bit by its legal structure.</span>
-<span id="cb3-60"><a href="#cb3-60"></a></span>
-<span id="cb3-61"><a href="#cb3-61"></a><span class="fu">## Conclusion</span></span>
-<span id="cb3-62"><a href="#cb3-62"></a>This analysis reveals that both the legal nature and the company size are associated with different capital levels among Brazilian companies. Based on the way these two factors interacted, we can understand that business capital in Brazil has to consider multiple different factors of how the companies are organized and classified. These patterns can help policymakers and investors better interpret business classifications and make more informed decisions.</span>
+<span id="cb3-26"><a href="#cb3-26"></a></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="in">```{r}</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a>top_legal <span class="ot">&lt;-</span> companies <span class="sc">%&gt;%</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a>  <span class="fu">count</span>(legal_nature, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a>  <span class="fu">pull</span>(legal_nature)</span>
+<span id="cb3-34"><a href="#cb3-34"></a></span>
+<span id="cb3-35"><a href="#cb3-35"></a>companies <span class="sc">%&gt;%</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a>  <span class="fu">filter</span>(legal_nature <span class="sc">%in%</span> top_legal) <span class="sc">%&gt;%</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a>  <span class="fu">group_by</span>(legal_nature, company_size) <span class="sc">%&gt;%</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a>  <span class="fu">summarise</span>(<span class="at">avg_capital =</span> <span class="fu">mean</span>(capital_millions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(legal_nature, avg_capital), <span class="at">y =</span> avg_capital, <span class="at">fill =</span> company_size)) <span class="sc">+</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a>  <span class="fu">scale_fill_viridis_d</span>(</span>
+<span id="cb3-42"><a href="#cb3-42"></a>    <span class="at">option =</span> <span class="st">"plasma"</span>,</span>
+<span id="cb3-43"><a href="#cb3-43"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Micro Enterprise"</span>, <span class="st">"Other"</span>, <span class="st">"Small Enterprise"</span>)</span>
+<span id="cb3-44"><a href="#cb3-44"></a>) <span class="sc">+</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-47"><a href="#cb3-47"></a>    <span class="at">title =</span> <span class="st">"Average Capital Across Legal Nature &amp; Company Size in Brazil"</span>,</span>
+<span id="cb3-48"><a href="#cb3-48"></a>    <span class="at">caption =</span> <span class="st">"Top 3 most common company legal structures from the dataset"</span>,</span>
+<span id="cb3-49"><a href="#cb3-49"></a>    <span class="at">x =</span> <span class="st">"Legal Nature"</span>,</span>
+<span id="cb3-50"><a href="#cb3-50"></a>    <span class="at">y =</span> <span class="st">"Average # of Capital Stock (Millions of BRL)"</span>,</span>
+<span id="cb3-51"><a href="#cb3-51"></a>    <span class="at">fill =</span> <span class="st">"Company Size"</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-53"><a href="#cb3-53"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a>   <span class="fu">theme</span>(</span>
+<span id="cb3-55"><a href="#cb3-55"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb3-56"><a href="#cb3-56"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">1.1</span>),</span>
+<span id="cb3-57"><a href="#cb3-57"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">1.5</span>),</span>
+<span id="cb3-58"><a href="#cb3-58"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb3-59"><a href="#cb3-59"></a>  )</span>
+<span id="cb3-60"><a href="#cb3-60"></a><span class="in">```</span></span>
+<span id="cb3-61"><a href="#cb3-61"></a></span>
+<span id="cb3-62"><a href="#cb3-62"></a><span class="fu">## Results</span></span>
+<span id="cb3-63"><a href="#cb3-63"></a></span>
+<span id="cb3-64"><a href="#cb3-64"></a>The grouped bar chart shows us how capital levels vary across both legal nature and company size. Within each of the legal natures, we see distinct differences between the size categories, with larger enterprises generally holding more capital than micro or smaller enterprises. We also see that certain legal structures are more common for specific sized categories, and that the relationship between size and capital differs a bit by its legal structure.</span>
+<span id="cb3-65"><a href="#cb3-65"></a></span>
+<span id="cb3-66"><a href="#cb3-66"></a><span class="fu">## Conclusion</span></span>
+<span id="cb3-67"><a href="#cb3-67"></a></span>
+<span id="cb3-68"><a href="#cb3-68"></a>This analysis reveals that both the legal nature and the company size are associated with different capital levels among Brazilian companies. Based on the way these two factors interacted, we can understand that business capital in Brazil has to consider multiple different factors of how the companies are organized and classified. These patterns can help policymakers and investors better interpret business classifications and make more informed decisions.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
