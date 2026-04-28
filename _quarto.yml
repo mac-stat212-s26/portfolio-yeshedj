@@ -60,10 +60,6 @@ book:
     - text: "Welcome"
       href: index.qmd
 
-    - part: "Prof Viz"
-      chapters:
-      - pv/pv-01.qmd
-
     - part: "Homework"
       chapters:
       - homework-yeshedj/hw01/src/hw1-tt.qmd
@@ -90,7 +86,25 @@ book:
 
     - part: "Pre-Class Learnings"
       chapters:
-      - pcl/pcl.qmd
+      - pcl/1_pcl.Rmd
+      - pcl/2_pcl.Rmd
+      - pcl/3_pcl.Rmd
+      - pcl/4_pcl.Rmd
+      - pcl/6_pcl.Rmd
+      - pcl/7_pcl.Rmd
+      - pcl/8_pcl.Rmd
+      - pcl/9_pcl.Rmd
+      - pcl/10_pcl.Rmd
+      - pcl/11_pcl.Rmd
+      - pcl/12_pcl.Rmd
+      - pcl/13_pcl.Rmd
+      - pcl/14_pcl.Rmd
+      - pcl/15_pcl.Rmd
+      - pcl/16_pcl.Rmd
+      - pcl/17_pcl.Rmd
+      - pcl/18_pcl.Rmd
+
+
 
     - part: "In-Class Activities"
       chapters:
