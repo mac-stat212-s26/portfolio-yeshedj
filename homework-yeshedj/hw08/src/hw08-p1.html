@@ -1373,96 +1373,100 @@ cookieconsent.run({
 <span id="cb15-72"><a href="#cb15-72"></a>To be kind to the website owners, please add a 1 second pause between page queries. (Note that you can view 100 cheeses at a time.)</span>
 <span id="cb15-73"><a href="#cb15-73"></a></span>
 <span id="cb15-76"><a href="#cb15-76"></a><span class="in">```{r}</span></span>
-<span id="cb15-77"><a href="#cb15-77"></a><span class="co"># Load required libraries</span></span>
-<span id="cb15-78"><a href="#cb15-78"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb15-79"><a href="#cb15-79"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb15-80"><a href="#cb15-80"></a></span>
-<span id="cb15-81"><a href="#cb15-81"></a></span>
-<span id="cb15-82"><a href="#cb15-82"></a><span class="co"># Define the URL</span></span>
-<span id="cb15-83"><a href="#cb15-83"></a>base_url    <span class="ot">&lt;-</span> <span class="st">"https://www.cheese.com/alphabetical/?page="</span></span>
-<span id="cb15-84"><a href="#cb15-84"></a>scrape_page <span class="ot">&lt;-</span> <span class="cf">function</span>(page_num) {</span>
-<span id="cb15-85"><a href="#cb15-85"></a>    url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(base_url, page_num)</span>
-<span id="cb15-86"><a href="#cb15-86"></a>  </span>
-<span id="cb15-87"><a href="#cb15-87"></a><span class="co"># Read the HTML content from the webpage</span></span>
-<span id="cb15-88"><a href="#cb15-88"></a>  webpage <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
-<span id="cb15-89"><a href="#cb15-89"></a>  </span>
-<span id="cb15-90"><a href="#cb15-90"></a><span class="co"># Extract the cheese names and URLs</span></span>
-<span id="cb15-91"><a href="#cb15-91"></a>  h3_links <span class="ot">&lt;-</span> webpage <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">"h3 a"</span>)</span>
-<span id="cb15-92"><a href="#cb15-92"></a>  names    <span class="ot">&lt;-</span> h3_links <span class="sc">|&gt;</span> <span class="fu">html_text</span>(<span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb15-93"><a href="#cb15-93"></a>  urls     <span class="ot">&lt;-</span> h3_links <span class="sc">|&gt;</span> <span class="fu">html_attr</span>(<span class="st">"href"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-94"><a href="#cb15-94"></a>    (\(x) <span class="fu">paste0</span>(<span class="st">"https://www.cheese.com"</span>,x))()</span>
-<span id="cb15-95"><a href="#cb15-95"></a>  </span>
-<span id="cb15-96"><a href="#cb15-96"></a><span class="co"># Check if the cheese has a picture</span></span>
-<span id="cb15-97"><a href="#cb15-97"></a>  all_srcs    <span class="ot">&lt;-</span> webpage<span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">"img"</span>) <span class="sc">|&gt;</span> <span class="fu">html_attr</span>(<span class="st">"src"</span>)</span>
-<span id="cb15-98"><a href="#cb15-98"></a>  cheese_srcs <span class="ot">&lt;-</span> all_srcs[<span class="fu">grepl</span>(<span class="st">"cheese-thumbs|icon-cheese-default"</span>, all_srcs)]</span>
-<span id="cb15-99"><a href="#cb15-99"></a>  has_image   <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"icon-cheese-default"</span>, cheese_srcs)</span>
-<span id="cb15-100"><a href="#cb15-100"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
-<span id="cb15-101"><a href="#cb15-101"></a>  </span>
-<span id="cb15-102"><a href="#cb15-102"></a><span class="co"># Create a data frame to store the results</span></span>
-<span id="cb15-103"><a href="#cb15-103"></a>  <span class="fu">tibble</span>(<span class="at">name =</span> names, <span class="at">url =</span> urls, <span class="at">has_image =</span> has_image)</span>
-<span id="cb15-104"><a href="#cb15-104"></a>}</span>
-<span id="cb15-105"><a href="#cb15-105"></a>cheese_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">103</span>, scrape_page))</span>
-<span id="cb15-106"><a href="#cb15-106"></a><span class="in">```</span></span>
-<span id="cb15-107"><a href="#cb15-107"></a></span>
-<span id="cb15-108"><a href="#cb15-108"></a>Print the dimensions &amp; first few rows of your final data frame:</span>
+<span id="cb15-77"><a href="#cb15-77"></a><span class="co">#| cache: true</span></span>
+<span id="cb15-78"><a href="#cb15-78"></a><span class="co"># Load required libraries</span></span>
+<span id="cb15-79"><a href="#cb15-79"></a></span>
+<span id="cb15-80"><a href="#cb15-80"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb15-81"><a href="#cb15-81"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-82"><a href="#cb15-82"></a></span>
+<span id="cb15-83"><a href="#cb15-83"></a></span>
+<span id="cb15-84"><a href="#cb15-84"></a><span class="co"># Define the URL</span></span>
+<span id="cb15-85"><a href="#cb15-85"></a>base_url    <span class="ot">&lt;-</span> <span class="st">"https://www.cheese.com/alphabetical/?page="</span></span>
+<span id="cb15-86"><a href="#cb15-86"></a>scrape_page <span class="ot">&lt;-</span> <span class="cf">function</span>(page_num) {</span>
+<span id="cb15-87"><a href="#cb15-87"></a>    url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(base_url, page_num)</span>
+<span id="cb15-88"><a href="#cb15-88"></a>  </span>
+<span id="cb15-89"><a href="#cb15-89"></a><span class="co"># Read the HTML content from the webpage</span></span>
+<span id="cb15-90"><a href="#cb15-90"></a>  webpage <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
+<span id="cb15-91"><a href="#cb15-91"></a>  </span>
+<span id="cb15-92"><a href="#cb15-92"></a><span class="co"># Extract the cheese names and URLs</span></span>
+<span id="cb15-93"><a href="#cb15-93"></a>  h3_links <span class="ot">&lt;-</span> webpage <span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">"h3 a"</span>)</span>
+<span id="cb15-94"><a href="#cb15-94"></a>  names    <span class="ot">&lt;-</span> h3_links <span class="sc">|&gt;</span> <span class="fu">html_text</span>(<span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-95"><a href="#cb15-95"></a>  urls     <span class="ot">&lt;-</span> h3_links <span class="sc">|&gt;</span> <span class="fu">html_attr</span>(<span class="st">"href"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-96"><a href="#cb15-96"></a>    (\(x) <span class="fu">paste0</span>(<span class="st">"https://www.cheese.com"</span>,x))()</span>
+<span id="cb15-97"><a href="#cb15-97"></a>  </span>
+<span id="cb15-98"><a href="#cb15-98"></a><span class="co"># Check if the cheese has a picture</span></span>
+<span id="cb15-99"><a href="#cb15-99"></a>  all_srcs    <span class="ot">&lt;-</span> webpage<span class="sc">|&gt;</span> <span class="fu">html_elements</span>(<span class="st">"img"</span>) <span class="sc">|&gt;</span> <span class="fu">html_attr</span>(<span class="st">"src"</span>)</span>
+<span id="cb15-100"><a href="#cb15-100"></a>  cheese_srcs <span class="ot">&lt;-</span> all_srcs[<span class="fu">grepl</span>(<span class="st">"cheese-thumbs|icon-cheese-default"</span>, all_srcs)]</span>
+<span id="cb15-101"><a href="#cb15-101"></a>  has_image   <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"icon-cheese-default"</span>, cheese_srcs)</span>
+<span id="cb15-102"><a href="#cb15-102"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
+<span id="cb15-103"><a href="#cb15-103"></a>  </span>
+<span id="cb15-104"><a href="#cb15-104"></a><span class="co"># Create a data frame to store the results</span></span>
+<span id="cb15-105"><a href="#cb15-105"></a>  <span class="fu">tibble</span>(<span class="at">name =</span> names, <span class="at">url =</span> urls, <span class="at">has_image =</span> has_image)</span>
+<span id="cb15-106"><a href="#cb15-106"></a>}</span>
+<span id="cb15-107"><a href="#cb15-107"></a>cheese_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">103</span>, scrape_page))</span>
+<span id="cb15-108"><a href="#cb15-108"></a><span class="in">```</span></span>
 <span id="cb15-109"><a href="#cb15-109"></a></span>
-<span id="cb15-112"><a href="#cb15-112"></a><span class="in">```{r}</span></span>
-<span id="cb15-113"><a href="#cb15-113"></a><span class="fu">dim</span>(cheese_df)</span>
-<span id="cb15-114"><a href="#cb15-114"></a><span class="fu">head</span>(cheese_df)</span>
-<span id="cb15-115"><a href="#cb15-115"></a><span class="in">```</span></span>
-<span id="cb15-116"><a href="#cb15-116"></a></span>
-<span id="cb15-117"><a href="#cb15-117"></a><span class="fu">## Ex 4</span></span>
+<span id="cb15-110"><a href="#cb15-110"></a>Print the dimensions &amp; first few rows of your final data frame:</span>
+<span id="cb15-111"><a href="#cb15-111"></a></span>
+<span id="cb15-114"><a href="#cb15-114"></a><span class="in">```{r}</span></span>
+<span id="cb15-115"><a href="#cb15-115"></a><span class="fu">dim</span>(cheese_df)</span>
+<span id="cb15-116"><a href="#cb15-116"></a><span class="fu">head</span>(cheese_df)</span>
+<span id="cb15-117"><a href="#cb15-117"></a><span class="in">```</span></span>
 <span id="cb15-118"><a href="#cb15-118"></a></span>
-<span id="cb15-119"><a href="#cb15-119"></a>When you go to a particular cheese's page (like <span class="co">[</span><span class="ot">gouda</span><span class="co">](https://www.cheese.com/gouda/)</span>), you'll see more detailed information about the cheese. For **just 10** of the cheeses in the database, obtain the following detailed information: milk information, country of origin, family, type, and flavour. (Just 10 to avoid overtaxing the website. Continue adding a 1 second pause between page queries.)</span>
+<span id="cb15-119"><a href="#cb15-119"></a><span class="fu">## Ex 4</span></span>
 <span id="cb15-120"><a href="#cb15-120"></a></span>
-<span id="cb15-123"><a href="#cb15-123"></a><span class="in">```{r}</span></span>
-<span id="cb15-124"><a href="#cb15-124"></a>get_field <span class="ot">&lt;-</span> <span class="cf">function</span>(items, label) {</span>
-<span id="cb15-125"><a href="#cb15-125"></a>  hit <span class="ot">&lt;-</span> items[<span class="fu">grepl</span>(label, items, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)]</span>
-<span id="cb15-126"><a href="#cb15-126"></a>  <span class="cf">if</span> (<span class="fu">length</span>(hit) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NA_character_</span>)</span>
-<span id="cb15-127"><a href="#cb15-127"></a>  <span class="fu">trimws</span>(<span class="fu">gsub</span>(<span class="fu">paste0</span>(<span class="st">"^.*"</span>, label, <span class="st">"</span><span class="sc">\\</span><span class="st">s*:?</span><span class="sc">\\</span><span class="st">s*"</span>), <span class="st">""</span>, hit[<span class="dv">1</span>], <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb15-128"><a href="#cb15-128"></a>}</span>
-<span id="cb15-129"><a href="#cb15-129"></a></span>
-<span id="cb15-130"><a href="#cb15-130"></a>scrape_detail <span class="ot">&lt;-</span> <span class="cf">function</span>(cheese_url) {</span>
-<span id="cb15-131"><a href="#cb15-131"></a>  page<span class="ot">&lt;-</span> <span class="fu">read_html</span>(cheese_url)</span>
-<span id="cb15-132"><a href="#cb15-132"></a>  items <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span></span>
-<span id="cb15-133"><a href="#cb15-133"></a>    <span class="fu">html_elements</span>(<span class="st">"#collapse-information li"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-134"><a href="#cb15-134"></a>    <span class="fu">html_text</span>(<span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb15-135"><a href="#cb15-135"></a>  </span>
-<span id="cb15-136"><a href="#cb15-136"></a>  milk <span class="ot">&lt;-</span><span class="fu">get_field</span>(items, <span class="st">"Made from"</span>)</span>
-<span id="cb15-137"><a href="#cb15-137"></a>  country <span class="ot">&lt;-</span> <span class="fu">get_field</span>(items, <span class="st">"Country of origin"</span>)</span>
-<span id="cb15-138"><a href="#cb15-138"></a>  family <span class="ot">&lt;-</span> <span class="fu">get_field</span>(items, <span class="st">"Family"</span>)</span>
-<span id="cb15-139"><a href="#cb15-139"></a>  type <span class="ot">&lt;-</span> <span class="fu">get_field</span>(items, <span class="st">"Type"</span>)</span>
-<span id="cb15-140"><a href="#cb15-140"></a>  flavor <span class="ot">&lt;-</span> <span class="fu">get_field</span>(items, <span class="st">"Flavou?r"</span>)   <span class="co"># so that it matches Flavour or Flavor</span></span>
-<span id="cb15-141"><a href="#cb15-141"></a>  </span>
-<span id="cb15-142"><a href="#cb15-142"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
-<span id="cb15-143"><a href="#cb15-143"></a>  </span>
-<span id="cb15-144"><a href="#cb15-144"></a>  <span class="fu">tibble</span>(<span class="at">url =</span> cheese_url, milk, country, family, type, flavor)</span>
-<span id="cb15-145"><a href="#cb15-145"></a>}</span>
-<span id="cb15-146"><a href="#cb15-146"></a></span>
-<span id="cb15-147"><a href="#cb15-147"></a>cheese_details <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(cheese_df<span class="sc">$</span>url[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], scrape_detail))</span>
-<span id="cb15-148"><a href="#cb15-148"></a></span>
-<span id="cb15-149"><a href="#cb15-149"></a><span class="in">```</span></span>
+<span id="cb15-121"><a href="#cb15-121"></a>When you go to a particular cheese's page (like <span class="co">[</span><span class="ot">gouda</span><span class="co">](https://www.cheese.com/gouda/)</span>), you'll see more detailed information about the cheese. For **just 10** of the cheeses in the database, obtain the following detailed information: milk information, country of origin, family, type, and flavour. (Just 10 to avoid overtaxing the website. Continue adding a 1 second pause between page queries.)</span>
+<span id="cb15-122"><a href="#cb15-122"></a></span>
+<span id="cb15-125"><a href="#cb15-125"></a><span class="in">```{r}</span></span>
+<span id="cb15-126"><a href="#cb15-126"></a><span class="co">#| cache: true</span></span>
+<span id="cb15-127"><a href="#cb15-127"></a></span>
+<span id="cb15-128"><a href="#cb15-128"></a>get_field <span class="ot">&lt;-</span> <span class="cf">function</span>(items, label) {</span>
+<span id="cb15-129"><a href="#cb15-129"></a>  hit <span class="ot">&lt;-</span> items[<span class="fu">grepl</span>(label, items, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)]</span>
+<span id="cb15-130"><a href="#cb15-130"></a>  <span class="cf">if</span> (<span class="fu">length</span>(hit) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NA_character_</span>)</span>
+<span id="cb15-131"><a href="#cb15-131"></a>  <span class="fu">trimws</span>(<span class="fu">gsub</span>(<span class="fu">paste0</span>(<span class="st">"^.*"</span>, label, <span class="st">"</span><span class="sc">\\</span><span class="st">s*:?</span><span class="sc">\\</span><span class="st">s*"</span>), <span class="st">""</span>, hit[<span class="dv">1</span>], <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-132"><a href="#cb15-132"></a>}</span>
+<span id="cb15-133"><a href="#cb15-133"></a></span>
+<span id="cb15-134"><a href="#cb15-134"></a>scrape_detail <span class="ot">&lt;-</span> <span class="cf">function</span>(cheese_url) {</span>
+<span id="cb15-135"><a href="#cb15-135"></a>  page<span class="ot">&lt;-</span> <span class="fu">read_html</span>(cheese_url)</span>
+<span id="cb15-136"><a href="#cb15-136"></a>  items <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span></span>
+<span id="cb15-137"><a href="#cb15-137"></a>    <span class="fu">html_elements</span>(<span class="st">"#collapse-information li"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-138"><a href="#cb15-138"></a>    <span class="fu">html_text</span>(<span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-139"><a href="#cb15-139"></a>  </span>
+<span id="cb15-140"><a href="#cb15-140"></a>  milk <span class="ot">&lt;-</span><span class="fu">get_field</span>(items, <span class="st">"Made from"</span>)</span>
+<span id="cb15-141"><a href="#cb15-141"></a>  country <span class="ot">&lt;-</span> <span class="fu">get_field</span>(items, <span class="st">"Country of origin"</span>)</span>
+<span id="cb15-142"><a href="#cb15-142"></a>  family <span class="ot">&lt;-</span> <span class="fu">get_field</span>(items, <span class="st">"Family"</span>)</span>
+<span id="cb15-143"><a href="#cb15-143"></a>  type <span class="ot">&lt;-</span> <span class="fu">get_field</span>(items, <span class="st">"Type"</span>)</span>
+<span id="cb15-144"><a href="#cb15-144"></a>  flavor <span class="ot">&lt;-</span> <span class="fu">get_field</span>(items, <span class="st">"Flavou?r"</span>)   <span class="co"># so that it matches Flavour or Flavor</span></span>
+<span id="cb15-145"><a href="#cb15-145"></a>  </span>
+<span id="cb15-146"><a href="#cb15-146"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
+<span id="cb15-147"><a href="#cb15-147"></a>  </span>
+<span id="cb15-148"><a href="#cb15-148"></a>  <span class="fu">tibble</span>(<span class="at">url =</span> cheese_url, milk, country, family, type, flavor)</span>
+<span id="cb15-149"><a href="#cb15-149"></a>}</span>
 <span id="cb15-150"><a href="#cb15-150"></a></span>
-<span id="cb15-151"><a href="#cb15-151"></a>Print the dimensions &amp; first few rows of your final data frame:</span>
+<span id="cb15-151"><a href="#cb15-151"></a>cheese_details <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">lapply</span>(cheese_df<span class="sc">$</span>url[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], scrape_detail))</span>
 <span id="cb15-152"><a href="#cb15-152"></a></span>
-<span id="cb15-155"><a href="#cb15-155"></a><span class="in">```{r}</span></span>
-<span id="cb15-156"><a href="#cb15-156"></a><span class="fu">dim</span>(cheese_details)</span>
-<span id="cb15-157"><a href="#cb15-157"></a><span class="fu">head</span>(cheese_details)</span>
-<span id="cb15-158"><a href="#cb15-158"></a><span class="in">```</span></span>
-<span id="cb15-159"><a href="#cb15-159"></a></span>
-<span id="cb15-160"><a href="#cb15-160"></a><span class="fu">## Resources Reflection (required)</span></span>
-<span id="cb15-161"><a href="#cb15-161"></a></span>
-<span id="cb15-162"><a href="#cb15-162"></a>List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.</span>
+<span id="cb15-153"><a href="#cb15-153"></a><span class="in">```</span></span>
+<span id="cb15-154"><a href="#cb15-154"></a></span>
+<span id="cb15-155"><a href="#cb15-155"></a>Print the dimensions &amp; first few rows of your final data frame:</span>
+<span id="cb15-156"><a href="#cb15-156"></a></span>
+<span id="cb15-159"><a href="#cb15-159"></a><span class="in">```{r}</span></span>
+<span id="cb15-160"><a href="#cb15-160"></a><span class="fu">dim</span>(cheese_details)</span>
+<span id="cb15-161"><a href="#cb15-161"></a><span class="fu">head</span>(cheese_details)</span>
+<span id="cb15-162"><a href="#cb15-162"></a><span class="in">```</span></span>
 <span id="cb15-163"><a href="#cb15-163"></a></span>
-<span id="cb15-164"><a href="#cb15-164"></a>**Resources:**</span>
+<span id="cb15-164"><a href="#cb15-164"></a><span class="fu">## Resources Reflection (required)</span></span>
 <span id="cb15-165"><a href="#cb15-165"></a></span>
-<span id="cb15-166"><a href="#cb15-166"></a><span class="ss">-   </span>ica</span>
+<span id="cb15-166"><a href="#cb15-166"></a>List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.</span>
 <span id="cb15-167"><a href="#cb15-167"></a></span>
-<span id="cb15-168"><a href="#cb15-168"></a><span class="ss">-   </span>documentation</span>
+<span id="cb15-168"><a href="#cb15-168"></a>**Resources:**</span>
 <span id="cb15-169"><a href="#cb15-169"></a></span>
-<span id="cb15-170"><a href="#cb15-170"></a><span class="ss">-   </span>textbook</span>
+<span id="cb15-170"><a href="#cb15-170"></a><span class="ss">-   </span>ica</span>
 <span id="cb15-171"><a href="#cb15-171"></a></span>
-<span id="cb15-172"><a href="#cb15-172"></a>**Reflection:** I referenced back to in-class activities and documentation to help guide me when I was stuck and needed to figure out how to structure my code. The R documentation and dplyr documentations were useful to look back on the examples and explantions. I also used the textbook as well which was helpful.</span>
+<span id="cb15-172"><a href="#cb15-172"></a><span class="ss">-   </span>documentation</span>
+<span id="cb15-173"><a href="#cb15-173"></a></span>
+<span id="cb15-174"><a href="#cb15-174"></a><span class="ss">-   </span>textbook</span>
+<span id="cb15-175"><a href="#cb15-175"></a></span>
+<span id="cb15-176"><a href="#cb15-176"></a>**Reflection:** I referenced back to in-class activities and documentation to help guide me when I was stuck and needed to figure out how to structure my code. The R documentation and dplyr documentations were useful to look back on the examples and explantions. I also used the textbook as well which was helpful.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

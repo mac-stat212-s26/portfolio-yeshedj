@@ -1,309 +1,90 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "COMP/STAT212 Portfolio",
+    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html",
+    "href": "homework-yeshedj/hw08/src/hw08-p1.html",
+    "title": "HW08-P1 Scraping",
     "section": "",
-    "text": "Welcome to my online portfolio for COMP/STAT112 course taken at Macalester College. Please, use the side bar on the left for navigation.",
+    "text": "Instructions\nRequirements\nEx 1\nEx 2\nEx 3\nEx 4",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome</span>"
+      "Homework",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
     ]
   },
   {
-    "objectID": "homework-yeshedj/hw01/src/hw1-tt.html",
-    "href": "homework-yeshedj/hw01/src/hw1-tt.html",
-    "title": "HW1 TidyTuesday Brazilian Companies",
+    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#instructions",
+    "href": "homework-yeshedj/hw08/src/hw08-p1.html#instructions",
+    "title": "HW08-P1 Scraping",
     "section": "",
-    "text": "Introduction\nBrazilian companies work under different legal natures/structures (e.g., “Limited Liability Business Company (LLC)”, and are classified into size categories ranging from micro-enterprises to large enterprises. For this Tidy Tuesday analysis, we explore how capital levels vary across both the legal structure and company sizes.\nCodeoptions(repos = c(CRAN = \"https://cloud.r-project.org\"))\n\nlibrary(tidyverse)\n\ncompanies &lt;- read_csv(\n  \"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv\",\n  show_col_types = FALSE\n) %&gt;%\n  mutate(capital_millions = capital_stock / 1e6)",
+    "text": "Have a correct answer to who can scrape that data based on the information in robots.txt\n\n\n\nWrite a description of what httr_attr() does\nInclude a code example to demonstrate what it does\n\n\n\nCode should result in 2046 rows and 3 columns of data about cheese\nCode should result in unique information about name, url, and whether or not it has an image\nCode should include Sys.sleep(1) to not overtax website\n\n\n\nCode should result in 10 rows and 6 columns of data about 10 cheeses\nCode should result in unique information about cheese identifier (name or url), milk, country, family, type, flavor\nCode should include Sys.sleep(1) to not overtax website",
     "crumbs": [
       "Homework",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>HW1 TidyTuesday Brazilian Companies</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
     ]
   },
   {
-    "objectID": "homework-yeshedj/hw01/src/hw1-tt.html#average-capital-by-legal-structure",
-    "href": "homework-yeshedj/hw01/src/hw1-tt.html#average-capital-by-legal-structure",
-    "title": "HW1 TidyTuesday Brazilian Companies",
-    "section": "Average Capital by Legal Structure",
-    "text": "Average Capital by Legal Structure\n\nCodetop_legal &lt;- companies %&gt;%\n  count(legal_nature, sort = TRUE) %&gt;%\n  head(3) %&gt;%\n  pull(legal_nature)\n\ncompanies %&gt;%\n  filter(legal_nature %in% top_legal) %&gt;%\n  group_by(legal_nature, company_size) %&gt;%\n  summarise(avg_capital = mean(capital_millions, na.rm = TRUE), .groups = \"drop\") %&gt;%\n  ggplot(aes(x = reorder(legal_nature, avg_capital), y = avg_capital, fill = company_size)) +\n  geom_col(position = \"dodge\") +\n  scale_fill_viridis_d(\n    option = \"plasma\",\n    labels = c(\"Micro Enterprise\", \"Other\", \"Small Enterprise\")\n) +\n  coord_flip() +\n  labs(\n    title = \"Average Capital Across Legal Nature & Company Size in Brazil\",\n    caption = \"Top 3 most common company legal structures from the dataset\",\n    x = \"Legal Nature\",\n    y = \"Average # of Capital Stock (Millions of BRL)\",\n    fill = \"Company Size\"\n  ) +\n  theme_minimal() +\n   theme(\n    legend.position = \"right\",\n    plot.title = element_text(hjust = 1.1),\n    plot.subtitle = element_text(hjust = 1.5),\n    panel.grid = element_blank()\n  )",
+    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#goal",
+    "href": "homework-yeshedj/hw08/src/hw08-p1.html#goal",
+    "title": "HW08-P1 Scraping",
+    "section": "Goal",
+    "text": "Goal\nScrape information from https://www.cheese.com to obtain a dataset of characteristics about different cheeses, and gain deeper insight into your coding process.",
     "crumbs": [
       "Homework",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>HW1 TidyTuesday Brazilian Companies</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
     ]
   },
   {
-    "objectID": "homework-yeshedj/hw01/src/hw1-tt.html#results",
-    "href": "homework-yeshedj/hw01/src/hw1-tt.html#results",
-    "title": "HW1 TidyTuesday Brazilian Companies",
-    "section": "Results",
-    "text": "Results\nThe grouped bar chart shows us how capital levels vary across both legal nature and company size. Within each of the legal natures, we see distinct differences between the size categories, with larger enterprises generally holding more capital than micro or smaller enterprises. We also see that certain legal structures are more common for specific sized categories, and that the relationship between size and capital differs a bit by its legal structure.",
+    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#ex-1",
+    "href": "homework-yeshedj/hw08/src/hw08-p1.html#ex-1",
+    "title": "HW08-P1 Scraping",
+    "section": "Ex 1",
+    "text": "Ex 1\nLocate and examine the robots.txt file for https://www.cheese.com. Summarize (in words) what you learn from the cheese.com robots.txt file.\n\nThe file has a rule in it. The User-agent: * means that the rule applies to all of the web crawlers and the Disallow means that no paths are restricted at all so every crawler is able to access any page on the site. So anyone is able to use the website.",
     "crumbs": [
       "Homework",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>HW1 TidyTuesday Brazilian Companies</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
     ]
   },
   {
-    "objectID": "homework-yeshedj/hw01/src/hw1-tt.html#conclusion",
-    "href": "homework-yeshedj/hw01/src/hw1-tt.html#conclusion",
-    "title": "HW1 TidyTuesday Brazilian Companies",
-    "section": "Conclusion",
-    "text": "Conclusion\nThis analysis reveals that both the legal nature and the company size are associated with different capital levels among Brazilian companies. Based on the way these two factors interacted, we can understand that business capital in Brazil has to consider multiple different factors of how the companies are organized and classified. These patterns can help policymakers and investors better interpret business classifications and make more informed decisions.",
+    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#ex-2",
+    "href": "homework-yeshedj/hw08/src/hw08-p1.html#ex-2",
+    "title": "HW08-P1 Scraping",
+    "section": "Ex 2",
+    "text": "Ex 2\nLearn about the html_attr() function from rvest. Describe how this function works, and give a small code example to illustrate how it works.\n\nCodelibrary(rvest)\nhtml &lt;- read_html('\n  &lt;a href=\"https://www.cheese.com/gouda/\"&gt;Gouda&lt;/a&gt;\n  &lt;a href=\"https://www.cheese.com/brie/\"&gt;Brie&lt;/a&gt;\n  &lt;img src=\"https://www.cheese.com/media/img/cheese-thumbs/gouda.jpg\" alt=\"Gouda photo\"&gt;\n')\n\nhtml |&gt;\n  html_elements(\"a\") |&gt;\n  html_attr(\"href\")\n\n[1] \"https://www.cheese.com/gouda/\" \"https://www.cheese.com/brie/\" \n\nCodehtml |&gt;\n  html_elements(\"img\") |&gt;\n  html_attr(\"src\")\n\n[1] \"https://www.cheese.com/media/img/cheese-thumbs/gouda.jpg\"",
     "crumbs": [
       "Homework",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>HW1 TidyTuesday Brazilian Companies</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
     ]
   },
   {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p1.html",
-    "href": "homework-yeshedj/hw02/src/hw02-p1.html",
-    "title": "HW02-P1 Adv Data Viz",
-    "section": "",
-    "text": "Instructions\nUsing ggplot2 and other tools in R, recreate the original New York Times graphic to the greatest extent possible. Try to get as close as possible to the figure below:\nYou will need to use reference pages and documentation to discover necessary tools. For example, you may want to Google search “ggplot multiple plots”. When looking through results, check publication dates and use newer references. Some helpful resources could include R documentation, Stack Overflow, and R cheatsheets.\nRequirements\nBonus: If you’d like further practice, recreate the legend in the temperature graph that shows how the colored lines relate to record, normal, and actual highs.",
+    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#ex-3",
+    "href": "homework-yeshedj/hw08/src/hw08-p1.html#ex-3",
+    "title": "HW08-P1 Scraping",
+    "section": "Ex 3",
+    "text": "Ex 3\nObtain the following information for all cheeses in the alphabetical database https://www.cheese.com/alphabetical/:\n\nCheese name\nURL for the cheese’s webpage (e.g., https://www.cheese.com/gouda/)\nWhether or not the cheese has a picture (e.g., gouda has a picture, but bianco does not)\n\nTo be kind to the website owners, please add a 1 second pause between page queries. (Note that you can view 100 cheeses at a time.)\n\nCode# Load required libraries\nlibrary(rvest)\nlibrary(dplyr)\n\n\n# Define the URL\nbase_url    &lt;- \"https://www.cheese.com/alphabetical/?page=\"\nscrape_page &lt;- function(page_num) {\n    url &lt;- paste0(base_url, page_num)\n  \n# Read the HTML content from the webpage\n  webpage &lt;- read_html(url)\n  \n# Extract the cheese names and URLs\n  h3_links &lt;- webpage |&gt; html_elements(\"h3 a\")\n  names    &lt;- h3_links |&gt; html_text(trim = TRUE)\n  urls     &lt;- h3_links |&gt; html_attr(\"href\") |&gt;\n    (\\(x) paste0(\"https://www.cheese.com\",x))()\n  \n# Check if the cheese has a picture\n  all_srcs    &lt;- webpage|&gt; html_elements(\"img\") |&gt; html_attr(\"src\")\n  cheese_srcs &lt;- all_srcs[grepl(\"cheese-thumbs|icon-cheese-default\", all_srcs)]\n  has_image   &lt;- !grepl(\"icon-cheese-default\", cheese_srcs)\n  Sys.sleep(1)\n  \n# Create a data frame to store the results\n  tibble(name = names, url = urls, has_image = has_image)\n}\ncheese_df &lt;- bind_rows(lapply(1:103, scrape_page))\n\n\nPrint the dimensions & first few rows of your final data frame:\n\nCodedim(cheese_df)\n\n[1] 2046    3\n\nCodehead(cheese_df)\n\n# A tibble: 6 × 3\n  name                              url                                has_image\n  &lt;chr&gt;                             &lt;chr&gt;                              &lt;lgl&gt;    \n1 2 Year Aged Cumin Gouda           https://www.cheese.com/2-year-age… TRUE     \n2 3-Cheese Italian Blend            https://www.cheese.com/3-cheese-i… FALSE    \n3 30 Month Aged Parmigiano Reggiano https://www.cheese.com/30-month-a… TRUE     \n4 3yrs Aged Vintage Gouda           https://www.cheese.com/3yrs-aged-… TRUE     \n5 Aarewasser                        https://www.cheese.com/aarewasser/ TRUE     \n6 Abbaye de Belloc                  https://www.cheese.com/abbaye-de-… TRUE",
     "crumbs": [
       "Homework",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW02-P1 Adv Data Viz</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
     ]
   },
   {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p1.html#instructions",
-    "href": "homework-yeshedj/hw02/src/hw02-p1.html#instructions",
-    "title": "HW02-P1 Adv Data Viz",
-    "section": "",
-    "text": "Temperature graph\n\nBands for the record, normal, and actual highs and lows are shown in the correct colors.\nDownward triangles point to the record high temperatures above the red band.\nText displays the record high temperatures above the triangles.\nX-axis label: 3-letter month abbreviations appear in the middle of each month.\nY-axis label: Tick marks at 0, 40, 80, and 120 only.\nVertical lines separate the months.\nTitle of “Temperature” is included.\n\n\nPrecipitation\n\nTan area and blue line reflecting the monthly cumulative precipitation is included.\nText (number) for cumulative precipitation for each month is included at the end of each month just above the blue line.\nDownward triangles point to the record precipitation days.\nVertical lines separate the months.\nTitle of “Precipitation” is included.\n\n\nOverall\n\nBoth the temperature and precipitation graphs are in one figure.\nThe temperature plot takes up more vertical space than the precipitation plot.\nThe title “SFO weather in 2011” is present.\n\n\nResource reflection\n\nAt least 1 resource is listed\nAt least 3 sentences about resources and their helpfulness in the task",
+    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#ex-4",
+    "href": "homework-yeshedj/hw08/src/hw08-p1.html#ex-4",
+    "title": "HW08-P1 Scraping",
+    "section": "Ex 4",
+    "text": "Ex 4\nWhen you go to a particular cheese’s page (like gouda), you’ll see more detailed information about the cheese. For just 10 of the cheeses in the database, obtain the following detailed information: milk information, country of origin, family, type, and flavour. (Just 10 to avoid overtaxing the website. Continue adding a 1 second pause between page queries.)\n\nCodeget_field &lt;- function(items, label) {\n  hit &lt;- items[grepl(label, items, ignore.case = TRUE)]\n  if (length(hit) == 0) return(NA_character_)\n  trimws(gsub(paste0(\"^.*\", label, \"\\\\s*:?\\\\s*\"), \"\", hit[1], ignore.case = TRUE))\n}\n\nscrape_detail &lt;- function(cheese_url) {\n  page&lt;- read_html(cheese_url)\n  items &lt;- page |&gt;\n    html_elements(\"#collapse-information li\") |&gt;\n    html_text(trim = TRUE)\n  \n  milk &lt;-get_field(items, \"Made from\")\n  country &lt;- get_field(items, \"Country of origin\")\n  family &lt;- get_field(items, \"Family\")\n  type &lt;- get_field(items, \"Type\")\n  flavor &lt;- get_field(items, \"Flavou?r\")   # so that it matches Flavour or Flavor\n  \n  Sys.sleep(1)\n  \n  tibble(url = cheese_url, milk, country, family, type, flavor)\n}\n\ncheese_details &lt;- bind_rows(lapply(cheese_df$url[1:10], scrape_detail))\n\n\nPrint the dimensions & first few rows of your final data frame:\n\nCodedim(cheese_details)\n\n[1] 10  6\n\nCodehead(cheese_details)\n\n# A tibble: 6 × 6\n  url                                          milk  country family type  flavor\n  &lt;chr&gt;                                        &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; \n1 https://www.cheese.com/2-year-aged-cumin-go… past… Nether… &lt;NA&gt;   semi… sharp \n2 https://www.cheese.com/3-cheese-italian-ble… past… Italy   Parme… semi… butte…\n3 https://www.cheese.com/30-month-aged-parmig… unpa… Italy   &lt;NA&gt;   hard  &lt;NA&gt;  \n4 https://www.cheese.com/3yrs-aged-vintage-go… past… Nether… &lt;NA&gt;   hard  strong\n5 https://www.cheese.com/aarewasser/           unpa… Switze… &lt;NA&gt;   semi… sweet \n6 https://www.cheese.com/abbaye-de-belloc/     unpa… France  &lt;NA&gt;   semi… burnt…",
     "crumbs": [
       "Homework",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW02-P1 Adv Data Viz</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
     ]
   },
   {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p1.html#setup",
-    "href": "homework-yeshedj/hw02/src/hw02-p1.html#setup",
-    "title": "HW02-P1 Adv Data Viz",
-    "section": "Setup",
-    "text": "Setup\n\nCode# Code for loading packages and reading in data\nlibrary(tidyverse)\nlibrary(ggplot2)\nweather &lt;- read_csv(\"https://mac-stat.github.io/data/sfo_weather.csv\")",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW02-P1 Adv Data Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p1.html#visualization",
-    "href": "homework-yeshedj/hw02/src/hw02-p1.html#visualization",
-    "title": "HW02-P1 Adv Data Viz",
-    "section": "Visualization",
-    "text": "Visualization\nTemperature Graph\n\nCode# Calculates month midpoints\nmonth_positions &lt;- weather %&gt;%\n  group_by(Month) %&gt;%\n  summarize(mid_day = (min(dateInYear) + max(dateInYear)) / 2)\n\n# Creates month boundaries\nmonth_breaks &lt;- weather %&gt;%\n  group_by(Month) %&gt;%\n  summarize(last_day = max(dateInYear)) %&gt;%\n  filter(Month != 12)\n\n# Get only the TOP 2 highest record temperatures for labels\ntop_2_records &lt;- weather %&gt;% \n  filter(Record == TRUE) %&gt;%\n  arrange(desc(High)) %&gt;%\n  slice(1:2)  # Take only the top 2\n\n# Plots the temp viz\ntemp_plot &lt;- ggplot(weather, aes(x = dateInYear)) +\n  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), \n                 color = \"#ECEBE3\") +\n  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), \n                 color = \"#C8B8BA\") +\n  geom_linerange(aes(ymin = Low, ymax = High), \n                 color = \"#A90248\") +\n  geom_vline(data = month_breaks, aes(xintercept = last_day + 0.5),\n             color = \"white\", size = 0.5) +\n  # Triangles for ALL record high days\n  geom_point(data = weather %&gt;% filter(Record == TRUE),\n             aes(x = dateInYear, y = High), \n             shape = 25, size = 1.5, fill = \"black\") +\n  # Text labels ONLY for top 2 highest records\n  geom_text(data = top_2_records,\n            aes(x = dateInYear, y = High, label = RecordText),  \n            size = 2, hjust = 0.5, vjust = -0.9) +\n  scale_y_continuous(limits = c(0, 120), breaks = c(0, 40, 80, 120)) +\n  scale_x_continuous(\n    breaks = month_positions$mid_day,\n    labels = month.abb\n  ) +\n  theme_classic() +\n  labs(title = \"Temperature\",\n       x = \"\", \n       y = \"Temperature (°F)\") +\n  theme(legend.position = \"none\")\n\ntemp_plot\n\n\n\n\n\n\n\nPrecipitation Graph\n\nCode# Calculates monthly precipitation\nmonthly_precip &lt;- weather %&gt;%\n  group_by(Month) %&gt;%\n  summarize(\n    total_precip = max(CulmPrec), \n    mid_day = (min(dateInYear) + max(dateInYear)) / 2,\n    last_day = max(dateInYear)  \n  )\n\nmonth_breaks\n\n# A tibble: 11 × 2\n   Month last_day\n   &lt;dbl&gt;    &lt;dbl&gt;\n 1     1       31\n 2     2       59\n 3     3       90\n 4     4      120\n 5     5      151\n 6     6      181\n 7     7      212\n 8     8      243\n 9     9      273\n10    10      304\n11    11      334\n\nCode# Plots the precipitation viz\nprecip_plot &lt;- ggplot(weather, aes(x = dateInYear)) +\n  geom_line(aes(y = CulmPrec), color = \"#32a3d8\", size = 0.5) +\n  geom_ribbon(aes(ymin = 0, ymax = CulmPrec), \n              fill = \"#ebeae2\", color = NA) +\n    geom_vline(\n    data = month_breaks,\n    aes(xintercept = last_day + 0.5),\n    color = \"white\",\n    size = 0.8,\n    linetype = \"solid\"\n  ) +\n  geom_point(\n    data = weather %&gt;% filter(RecordP == TRUE),\n    aes(x = dateInYear, y = CulmPrec +0.2),  \n    shape = 25,       \n    fill = \"black\",   \n    color = \"black\",  \n    size = 1.5\n  ) +\n  geom_text(\n    data = monthly_precip,\n    aes(x = last_day, y = total_precip, label = round(total_precip, 2)),\n    vjust = -0.1,  \n    hjust = 1,  \n    size = 2.5,\n    color = \"black\"\n  ) +\n  scale_y_continuous(limits = c(-0.1, 6), breaks = c(0,2,4)) +\n  scale_x_continuous(limits = c(0, 370), breaks = c(0,100,200,300)) +\n  theme_classic() +\n  theme(\n    panel.grid = element_blank(),\n    panel.border = element_blank(),\n    panel.background = element_rect(fill = \"white\", color = NA),  \n    plot.background = element_rect(fill = \"white\", color = NA),  \n    axis.line = element_line(color = \"black\", size = 0.5),\n    axis.ticks = element_line(color = \"black\", size = 0.3) \n  ) +\n  labs(\n    title = \"Precipitation\",\n    x = \"dateInYear\",\n    y = \"CulmPrec\"\n  )\nprecip_plot\n\n\n\n\n\n\n\nOverall Graph\n\nCodelibrary(patchwork)\n\nfinal_plot &lt;- temp_plot / precip_plot +\n  plot_layout(heights = c(2, 1)) +\n  plot_annotation(title = \"SFO weather in 2011\")\n\nfinal_plot",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW02-P1 Adv Data Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p1.html#resources-reflection-required",
-    "href": "homework-yeshedj/hw02/src/hw02-p1.html#resources-reflection-required",
-    "title": "HW02-P1 Adv Data Viz",
+    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#resources-reflection-required",
+    "href": "homework-yeshedj/hw08/src/hw08-p1.html#resources-reflection-required",
+    "title": "HW08-P1 Scraping",
     "section": "Resources Reflection (required)",
-    "text": "Resources Reflection (required)\nList the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.\nResources:\n\n03 Adv Data Viz in class activity\nggplot2 documentation\nStack Overflow\n\nReflection: The most helpful resource for this assignment was the ggplot2 documentation because it explains how different functions work by providing example code and also visualizations. In particular, it was very useful in figuring out how to use the geom_linerage() function. The in class activity was useful as well since it took you step by step in learning the data and the functions, and then eventually piecing together the final visualizations. I used Stack Overflow a few times to understand confusing errors, which helped to resolve them.",
+    "text": "Resources Reflection (required)\nList the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.\nResources:\n\nica\ndocumentation\ntextbook\n\nReflection: I referenced back to in-class activities and documentation to help guide me when I was stuck and needed to figure out how to structure my code. The R documentation and dplyr documentations were useful to look back on the examples and explantions. I also used the textbook as well which was helpful.",
     "crumbs": [
       "Homework",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>HW02-P1 Adv Data Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p2.html",
-    "href": "homework-yeshedj/hw02/src/hw02-p2.html",
-    "title": "HW02-P2 Adv Data Viz",
-    "section": "",
-    "text": "Instructions\nTask: Open up the New York Times article A Summer of Strikes, and scroll down to the plot titled “Union membership has fallen sharply over the past four decades (Share of the work force in a union, by industry)”.\nUsing ggplot2 and other tools in R, recreate this plot. Note that you will need to create the data underlying the plot yourself. You can create this data in R with tibble(). You can also write the data in Excel or Google Sheets and export it as a CSV file.\nRequirements:\nBonus: Additional possibilities to enhance your visualization include adjusting the default aesthetics of the arrows, aligning your plots neatly, and adding margins in order to left-align the y-axis text.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>HW02-P2 Adv Data Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p2.html#instructions",
-    "href": "homework-yeshedj/hw02/src/hw02-p2.html#instructions",
-    "title": "HW02-P2 Adv Data Viz",
-    "section": "",
-    "text": "Overall\n\nPanels for “All workers”, “By Sector”, and “By Industry” are shown.\nArrows showing the change from 1983 to 2022 are shown.\n\nNote: be sure that the arrows all point in the correct direction!\n\n\nThe actual percentages in 1983 and 2022 are shown as text.\nX-axis tick marks are at 0, 25, and 50.\nPlot title says “Union membership has fallen sharply over the past four decades”.\nPlot subtitle says “Share of the work force in a union, by industry”.\n\n\nResource reflection\n\nAt least 1 resource is listed\nAt least 3 sentences about resources and their helpfulness in the task",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>HW02-P2 Adv Data Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p2.html#setup",
-    "href": "homework-yeshedj/hw02/src/hw02-p2.html#setup",
-    "title": "HW02-P2 Adv Data Viz",
-    "section": "Setup",
-    "text": "Setup\n\nCode# loading packages\nlibrary(tidyverse)\nlibrary(patchwork)\n\n\n\nCode# generating data\nunion_data &lt;- tibble(\n  category = c(\n    \"All workers\",\n    \"Private sector\", \"Public sector\",\n    \"Transportation and utilities\", \"Manufacturing\", \"Mining\",\n    \"Construction\", \"Education and health\", \"Arts, entertainment and recreation\",\n    \"Business services\", \"Retail, food and hospitality\", \"Public administration\",\n    \"Agriculture\"\n  ),\n  percent_1983 = c(20, 17, 37, 47, 28, 27, 28, 26, 17, 10, 8, 30, 5),\n  percent_2022 = c(10,6, 33,16, 8, 7, 13, 17, 7, 3, 3, 28, 4),\n  panel = c(\n    \"All workers\",\n    \"By Sector\", \"By Sector\",\n    rep(\"By Industry\", 10)\n  )\n)\n\nunion_data &lt;- union_data %&gt;%\n  mutate(\n    category = fct_inorder(category),\n    panel = factor(panel, levels = c(\"All workers\", \"By Sector\", \"By Industry\"))\n  )",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>HW02-P2 Adv Data Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p2.html#visualization",
-    "href": "homework-yeshedj/hw02/src/hw02-p2.html#visualization",
-    "title": "HW02-P2 Adv Data Viz",
-    "section": "Visualization",
-    "text": "Visualization\n\nCode# recreating the visualization\n\ncreate_panel &lt;- function(data, panel_name) {\n  data_subset &lt;- data %&gt;% filter(panel == panel_name)\n  \n  ggplot(data_subset, aes(y = category)) +\n    geom_segment(\n      aes(x = percent_1983, xend = percent_2022, \n          y = category, yend = category),\n      arrow = arrow(length = unit(0.2, \"cm\"), type = \"closed\"),\n      color = \"#1f4788\", \n      linewidth = 0.8\n    ) +\n    geom_text(\n      aes(x = percent_2022, label = paste(percent_2022, \"%\", sep=\"\")),\n      hjust = 1.3,\n      size = 3.5,\n      fontface = \"bold\"\n    ) +\n    geom_text(\n      aes(x = percent_1983, label = paste(percent_1983, \"%\", sep=\"\")), \n      hjust = -0.3,\n      size = 3.5,\n      fontface = \"bold\"\n    ) +\n    scale_x_continuous(\n      breaks = c(0, 25, 50),\n      limits = c(0, 52),\n      labels = function(x) paste(x, \"%\", sep=\"\"),\n      expand = c(0, 0)\n    ) +\n    labs(\n      title = if(panel_name == \"All workers\") NULL else toupper(panel_name),\n      x = NULL,\n      y = NULL\n    ) +\n    theme_minimal() +\n    theme(\n      panel.grid.major.y = element_blank(),\n      panel.grid.minor = element_blank(),\n      panel.grid.major.x = element_line(color = \"gray85\", linewidth = 0.3),\n      axis.text.y = element_text(hjust = 0, size = 10),\n      axis.text.x = element_text(size = 9, color = \"gray50\"),\n      plot.title = element_text(face = \"bold\", size = 10, margin = margin(b = 10), hjust = 0),\n      plot.title.position = \"plot\",  \n      plot.margin = margin(15, 10, 10, 10)\n    )\n}\n\npanel1 &lt;- create_panel(union_data, \"All workers\") +\n  annotate(\"text\", \n           x = 10, y = 1.5, \n           label = \"2022\", \n           size = 3, \n           color = \"gray50\") +\n  annotate(\"text\", \n           x = 20, y = 1.5, \n           label = \"1983\", \n           size = 3, \n           color = \"gray50\")\n\npanel2 &lt;- create_panel(union_data, \"By Sector\")\npanel3 &lt;- create_panel(union_data, \"By Industry\")\n\nfinal_plot &lt;- panel1 / panel2 / panel3 +\n  plot_layout(heights = c(1, 2, 10)) +  \n  plot_annotation(\n    title = \"Union membership has fallen sharply over the past four decades\",\n    subtitle = \"Share of the work force in a union, by industry\",\n    theme = theme(\n      plot.title = element_text(face = \"bold\", size = 14),\n      plot.subtitle = element_text(size = 12, color = \"gray50\")\n    )\n  )\n\nfinal_plot",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>HW02-P2 Adv Data Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw02/src/hw02-p2.html#resources-reflection-required",
-    "href": "homework-yeshedj/hw02/src/hw02-p2.html#resources-reflection-required",
-    "title": "HW02-P2 Adv Data Viz",
-    "section": "Resources Reflection (required)",
-    "text": "Resources Reflection (required)\nList the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.\nResources:\n\n03 Adv Data Viz & 04 Adv Spatial Viz in class activity\nggplot2 documentation\nStack Overflow\n\nReflection: Similarly to HW 2 pt 1, the most helpful resource for this assignment was the ggplot2 documentation since it explains what different functions are and how they work, by providing example code and visualizations. The in class activities were also useful to reference back since you can review the steps of creating a multi-pieced graph with different parts to it. I, again, used Stack Overflow a few times to understand some errors that helped to resolve confusion.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>HW02-P2 Adv Data Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "",
-    "text": "Introduction\nThe following exercises will use census tract tidycensus data for Ramsey and Hennepin county and crash data (2019-2022) from the pedestrian/bike crash database for St. Paul within Ramsey county in the Twin Cities.\nRequirements:",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#introduction",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#introduction",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "",
-    "text": "Explore ACS and enter an addition variable to code\nDownload and Read in roads data\nEnsure both census2020 and crashes are same CRS\nCrop roads (at least to Ramsey and Hennepin counties)\nJoin crashes and census to calculate number of crashes per tract\nJoin census2020 and crashes per tract\nChoropleth map of number of crashes per tract + use of scale_fill_gradientn()\nChoropleth map coloring census tracts by a census variable + crash locations as points + scale_fill_gradientn()\nSentence Interpretation in Data Context\n2 non-map visuals of number of crashes vs census variables\nSentence Interpretation in Data Context",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#load-one-more-variable",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#load-one-more-variable",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "1 Load One More Variable",
-    "text": "1 Load One More Variable\nThe following code loads census data for Ramsey counties and reads in the pedestrian/bike crash data. Adjust this code to load in one additional census variable that you think might serve as useful context for crash data. To do this:\n\nLook at the documentation for get_acs() by entering ?tidycensus::get_acs in the Console.\nLook at the Seaching for variables documentation from the tidycensus package. Use the function in this documentation to find one variable to add to the variables argument in the get_acs() function below.\nRename the variable that you picked to have a more descriptive name within rename().\n\n\nEnter the new variable you selected (e.g., B01003_001) here: B08301_019\nEnter the new name for that variable (e.g., population) here: walkCommute\n\n\nCodelibrary(tidyverse)\n\ncensus2020 &lt;- tidycensus::get_acs(\n    year = 2020,\n    state = \"MN\",\n    geography = \"tract\",\n    variables = c(\"B01003_001\", \"B19013_001\", \"B23006_023\", \"B25058_001\", \"B25107_001\", \"B25003_001\", \"B25003_002\", \"B25003_003\", \"B25077_001\", \"B08301_019\"),\n    output = \"wide\",\n    geometry = TRUE\n) |&gt;\n    filter(word(NAME, 4) %in% c(\"Ramsey\")) |&gt;\n    mutate(\n        tract = word(NAME, 3),\n        tract = str_remove(tract, \",\"),\n        county = word(NAME, 4)\n    ) |&gt;\n    select(-NAME) |&gt;\n    rename(\n        \"population\" = \"B01003_001E\",\n        \"medianIncome\" = \"B19013_001E\",\n        \"bachelors\" = \"B23006_023E\",\n        \"medContractRent\" = \"B25058_001E\",\n        \"tenureTotal\" = \"B25003_001E\",\n        \"tenureOwned\" = \"B25003_002E\",\n        \"tenureRented\" = \"B25003_003E\",\n        \"medianHomeValue\"= \"B25077_001E\",\n        \"walkCommute\" = \"B08301_019E\"\n    ) |&gt;\n    select(-contains(\"_\"))\n\ncrashes &lt;- read_csv(\"https://mac-stat.github.io/data/Crash.csv\") |&gt;\n    filter(!is.na(Latitude), !is.na(Longitude))",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#download-shapefile",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#download-shapefile",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "2 Download Shapefile",
-    "text": "2 Download Shapefile\nVisit this site and download the Shapefile Zip File (tl_2019_27_prisecroads.zip) to the data/raw folder of this homework then unzip.\nLoad in the roads shapefile using st_read(), and transform roads to have the same CRS as census2020 if necessary.\n\nCoderoads &lt;- sf::st_read(\"../data/raw/tl_2019_27_prisecroads/tl_2019_27_prisecroads.shp\")\n\nReading layer `tl_2019_27_prisecroads' from data source \n  `/Users/yeshejangchup/Documents/CLASSES/ds212/portfolio-yeshedj/homework-yeshedj/hw03/data/raw/tl_2019_27_prisecroads/tl_2019_27_prisecroads.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 4309 features and 4 fields\nGeometry type: LINESTRING\nDimension:     XY\nBounding box:  xmin: -97.23724 ymin: 43.4995 xmax: -89.58524 ymax: 49.00066\nGeodetic CRS:  NAD83\n\nCode# Check CRS of roads and transform if necessary\nlibrary(sf)\nlibrary(tidycensus)\nlibrary(tidyverse)\n\n\nst_crs(roads)\n\nCoordinate Reference System:\n  User input: NAD83 \n  wkt:\nGEOGCRS[\"NAD83\",\n    DATUM[\"North American Datum 1983\",\n        ELLIPSOID[\"GRS 1980\",6378137,298.257222101,\n            LENGTHUNIT[\"metre\",1]]],\n    PRIMEM[\"Greenwich\",0,\n        ANGLEUNIT[\"degree\",0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\"latitude\",north,\n            ORDER[1],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        AXIS[\"longitude\",east,\n            ORDER[2],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n    ID[\"EPSG\",4269]]\n\nCodest_crs(census2020)\n\nCoordinate Reference System:\n  User input: NAD83 \n  wkt:\nGEOGCRS[\"NAD83\",\n    DATUM[\"North American Datum 1983\",\n        ELLIPSOID[\"GRS 1980\",6378137,298.257222101,\n            LENGTHUNIT[\"metre\",1]]],\n    PRIMEM[\"Greenwich\",0,\n        ANGLEUNIT[\"degree\",0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\"latitude\",north,\n            ORDER[1],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        AXIS[\"longitude\",east,\n            ORDER[2],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n    ID[\"EPSG\",4269]]",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#transofrm-to-sf-object",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#transofrm-to-sf-object",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "3 Transofrm to sf Object",
-    "text": "3 Transofrm to sf Object\nTransform the crashes data frame to a sf object that has point geometry using the code below.\n\nCodecrashes &lt;- st_as_sf(crashes, coords = c(\"Longitude\", \"Latitude\"), crs = \"NAD83\")",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#check-crss",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#check-crss",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "4 Check CRSs",
-    "text": "4 Check CRSs\nCheck if the CRSs are the same for census2020 and crashes using st_crs(). Transform to ensure they are exactly the same.\n\nCodest_crs(census2020) == st_crs(crashes)\n\n[1] TRUE\n\nCodecrashes &lt;- st_transform(crashes, st_crs(census2020))",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#crop",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#crop",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "5 Crop",
-    "text": "5 Crop\nUse st_crop() to crop the roads and census2020 datasets to the area we are interested in (crashes in St. Paul within Ramsey County). To determine the region to crop to, you will need to use st_bbox() on a spatial data object that only pertains to St. Paul within Ramsey County.\n\nCodestpaul_bbox &lt;- st_bbox(crashes)\n\nroads_sub &lt;- st_crop(roads, stpaul_bbox)\ncensus2020_sub &lt;- st_crop(census2020, stpaul_bbox)",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#join-spatial-datasets",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#join-spatial-datasets",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "6 Join Spatial Datasets",
-    "text": "6 Join Spatial Datasets\nJoin the crashes and census dataset together and count the number of crashes per census tract. The function st_join can join to spatial data sets according to whether the spatial geometries of the right table intersect with the spatial geometries of the left table. It matters which order you join the datasets in!\n\nCodecrashes_per_tract &lt;- st_join(crashes, census2020) |&gt;\n    st_drop_geometry() |&gt; # removes geometry - makes the following calculation more efficient \n    filter(!is.na(Accident_Datetime)) |&gt;\n    count(GEOID)",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#join-census",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#join-census",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "7 Join Census",
-    "text": "7 Join Census\nJoin the census data with crashes_per_tract and then use a filter of n &gt; 0 to only keep the census tracts where crashes were recorded instead of all of Ramsey County. Again, order matters!\n\nCodecrashes_per_tract_geo &lt;- census2020_sub |&gt; # sf object with census geometry goes first\n    left_join(crashes_per_tract, by = \"GEOID\") |&gt;\n    filter(n &gt; 0)",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#pedestrianbike-crashes-per-census-tract",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#pedestrianbike-crashes-per-census-tract",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "8 Pedestrian/Bike Crashes per Census Tract",
-    "text": "8 Pedestrian/Bike Crashes per Census Tract\nCreate a map that shows the number of pedestrian/bike crashes per census tract. Write one sentence about the patterns you notices; interpret your findings in the data context.\n\nUse scale_fill_gradientn() to set up a meaningful color scale for the census tract colors.\nInclude a map layer for the roads.\n\n\nCodeggplot() +\n    geom_sf(data = census2020_sub, fill = \"lightgrey\", color = \"white\") +\n    geom_sf(data = crashes_per_tract_geo, aes(fill = n), color = \"white\") +\n    geom_sf(data = roads_sub, color = \"black\", linewidth = 0.2) +\n    \n    scale_fill_gradientn(\n        colors = c(\"lightyellow\", \"lightpink\", \"darkred\"),\n        name = \"# of Crashes\"\n    ) +\n    labs(title = \"Pedestrian/Bike Crashes per Census Tract in St. Paul\") +\n    theme_void()\n\n\n\n\n\n\n\n\nCensus tracts near the downtown St. Paul area and along some more busy roads tend to have a higher number of pedestrian and bike crashes, which suggests that the areas with a denser amount of roads are associated with more crashes.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#crash-locations",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#crash-locations",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "9 Crash Locations",
-    "text": "9 Crash Locations\nCreate one map that shows crash locations as points and colors census tracts by one different census variable. Write one sentence about the patterns you notice; interpret your findings in the data context.\n\nUse scale_fill_gradientn() to set up a color scale for the census tract colors.\nInclude a layer for the roads.\n\n\nCodeggplot() +\n    geom_sf(data = census2020_sub, aes(fill = medianIncome), color = \"white\") +\n    geom_sf(data = roads_sub, color = \"black\", linewidth = 0.2) +\n    geom_sf(data = crashes, color = \"red\", size = 0.5, alpha = 0.5) +\n    scale_fill_gradientn(\n        colors = c(\"orange\", \"lightpink\", \"lightyellow\"),\n        name = \"Median Income ($)\",\n        na.value = \"lightgrey\"\n    ) +\n    labs(title = \"Crash Locations and Median Income by Census Tracts in St. Paul\") +\n    theme_void()\n\n\n\n\n\n\n\n\nCrash locations are clustered more in the lower income census tracts, which suggests that pedestrians and cyclists in economically/financially disadvantaged parts of St. Paul face more of a risk to crashes.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#number-of-crashes-and-census-data",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#number-of-crashes-and-census-data",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "10 Number of Crashes and Census Data",
-    "text": "10 Number of Crashes and Census Data\nCreate two other visuals (that are not maps) showing the relationships between the number of crashes and census data. Write one sentence about the patterns you notice; interpret your findings in the data context.\n\nCode# Viz 1: Crashes vs medianHomeValue\ncrashes_per_tract_geo |&gt;\n    ggplot(aes(x = medianHomeValue, y = n)) +\n    geom_point(alpha = 0.6, color = \"#1E88E5\") +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"#D81B60\") +\n    labs(\n        title = \"Crashes vs Median Home Value by Census Tract\",\n        x = \"Median Home Value ($)\",\n        y = \"# of Crashes\"\n    ) +\n    theme_minimal()\n\n\n\n\n\n\nCode# Viz 2: Crashes vs population\ncrashes_per_tract_geo |&gt;\n    ggplot(aes(x = population, y = n)) +\n    geom_point(alpha = 0.6, color = \"#1E88E5\") +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"#D81B60\") +\n    labs(\n        title = \"Crashes vs Population Amount by Census Tract\",\n        x = \"Population\",\n        y = \"# of Crashes\"\n    ) +\n    theme_minimal()\n\n\n\n\n\n\n\n\nThe Crashes vs Median Home Value visualization shows how the census tracts with lower median home values tend to have more pedestrian and bike crashes, which suggests that less wealthy neighborhoods in St. Paul might have less safe roads built and/or higher pedestrian activity in relation to vehicle traffic, thus a higher risk of crash incidents.\nThe Crashes vs Population visualization shows how the Census tracts with larger populations tend to experience more pedestrian and bike crashes, which makes sense as more people living in a particular area will increase the chances of pedestrian and cyclists being exposed to vehicle traffic, thus a higher risk of crash incidents.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw03/src/hw03-p1.html#resources-reflection-required",
-    "href": "homework-yeshedj/hw03/src/hw03-p1.html#resources-reflection-required",
-    "title": "HW03-P1 Adv Map Viz",
-    "section": "Resources Reflection (required)",
-    "text": "Resources Reflection (required)\nList the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.\nResources:\n\nR documentation\nIn class activities\ntextbook\n\nReflection:\nThe most helpful resource for this homework was the R documentation like the get_acs documentation since those explained how the functions worked, showed how it can be used, and also example code. It was particularly useful in figuring out what some of the arguments meant, like geometry and zacta. The in-class activities were also useful to reference like the Spatial Viz day.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>HW03-P1 Adv Map Viz</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
     ]
   },
   {
@@ -912,94 +693,6 @@
     ]
   },
   {
-    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html",
-    "href": "homework-yeshedj/hw08/src/hw08-p1.html",
-    "title": "HW08-P1 Scraping",
-    "section": "",
-    "text": "Instructions\nRequirements\nEx 1\nEx 2\nEx 3\nEx 4",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#instructions",
-    "href": "homework-yeshedj/hw08/src/hw08-p1.html#instructions",
-    "title": "HW08-P1 Scraping",
-    "section": "",
-    "text": "Have a correct answer to who can scrape that data based on the information in robots.txt\n\n\n\nWrite a description of what httr_attr() does\nInclude a code example to demonstrate what it does\n\n\n\nCode should result in 2046 rows and 3 columns of data about cheese\nCode should result in unique information about name, url, and whether or not it has an image\nCode should include Sys.sleep(1) to not overtax website\n\n\n\nCode should result in 10 rows and 6 columns of data about 10 cheeses\nCode should result in unique information about cheese identifier (name or url), milk, country, family, type, flavor\nCode should include Sys.sleep(1) to not overtax website",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#goal",
-    "href": "homework-yeshedj/hw08/src/hw08-p1.html#goal",
-    "title": "HW08-P1 Scraping",
-    "section": "Goal",
-    "text": "Goal\nScrape information from https://www.cheese.com to obtain a dataset of characteristics about different cheeses, and gain deeper insight into your coding process.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#ex-1",
-    "href": "homework-yeshedj/hw08/src/hw08-p1.html#ex-1",
-    "title": "HW08-P1 Scraping",
-    "section": "Ex 1",
-    "text": "Ex 1\nLocate and examine the robots.txt file for https://www.cheese.com. Summarize (in words) what you learn from the cheese.com robots.txt file.\n\nThe file has a rule in it. The User-agent: * means that the rule applies to all of the web crawlers and the Disallow means that no paths are restricted at all so every crawler is able to access any page on the site. So anyone is able to use the website.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#ex-2",
-    "href": "homework-yeshedj/hw08/src/hw08-p1.html#ex-2",
-    "title": "HW08-P1 Scraping",
-    "section": "Ex 2",
-    "text": "Ex 2\nLearn about the html_attr() function from rvest. Describe how this function works, and give a small code example to illustrate how it works.\n\nCodelibrary(rvest)\nhtml &lt;- read_html('\n  &lt;a href=\"https://www.cheese.com/gouda/\"&gt;Gouda&lt;/a&gt;\n  &lt;a href=\"https://www.cheese.com/brie/\"&gt;Brie&lt;/a&gt;\n  &lt;img src=\"https://www.cheese.com/media/img/cheese-thumbs/gouda.jpg\" alt=\"Gouda photo\"&gt;\n')\n\nhtml |&gt;\n  html_elements(\"a\") |&gt;\n  html_attr(\"href\")\n\n[1] \"https://www.cheese.com/gouda/\" \"https://www.cheese.com/brie/\" \n\nCodehtml |&gt;\n  html_elements(\"img\") |&gt;\n  html_attr(\"src\")\n\n[1] \"https://www.cheese.com/media/img/cheese-thumbs/gouda.jpg\"",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#ex-3",
-    "href": "homework-yeshedj/hw08/src/hw08-p1.html#ex-3",
-    "title": "HW08-P1 Scraping",
-    "section": "Ex 3",
-    "text": "Ex 3\nObtain the following information for all cheeses in the alphabetical database https://www.cheese.com/alphabetical/:\n\nCheese name\nURL for the cheese’s webpage (e.g., https://www.cheese.com/gouda/)\nWhether or not the cheese has a picture (e.g., gouda has a picture, but bianco does not)\n\nTo be kind to the website owners, please add a 1 second pause between page queries. (Note that you can view 100 cheeses at a time.)\n\nCode# Load required libraries\nlibrary(rvest)\nlibrary(dplyr)\n\n\n# Define the URL\nbase_url    &lt;- \"https://www.cheese.com/alphabetical/?page=\"\nscrape_page &lt;- function(page_num) {\n    url &lt;- paste0(base_url, page_num)\n  \n# Read the HTML content from the webpage\n  webpage &lt;- read_html(url)\n  \n# Extract the cheese names and URLs\n  h3_links &lt;- webpage |&gt; html_elements(\"h3 a\")\n  names    &lt;- h3_links |&gt; html_text(trim = TRUE)\n  urls     &lt;- h3_links |&gt; html_attr(\"href\") |&gt;\n    (\\(x) paste0(\"https://www.cheese.com\",x))()\n  \n# Check if the cheese has a picture\n  all_srcs    &lt;- webpage|&gt; html_elements(\"img\") |&gt; html_attr(\"src\")\n  cheese_srcs &lt;- all_srcs[grepl(\"cheese-thumbs|icon-cheese-default\", all_srcs)]\n  has_image   &lt;- !grepl(\"icon-cheese-default\", cheese_srcs)\n  Sys.sleep(1)\n  \n# Create a data frame to store the results\n  tibble(name = names, url = urls, has_image = has_image)\n}\ncheese_df &lt;- bind_rows(lapply(1:103, scrape_page))\n\n\nPrint the dimensions & first few rows of your final data frame:\n\nCodedim(cheese_df)\n\n[1] 2046    3\n\nCodehead(cheese_df)\n\n# A tibble: 6 × 3\n  name                              url                                has_image\n  &lt;chr&gt;                             &lt;chr&gt;                              &lt;lgl&gt;    \n1 2 Year Aged Cumin Gouda           https://www.cheese.com/2-year-age… TRUE     \n2 3-Cheese Italian Blend            https://www.cheese.com/3-cheese-i… FALSE    \n3 30 Month Aged Parmigiano Reggiano https://www.cheese.com/30-month-a… TRUE     \n4 3yrs Aged Vintage Gouda           https://www.cheese.com/3yrs-aged-… TRUE     \n5 Aarewasser                        https://www.cheese.com/aarewasser/ TRUE     \n6 Abbaye de Belloc                  https://www.cheese.com/abbaye-de-… TRUE",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#ex-4",
-    "href": "homework-yeshedj/hw08/src/hw08-p1.html#ex-4",
-    "title": "HW08-P1 Scraping",
-    "section": "Ex 4",
-    "text": "Ex 4\nWhen you go to a particular cheese’s page (like gouda), you’ll see more detailed information about the cheese. For just 10 of the cheeses in the database, obtain the following detailed information: milk information, country of origin, family, type, and flavour. (Just 10 to avoid overtaxing the website. Continue adding a 1 second pause between page queries.)\n\nCodeget_field &lt;- function(items, label) {\n  hit &lt;- items[grepl(label, items, ignore.case = TRUE)]\n  if (length(hit) == 0) return(NA_character_)\n  trimws(gsub(paste0(\"^.*\", label, \"\\\\s*:?\\\\s*\"), \"\", hit[1], ignore.case = TRUE))\n}\n\nscrape_detail &lt;- function(cheese_url) {\n  page&lt;- read_html(cheese_url)\n  items &lt;- page |&gt;\n    html_elements(\"#collapse-information li\") |&gt;\n    html_text(trim = TRUE)\n  \n  milk &lt;-get_field(items, \"Made from\")\n  country &lt;- get_field(items, \"Country of origin\")\n  family &lt;- get_field(items, \"Family\")\n  type &lt;- get_field(items, \"Type\")\n  flavor &lt;- get_field(items, \"Flavou?r\")   # so that it matches Flavour or Flavor\n  \n  Sys.sleep(1)\n  \n  tibble(url = cheese_url, milk, country, family, type, flavor)\n}\n\ncheese_details &lt;- bind_rows(lapply(cheese_df$url[1:10], scrape_detail))\n\n\nPrint the dimensions & first few rows of your final data frame:\n\nCodedim(cheese_details)\n\n[1] 10  6\n\nCodehead(cheese_details)\n\n# A tibble: 6 × 6\n  url                                          milk  country family type  flavor\n  &lt;chr&gt;                                        &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; \n1 https://www.cheese.com/2-year-aged-cumin-go… past… Nether… &lt;NA&gt;   semi… sharp \n2 https://www.cheese.com/3-cheese-italian-ble… past… Italy   Parme… semi… butte…\n3 https://www.cheese.com/30-month-aged-parmig… unpa… Italy   &lt;NA&gt;   hard  &lt;NA&gt;  \n4 https://www.cheese.com/3yrs-aged-vintage-go… past… Nether… &lt;NA&gt;   hard  strong\n5 https://www.cheese.com/aarewasser/           unpa… Switze… &lt;NA&gt;   semi… sweet \n6 https://www.cheese.com/abbaye-de-belloc/     unpa… France  &lt;NA&gt;   semi… burnt…",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
-    ]
-  },
-  {
-    "objectID": "homework-yeshedj/hw08/src/hw08-p1.html#resources-reflection-required",
-    "href": "homework-yeshedj/hw08/src/hw08-p1.html#resources-reflection-required",
-    "title": "HW08-P1 Scraping",
-    "section": "Resources Reflection (required)",
-    "text": "Resources Reflection (required)\nList the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.\nResources:\n\nica\ndocumentation\ntextbook\n\nReflection: I referenced back to in-class activities and documentation to help guide me when I was stuck and needed to figure out how to structure my code. The R documentation and dplyr documentations were useful to look back on the examples and explantions. I also used the textbook as well which was helpful.",
-    "crumbs": [
-      "Homework",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>HW08-P1 Scraping</span>"
-    ]
-  },
-  {
     "objectID": "homework-yeshedj/hw08/src/hw08-p2.html",
     "href": "homework-yeshedj/hw08/src/hw08-p2.html",
     "title": "HW08-P2 Databases",
@@ -1235,7 +928,7 @@
     "href": "pcl/9_pcl.html",
     "title": "9_pcl",
     "section": "",
-    "text": "Pre-Class Learning 1\n\n\nCaption for the picture.",
+    "text": "Pre-Class Learning 1\n\n\n\nCaption for the picture.\n\n\n\nYeshe Jangchup COMP/STAT212 Portfolio 25  10_pcl 23  8_pcl 1  Welcome Homework 2  HW1 TidyTuesday Brazilian Companies 3  HW02-P1 Adv Data Viz 4  HW02-P2 Adv Data Viz 5  HW03-P1 Adv Map Viz 6  HW03-P2 Adv Map Viz 7  HW04-P1 Data wrangling 8  HW05-P1 Adv. Data wrangling & Generalization 9  HW05-P2 Adv. Data Wrangling + Functions 10  HW06 Functions + Iteration 11  HW07-P1 Programming + JSON 12  HW07-P2 Navigating the Census API 13  HW08-P1 Scraping 14  HW08-P2 Databases TidyTuesday 16  TidyTuesday Sample 2 Pre-Class Learnings 17  1_pcl 18  2_pcl 19  3_pcl 20  4_pcl 21  6_pcl 22  7_pcl 23  8_pcl 24  9_pcl 25  10_pcl 26  11_pcl 27  12_pcl 28  13_pcl 29  14_pcl 30  15_pcl 31  16_pcl 32  17_pcl 33  18_pcl In-Class Activities 34  2 Cleaning SFO Weather Data 35  3 Adv Data Viz 36  4 Adv Spatial Viz P1 37  6 Adv Data wrangling I 38  7 Adv Data wrangling II 39  8 Missing Data 40  9 Functions 41  10 Base R 42  11 Loops+Iter I 43  12 Loops+Iter II 44  14 APIs II 45  15 Web scraping 46  16 Databases and SQL 47  18 Interactive Viz Extras 48  Extra Sample 2 Pre-Class Learnings 24  9_pcl\n\n\n\n\n\n9_pcl – COMP/STAT212 Portfolio 9_pcl – COMP/STAT212 Portfolio 9_pcl – COMP/STAT212 Portfolio COMP/STAT212 Portfolio  \n\n\n\n---\ntitle: \"9_pcl\"\noutput: html_document\n---\n\n# Pre-Class Learning 1\n\n![Caption for the picture.](images/9_pcl.jpg)",
     "crumbs": [
       "Pre-Class Learnings",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>9_pcl</span>"

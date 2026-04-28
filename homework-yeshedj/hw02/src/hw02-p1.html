@@ -4529,8 +4529,8 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
     <div class="sidebar-title mb-0 py-0">
       <a href="../../../">Yeshe Jangchup</a> 
         <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <a href class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -4540,7 +4540,7 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class title="Search"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -4926,7 +4926,7 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Code for loading packages and reading in data</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/sfo_weather.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://mac-stat.github.io/data/sfo_weather.csv&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section><section id="visualization" class="level2"><h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
@@ -4952,17 +4952,17 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb2-18"><a href="#cb2-18"></a><span class="co"># Plots the temp viz</span></span>
 <span id="cb2-19"><a href="#cb2-19"></a>temp_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear)) <span class="sc">+</span></span>
 <span id="cb2-20"><a href="#cb2-20"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> RecordLow, <span class="at">ymax =</span> RecordHigh), </span>
-<span id="cb2-21"><a href="#cb2-21"></a>                 <span class="at">color =</span> <span class="st">"#ECEBE3"</span>) <span class="sc">+</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>                 <span class="at">color =</span> <span class="st">&quot;#ECEBE3&quot;</span>) <span class="sc">+</span></span>
 <span id="cb2-22"><a href="#cb2-22"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> NormalLow, <span class="at">ymax =</span> NormalHigh), </span>
-<span id="cb2-23"><a href="#cb2-23"></a>                 <span class="at">color =</span> <span class="st">"#C8B8BA"</span>) <span class="sc">+</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>                 <span class="at">color =</span> <span class="st">&quot;#C8B8BA&quot;</span>) <span class="sc">+</span></span>
 <span id="cb2-24"><a href="#cb2-24"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Low, <span class="at">ymax =</span> High), </span>
-<span id="cb2-25"><a href="#cb2-25"></a>                 <span class="at">color =</span> <span class="st">"#A90248"</span>) <span class="sc">+</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>                 <span class="at">color =</span> <span class="st">&quot;#A90248&quot;</span>) <span class="sc">+</span></span>
 <span id="cb2-26"><a href="#cb2-26"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> month_breaks, <span class="fu">aes</span>(<span class="at">xintercept =</span> last_day <span class="sc">+</span> <span class="fl">0.5</span>),</span>
-<span id="cb2-27"><a href="#cb2-27"></a>             <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>             <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb2-28"><a href="#cb2-28"></a>  <span class="co"># Triangles for ALL record high days</span></span>
 <span id="cb2-29"><a href="#cb2-29"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Record <span class="sc">==</span> <span class="cn">TRUE</span>),</span>
 <span id="cb2-30"><a href="#cb2-30"></a>             <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> High), </span>
-<span id="cb2-31"><a href="#cb2-31"></a>             <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">fill =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>             <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">fill =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb2-32"><a href="#cb2-32"></a>  <span class="co"># Text labels ONLY for top 2 highest records</span></span>
 <span id="cb2-33"><a href="#cb2-33"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> top_2_records,</span>
 <span id="cb2-34"><a href="#cb2-34"></a>            <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> High, <span class="at">label =</span> RecordText),  </span>
@@ -4973,10 +4973,10 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb2-39"><a href="#cb2-39"></a>    <span class="at">labels =</span> month.abb</span>
 <span id="cb2-40"><a href="#cb2-40"></a>  ) <span class="sc">+</span></span>
 <span id="cb2-41"><a href="#cb2-41"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb2-42"><a href="#cb2-42"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Temperature"</span>,</span>
-<span id="cb2-43"><a href="#cb2-43"></a>       <span class="at">x =</span> <span class="st">""</span>, </span>
-<span id="cb2-44"><a href="#cb2-44"></a>       <span class="at">y =</span> <span class="st">"Temperature (°F)"</span>) <span class="sc">+</span></span>
-<span id="cb2-45"><a href="#cb2-45"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb2-42"><a href="#cb2-42"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Temperature&quot;</span>,</span>
+<span id="cb2-43"><a href="#cb2-43"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb2-44"><a href="#cb2-44"></a>       <span class="at">y =</span> <span class="st">&quot;Temperature (°F)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-45"><a href="#cb2-45"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
 <span id="cb2-46"><a href="#cb2-46"></a></span>
 <span id="cb2-47"><a href="#cb2-47"></a>temp_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
@@ -5016,22 +5016,22 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 </div>
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Plots the precipitation viz</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>precip_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear)) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> CulmPrec), <span class="at">color =</span> <span class="st">"#32a3d8"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> CulmPrec), <span class="at">color =</span> <span class="st">&quot;#32a3d8&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> CulmPrec), </span>
-<span id="cb5-5"><a href="#cb5-5"></a>              <span class="at">fill =</span> <span class="st">"#ebeae2"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>              <span class="at">fill =</span> <span class="st">&quot;#ebeae2&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a>    <span class="fu">geom_vline</span>(</span>
 <span id="cb5-7"><a href="#cb5-7"></a>    <span class="at">data =</span> month_breaks,</span>
 <span id="cb5-8"><a href="#cb5-8"></a>    <span class="fu">aes</span>(<span class="at">xintercept =</span> last_day <span class="sc">+</span> <span class="fl">0.5</span>),</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="at">color =</span> <span class="st">&quot;white&quot;</span>,</span>
 <span id="cb5-10"><a href="#cb5-10"></a>    <span class="at">size =</span> <span class="fl">0.8</span>,</span>
-<span id="cb5-11"><a href="#cb5-11"></a>    <span class="at">linetype =</span> <span class="st">"solid"</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span></span>
 <span id="cb5-12"><a href="#cb5-12"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-13"><a href="#cb5-13"></a>  <span class="fu">geom_point</span>(</span>
 <span id="cb5-14"><a href="#cb5-14"></a>    <span class="at">data =</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(RecordP <span class="sc">==</span> <span class="cn">TRUE</span>),</span>
 <span id="cb5-15"><a href="#cb5-15"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> CulmPrec <span class="sc">+</span><span class="fl">0.2</span>),  </span>
 <span id="cb5-16"><a href="#cb5-16"></a>    <span class="at">shape =</span> <span class="dv">25</span>,       </span>
-<span id="cb5-17"><a href="#cb5-17"></a>    <span class="at">fill =</span> <span class="st">"black"</span>,   </span>
-<span id="cb5-18"><a href="#cb5-18"></a>    <span class="at">color =</span> <span class="st">"black"</span>,  </span>
+<span id="cb5-17"><a href="#cb5-17"></a>    <span class="at">fill =</span> <span class="st">&quot;black&quot;</span>,   </span>
+<span id="cb5-18"><a href="#cb5-18"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,  </span>
 <span id="cb5-19"><a href="#cb5-19"></a>    <span class="at">size =</span> <span class="fl">1.5</span></span>
 <span id="cb5-20"><a href="#cb5-20"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-21"><a href="#cb5-21"></a>  <span class="fu">geom_text</span>(</span>
@@ -5040,7 +5040,7 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb5-24"><a href="#cb5-24"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,  </span>
 <span id="cb5-25"><a href="#cb5-25"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,  </span>
 <span id="cb5-26"><a href="#cb5-26"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
-<span id="cb5-27"><a href="#cb5-27"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
 <span id="cb5-28"><a href="#cb5-28"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-29"><a href="#cb5-29"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="dv">6</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>)) <span class="sc">+</span></span>
 <span id="cb5-30"><a href="#cb5-30"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">370</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">300</span>)) <span class="sc">+</span></span>
@@ -5048,15 +5048,15 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb5-32"><a href="#cb5-32"></a>  <span class="fu">theme</span>(</span>
 <span id="cb5-33"><a href="#cb5-33"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb5-34"><a href="#cb5-34"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb5-35"><a href="#cb5-35"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),  </span>
-<span id="cb5-36"><a href="#cb5-36"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),  </span>
-<span id="cb5-37"><a href="#cb5-37"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
-<span id="cb5-38"><a href="#cb5-38"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.3</span>) </span>
+<span id="cb5-35"><a href="#cb5-35"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),  </span>
+<span id="cb5-36"><a href="#cb5-36"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),  </span>
+<span id="cb5-37"><a href="#cb5-37"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
+<span id="cb5-38"><a href="#cb5-38"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">0.3</span>) </span>
 <span id="cb5-39"><a href="#cb5-39"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-40"><a href="#cb5-40"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-41"><a href="#cb5-41"></a>    <span class="at">title =</span> <span class="st">"Precipitation"</span>,</span>
-<span id="cb5-42"><a href="#cb5-42"></a>    <span class="at">x =</span> <span class="st">"dateInYear"</span>,</span>
-<span id="cb5-43"><a href="#cb5-43"></a>    <span class="at">y =</span> <span class="st">"CulmPrec"</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a>    <span class="at">title =</span> <span class="st">&quot;Precipitation&quot;</span>,</span>
+<span id="cb5-42"><a href="#cb5-42"></a>    <span class="at">x =</span> <span class="st">&quot;dateInYear&quot;</span>,</span>
+<span id="cb5-43"><a href="#cb5-43"></a>    <span class="at">y =</span> <span class="st">&quot;CulmPrec&quot;</span></span>
 <span id="cb5-44"><a href="#cb5-44"></a>  )</span>
 <span id="cb5-45"><a href="#cb5-45"></a>precip_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
@@ -5072,7 +5072,7 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb6-2"><a href="#cb6-2"></a></span>
 <span id="cb6-3"><a href="#cb6-3"></a>final_plot <span class="ot">&lt;-</span> temp_plot <span class="sc">/</span> precip_plot <span class="sc">+</span></span>
 <span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">"SFO weather in 2011"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">&quot;SFO weather in 2011&quot;</span>)</span>
 <span id="cb6-6"><a href="#cb6-6"></a></span>
 <span id="cb6-7"><a href="#cb6-7"></a>final_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
@@ -5573,9 +5573,9 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
         <span class="nav-page-text"><span class="chapter-title">HW02-P2 Adv Data Viz</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="an">title:</span><span class="co"> "HW02-P1 Adv Data Viz"</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="an">title:</span><span class="co"> &quot;HW02-P1 Adv Data Viz&quot;</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="an">format:</span><span class="co"> </span></span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co">  html: </span></span>
 <span id="cb7-5"><a href="#cb7-5"></a><span class="co">    embed-resources: true</span></span>
@@ -5585,9 +5585,9 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-9"><a href="#cb7-9"></a></span>
 <span id="cb7-10"><a href="#cb7-10"></a>Using <span class="in">`ggplot2`</span> and other tools in R, recreate the original New York Times graphic to the greatest extent possible. Try to get as close as possible to the figure below:</span>
 <span id="cb7-11"><a href="#cb7-11"></a></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="al">![](https://hash-mac.github.io/stat212site-sp26/images/hw1_goal.png)</span>{width="600," fig-align="center"}</span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="al">![](https://hash-mac.github.io/stat212site-sp26/images/hw1_goal.png)</span>{width=&quot;600,&quot; fig-align=&quot;center&quot;}</span>
 <span id="cb7-13"><a href="#cb7-13"></a></span>
-<span id="cb7-14"><a href="#cb7-14"></a>You will need to use reference pages and documentation to discover necessary tools. For example, you may want to Google search "ggplot multiple plots". When looking through results, check publication dates and use newer references. Some helpful resources could include R documentation, Stack Overflow, and <span class="co">[</span><span class="ot">R cheatsheets</span><span class="co">](https://rstudio.github.io/cheatsheets/)</span>.</span>
+<span id="cb7-14"><a href="#cb7-14"></a>You will need to use reference pages and documentation to discover necessary tools. For example, you may want to Google search &quot;ggplot multiple plots&quot;. When looking through results, check publication dates and use newer references. Some helpful resources could include R documentation, Stack Overflow, and <span class="co">[</span><span class="ot">R cheatsheets</span><span class="co">](https://rstudio.github.io/cheatsheets/)</span>.</span>
 <span id="cb7-15"><a href="#cb7-15"></a></span>
 <span id="cb7-16"><a href="#cb7-16"></a>**Requirements**</span>
 <span id="cb7-17"><a href="#cb7-17"></a></span>
@@ -5598,22 +5598,22 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-22"><a href="#cb7-22"></a><span class="ss">    -   </span>X-axis label: 3-letter month abbreviations appear in the middle of each month.</span>
 <span id="cb7-23"><a href="#cb7-23"></a><span class="ss">    -   </span>Y-axis label: Tick marks at 0, 40, 80, and 120 only.</span>
 <span id="cb7-24"><a href="#cb7-24"></a><span class="ss">    -   </span>Vertical lines separate the months.</span>
-<span id="cb7-25"><a href="#cb7-25"></a><span class="ss">    -   </span>Title of "Temperature" is included.</span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="ss">    -   </span>Title of &quot;Temperature&quot; is included.</span>
 <span id="cb7-26"><a href="#cb7-26"></a><span class="ss">-   </span>Precipitation</span>
 <span id="cb7-27"><a href="#cb7-27"></a><span class="ss">    -   </span>Tan area and blue line reflecting the monthly cumulative precipitation is included.</span>
 <span id="cb7-28"><a href="#cb7-28"></a><span class="ss">    -   </span>Text (number) for cumulative precipitation for each month is included at the end of each month just above the blue line.</span>
 <span id="cb7-29"><a href="#cb7-29"></a><span class="ss">    -   </span>Downward triangles point to the record precipitation days.</span>
 <span id="cb7-30"><a href="#cb7-30"></a><span class="ss">    -   </span>Vertical lines separate the months.</span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="ss">    -   </span>Title of "Precipitation" is included.</span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="ss">    -   </span>Title of &quot;Precipitation&quot; is included.</span>
 <span id="cb7-32"><a href="#cb7-32"></a><span class="ss">-   </span>Overall</span>
 <span id="cb7-33"><a href="#cb7-33"></a><span class="ss">    -   </span>Both the temperature and precipitation graphs are in one figure.</span>
 <span id="cb7-34"><a href="#cb7-34"></a><span class="ss">    -   </span>The temperature plot takes up more vertical space than the precipitation plot.</span>
-<span id="cb7-35"><a href="#cb7-35"></a><span class="ss">    -   </span>The title "SFO weather in 2011" is present.</span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="ss">    -   </span>The title &quot;SFO weather in 2011&quot; is present.</span>
 <span id="cb7-36"><a href="#cb7-36"></a><span class="ss">-   </span>Resource reflection</span>
 <span id="cb7-37"><a href="#cb7-37"></a><span class="ss">    -   </span>At least 1 resource is listed</span>
 <span id="cb7-38"><a href="#cb7-38"></a><span class="ss">    -   </span>At least 3 sentences about resources and their helpfulness in the task</span>
 <span id="cb7-39"><a href="#cb7-39"></a></span>
-<span id="cb7-40"><a href="#cb7-40"></a>**Bonus:** If you'd like further practice, recreate the legend in the temperature graph that shows how the colored lines relate to record, normal, and actual highs.</span>
+<span id="cb7-40"><a href="#cb7-40"></a>**Bonus:** If you&#39;d like further practice, recreate the legend in the temperature graph that shows how the colored lines relate to record, normal, and actual highs.</span>
 <span id="cb7-41"><a href="#cb7-41"></a></span>
 <span id="cb7-42"><a href="#cb7-42"></a><span class="fu">## Setup</span></span>
 <span id="cb7-43"><a href="#cb7-43"></a></span>
@@ -5621,7 +5621,7 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-47"><a href="#cb7-47"></a><span class="co"># Code for loading packages and reading in data</span></span>
 <span id="cb7-48"><a href="#cb7-48"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb7-49"><a href="#cb7-49"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-50"><a href="#cb7-50"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/sfo_weather.csv"</span>)</span>
+<span id="cb7-50"><a href="#cb7-50"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://mac-stat.github.io/data/sfo_weather.csv&quot;</span>)</span>
 <span id="cb7-51"><a href="#cb7-51"></a><span class="in">```</span></span>
 <span id="cb7-52"><a href="#cb7-52"></a></span>
 <span id="cb7-53"><a href="#cb7-53"></a><span class="fu">## Visualization</span></span>
@@ -5649,17 +5649,17 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-77"><a href="#cb7-77"></a><span class="co"># Plots the temp viz</span></span>
 <span id="cb7-78"><a href="#cb7-78"></a>temp_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear)) <span class="sc">+</span></span>
 <span id="cb7-79"><a href="#cb7-79"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> RecordLow, <span class="at">ymax =</span> RecordHigh), </span>
-<span id="cb7-80"><a href="#cb7-80"></a>                 <span class="at">color =</span> <span class="st">"#ECEBE3"</span>) <span class="sc">+</span></span>
+<span id="cb7-80"><a href="#cb7-80"></a>                 <span class="at">color =</span> <span class="st">&quot;#ECEBE3&quot;</span>) <span class="sc">+</span></span>
 <span id="cb7-81"><a href="#cb7-81"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> NormalLow, <span class="at">ymax =</span> NormalHigh), </span>
-<span id="cb7-82"><a href="#cb7-82"></a>                 <span class="at">color =</span> <span class="st">"#C8B8BA"</span>) <span class="sc">+</span></span>
+<span id="cb7-82"><a href="#cb7-82"></a>                 <span class="at">color =</span> <span class="st">&quot;#C8B8BA&quot;</span>) <span class="sc">+</span></span>
 <span id="cb7-83"><a href="#cb7-83"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Low, <span class="at">ymax =</span> High), </span>
-<span id="cb7-84"><a href="#cb7-84"></a>                 <span class="at">color =</span> <span class="st">"#A90248"</span>) <span class="sc">+</span></span>
+<span id="cb7-84"><a href="#cb7-84"></a>                 <span class="at">color =</span> <span class="st">&quot;#A90248&quot;</span>) <span class="sc">+</span></span>
 <span id="cb7-85"><a href="#cb7-85"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> month_breaks, <span class="fu">aes</span>(<span class="at">xintercept =</span> last_day <span class="sc">+</span> <span class="fl">0.5</span>),</span>
-<span id="cb7-86"><a href="#cb7-86"></a>             <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb7-86"><a href="#cb7-86"></a>             <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb7-87"><a href="#cb7-87"></a>  <span class="co"># Triangles for ALL record high days</span></span>
 <span id="cb7-88"><a href="#cb7-88"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Record <span class="sc">==</span> <span class="cn">TRUE</span>),</span>
 <span id="cb7-89"><a href="#cb7-89"></a>             <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> High), </span>
-<span id="cb7-90"><a href="#cb7-90"></a>             <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">fill =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb7-90"><a href="#cb7-90"></a>             <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">fill =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb7-91"><a href="#cb7-91"></a>  <span class="co"># Text labels ONLY for top 2 highest records</span></span>
 <span id="cb7-92"><a href="#cb7-92"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> top_2_records,</span>
 <span id="cb7-93"><a href="#cb7-93"></a>            <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> High, <span class="at">label =</span> RecordText),  </span>
@@ -5670,10 +5670,10 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-98"><a href="#cb7-98"></a>    <span class="at">labels =</span> month.abb</span>
 <span id="cb7-99"><a href="#cb7-99"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-100"><a href="#cb7-100"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb7-101"><a href="#cb7-101"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Temperature"</span>,</span>
-<span id="cb7-102"><a href="#cb7-102"></a>       <span class="at">x =</span> <span class="st">""</span>, </span>
-<span id="cb7-103"><a href="#cb7-103"></a>       <span class="at">y =</span> <span class="st">"Temperature (°F)"</span>) <span class="sc">+</span></span>
-<span id="cb7-104"><a href="#cb7-104"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb7-101"><a href="#cb7-101"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Temperature&quot;</span>,</span>
+<span id="cb7-102"><a href="#cb7-102"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb7-103"><a href="#cb7-103"></a>       <span class="at">y =</span> <span class="st">&quot;Temperature (°F)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-104"><a href="#cb7-104"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
 <span id="cb7-105"><a href="#cb7-105"></a></span>
 <span id="cb7-106"><a href="#cb7-106"></a>temp_plot</span>
 <span id="cb7-107"><a href="#cb7-107"></a><span class="in">```</span></span>
@@ -5694,22 +5694,22 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-124"><a href="#cb7-124"></a></span>
 <span id="cb7-125"><a href="#cb7-125"></a><span class="co"># Plots the precipitation viz</span></span>
 <span id="cb7-126"><a href="#cb7-126"></a>precip_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear)) <span class="sc">+</span></span>
-<span id="cb7-127"><a href="#cb7-127"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> CulmPrec), <span class="at">color =</span> <span class="st">"#32a3d8"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb7-127"><a href="#cb7-127"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> CulmPrec), <span class="at">color =</span> <span class="st">&quot;#32a3d8&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb7-128"><a href="#cb7-128"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> CulmPrec), </span>
-<span id="cb7-129"><a href="#cb7-129"></a>              <span class="at">fill =</span> <span class="st">"#ebeae2"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb7-129"><a href="#cb7-129"></a>              <span class="at">fill =</span> <span class="st">&quot;#ebeae2&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb7-130"><a href="#cb7-130"></a>    <span class="fu">geom_vline</span>(</span>
 <span id="cb7-131"><a href="#cb7-131"></a>    <span class="at">data =</span> month_breaks,</span>
 <span id="cb7-132"><a href="#cb7-132"></a>    <span class="fu">aes</span>(<span class="at">xintercept =</span> last_day <span class="sc">+</span> <span class="fl">0.5</span>),</span>
-<span id="cb7-133"><a href="#cb7-133"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb7-133"><a href="#cb7-133"></a>    <span class="at">color =</span> <span class="st">&quot;white&quot;</span>,</span>
 <span id="cb7-134"><a href="#cb7-134"></a>    <span class="at">size =</span> <span class="fl">0.8</span>,</span>
-<span id="cb7-135"><a href="#cb7-135"></a>    <span class="at">linetype =</span> <span class="st">"solid"</span></span>
+<span id="cb7-135"><a href="#cb7-135"></a>    <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span></span>
 <span id="cb7-136"><a href="#cb7-136"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-137"><a href="#cb7-137"></a>  <span class="fu">geom_point</span>(</span>
 <span id="cb7-138"><a href="#cb7-138"></a>    <span class="at">data =</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(RecordP <span class="sc">==</span> <span class="cn">TRUE</span>),</span>
 <span id="cb7-139"><a href="#cb7-139"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> CulmPrec <span class="sc">+</span><span class="fl">0.2</span>),  </span>
 <span id="cb7-140"><a href="#cb7-140"></a>    <span class="at">shape =</span> <span class="dv">25</span>,       </span>
-<span id="cb7-141"><a href="#cb7-141"></a>    <span class="at">fill =</span> <span class="st">"black"</span>,   </span>
-<span id="cb7-142"><a href="#cb7-142"></a>    <span class="at">color =</span> <span class="st">"black"</span>,  </span>
+<span id="cb7-141"><a href="#cb7-141"></a>    <span class="at">fill =</span> <span class="st">&quot;black&quot;</span>,   </span>
+<span id="cb7-142"><a href="#cb7-142"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,  </span>
 <span id="cb7-143"><a href="#cb7-143"></a>    <span class="at">size =</span> <span class="fl">1.5</span></span>
 <span id="cb7-144"><a href="#cb7-144"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-145"><a href="#cb7-145"></a>  <span class="fu">geom_text</span>(</span>
@@ -5718,7 +5718,7 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-148"><a href="#cb7-148"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.1</span>,  </span>
 <span id="cb7-149"><a href="#cb7-149"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,  </span>
 <span id="cb7-150"><a href="#cb7-150"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
-<span id="cb7-151"><a href="#cb7-151"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb7-151"><a href="#cb7-151"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
 <span id="cb7-152"><a href="#cb7-152"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-153"><a href="#cb7-153"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="dv">6</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>)) <span class="sc">+</span></span>
 <span id="cb7-154"><a href="#cb7-154"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">370</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">300</span>)) <span class="sc">+</span></span>
@@ -5726,15 +5726,15 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-156"><a href="#cb7-156"></a>  <span class="fu">theme</span>(</span>
 <span id="cb7-157"><a href="#cb7-157"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb7-158"><a href="#cb7-158"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-159"><a href="#cb7-159"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),  </span>
-<span id="cb7-160"><a href="#cb7-160"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),  </span>
-<span id="cb7-161"><a href="#cb7-161"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
-<span id="cb7-162"><a href="#cb7-162"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.3</span>) </span>
+<span id="cb7-159"><a href="#cb7-159"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),  </span>
+<span id="cb7-160"><a href="#cb7-160"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),  </span>
+<span id="cb7-161"><a href="#cb7-161"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
+<span id="cb7-162"><a href="#cb7-162"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">0.3</span>) </span>
 <span id="cb7-163"><a href="#cb7-163"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-164"><a href="#cb7-164"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-165"><a href="#cb7-165"></a>    <span class="at">title =</span> <span class="st">"Precipitation"</span>,</span>
-<span id="cb7-166"><a href="#cb7-166"></a>    <span class="at">x =</span> <span class="st">"dateInYear"</span>,</span>
-<span id="cb7-167"><a href="#cb7-167"></a>    <span class="at">y =</span> <span class="st">"CulmPrec"</span></span>
+<span id="cb7-165"><a href="#cb7-165"></a>    <span class="at">title =</span> <span class="st">&quot;Precipitation&quot;</span>,</span>
+<span id="cb7-166"><a href="#cb7-166"></a>    <span class="at">x =</span> <span class="st">&quot;dateInYear&quot;</span>,</span>
+<span id="cb7-167"><a href="#cb7-167"></a>    <span class="at">y =</span> <span class="st">&quot;CulmPrec&quot;</span></span>
 <span id="cb7-168"><a href="#cb7-168"></a>  )</span>
 <span id="cb7-169"><a href="#cb7-169"></a>precip_plot</span>
 <span id="cb7-170"><a href="#cb7-170"></a><span class="in">```</span></span>
@@ -5745,7 +5745,7 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-177"><a href="#cb7-177"></a></span>
 <span id="cb7-178"><a href="#cb7-178"></a>final_plot <span class="ot">&lt;-</span> temp_plot <span class="sc">/</span> precip_plot <span class="sc">+</span></span>
 <span id="cb7-179"><a href="#cb7-179"></a>  <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb7-180"><a href="#cb7-180"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">"SFO weather in 2011"</span>)</span>
+<span id="cb7-180"><a href="#cb7-180"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">&quot;SFO weather in 2011&quot;</span>)</span>
 <span id="cb7-181"><a href="#cb7-181"></a></span>
 <span id="cb7-182"><a href="#cb7-182"></a>final_plot</span>
 <span id="cb7-183"><a href="#cb7-183"></a><span class="in">```</span></span>
@@ -5763,18 +5763,18 @@ box-shadow: 40px 0 100px #008cff85, -40px 0 100px #e100ffbb ;
 <span id="cb7-195"><a href="#cb7-195"></a><span class="ss">-   </span>Stack Overflow</span>
 <span id="cb7-196"><a href="#cb7-196"></a></span>
 <span id="cb7-197"><a href="#cb7-197"></a>**Reflection:** The most helpful resource for this assignment was the ggplot2 documentation because it explains how different functions work by providing example code and also visualizations. In particular, it was very useful in figuring out how to use the geom_linerage() function. The in class activity was useful as well since it took you step by step in learning the data and the functions, and then eventually piecing together the final visualizations. I used Stack Overflow a few times to understand confusing errors, which helped to resolve them.</span>
-</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
+       
     </div>   
     <div class="nav-footer-center">
 
 <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
-      &nbsp;
+       
     </div>
   </div>
 </footer>
