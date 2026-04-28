@@ -22,7 +22,7 @@ number-depth: 2
 
 book:
   title: "COMP/STAT212 Portfolio"
-  author: "Your Name Here"
+  author: "Yeshe Jangchup"
   date: today  # use today to update date published based on last time project was edited
   date-format: full
   # favicon: path/to/favorite-logo.png
@@ -45,7 +45,7 @@ book:
       # footer text
 
   sidebar:
-    title: "Your Name Here"
+    title: "Yeshe Jangchup"
     logo: assets/sidebar-logo.png
     logo-alt: "Random negative space illustration"
     collapse-level: 2
@@ -60,27 +60,73 @@ book:
     - text: "Welcome"
       href: index.qmd
 
-    - part: "Prof Viz"
+    - part: "Homework"
       chapters:
-      - pv/pv-01.qmd
+      - homework-yeshedj/hw01/src/hw1-tt.qmd
+      - homework-yeshedj/hw02/src/hw02-p1.qmd
+      - homework-yeshedj/hw02/src/hw02-p2.qmd
+      - homework-yeshedj/hw03/src/hw03-p1.qmd
+      - homework-yeshedj/hw03/src/hw03-p2.qmd
+      - homework-yeshedj/hw04/src/hw04-p1.qmd
+      - homework-yeshedj/hw05/src/hw05-p1.qmd
+      - homework-yeshedj/hw05/src/hw05-p2.qmd
+      - homework-yeshedj/hw06/src/hw06.qmd
+      - homework-yeshedj/hw07/src/hw07-p1.qmd
+      - homework-yeshedj/hw07/src/hw07-p2.qmd
+      - homework-yeshedj/hw08/src/hw08-p1.qmd
+      - homework-yeshedj/hw08/src/hw08-p2.qmd
+
+
+
 
     - part: "TidyTuesday"
       chapters:
-      - tt/2025-07-08.qmd
+      - homework-yeshedj/hw01/src/hw1-tt.qmd
       - tt/2025-07-15.qmd
 
     - part: "Pre-Class Learnings"
       chapters:
-      - pcl/pcl.qmd
+      - pcl/1_pcl.Rmd
+      - pcl/2_pcl.Rmd
+      - pcl/3_pcl.Rmd
+      - pcl/4_pcl.Rmd
+      - pcl/6_pcl.Rmd
+      - pcl/7_pcl.Rmd
+      - pcl/8_pcl.Rmd
+      - pcl/9_pcl.Rmd
+      - pcl/10_pcl.Rmd
+      - pcl/11_pcl.Rmd
+      - pcl/12_pcl.Rmd
+      - pcl/13_pcl.Rmd
+      - pcl/14_pcl.Rmd
+      - pcl/15_pcl.Rmd
+      - pcl/16_pcl.Rmd
+      - pcl/17_pcl.Rmd
+      - pcl/18_pcl.Rmd
+
+
 
     - part: "In-Class Activities"
       chapters:
-      - ica/ica-sample1.qmd
-      - ica/ica-sample2.qmd
+      - ica/02_review/cleaning.qmd
+      - ica/03_adv_ggplot/code/03-adv-ggplot-notes.qmd
+      - ica/04_adv_maps/code/04-adv-maps-1-notes.qmd
+      - ica/06_adv_data_wrangling1/06-wrangling-1-notes.qmd
+      - ica/07_adv_data_wrangling2/07-wrangling-2-notes.qmd
+      - ica/08_missing_data/08-missing-data-notes.qmd
+      - ica/09_functions/09-functions-notes.qmd
+      - ica/10_base_r/10-base-r-notes.qmd
+      - ica/11_loops_and_Iter_1/11-iteration-1-notes.qmd
+      - ica/12_loops_and_iter_2/12-iteration-2-notes.qmd
+      - ica/14_apis_2/14-apis-2-notes.qmd
+      - ica/15_web_scraping/15-scraping-notes.qmd
+      - ica/16_databases_and_sql/16-databases-notes.qmd
+      - ica/18_interactive_viz/18-interactive-viz-notes.qmd
+
+
 
     - part: "Extras"
       chapters:
-      - extra/extra-sample1.qmd
       - extra/extra-sample2.qmd
 
 

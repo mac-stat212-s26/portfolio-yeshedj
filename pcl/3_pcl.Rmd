@@ -1,0 +1,8 @@
+---
+title: "3_pcl"
+output: html_document
+---
+
+# Pre-Class Learning 1
+
+![Caption for the picture.](images/3_pcl.jpg)
