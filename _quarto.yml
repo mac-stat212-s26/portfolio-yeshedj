@@ -71,6 +71,16 @@ book:
       - homework-yeshedj/hw02/src/hw02-p2.qmd
       - homework-yeshedj/hw03/src/hw03-p1.qmd
       - homework-yeshedj/hw03/src/hw03-p2.qmd
+      - homework-yeshedj/hw04/src/hw04-p1.qmd
+      - homework-yeshedj/hw05/src/hw05-p1.qmd
+      - homework-yeshedj/hw05/src/hw05-p2.qmd
+      - homework-yeshedj/hw06/src/hw06.qmd
+      - homework-yeshedj/hw07/src/hw07-p1.qmd
+      - homework-yeshedj/hw07/src/hw07-p2.qmd
+      - homework-yeshedj/hw08/src/hw08-p1.qmd
+      - homework-yeshedj/hw08/src/hw08-p2.qmd
+
+
 
 
     - part: "TidyTuesday"
@@ -84,8 +94,21 @@ book:
 
     - part: "In-Class Activities"
       chapters:
+      - ica/02_review/cleaning.qmd
       - ica/03_adv_ggplot/code/03-adv-ggplot-notes.qmd
       - ica/04_adv_maps/code/04-adv-maps-1-notes.qmd
+      - ica/06_adv_data_wrangling1/06-wrangling-1-notes.qmd
+      - ica/07_adv_data_wrangling2/07-wrangling-2-notes.qmd
+      - ica/08_missing_data/08-missing-data-notes.qmd
+      - ica/09_functions/09-functions-notes.qmd
+      - ica/10_base_r/10-base-r-notes.qmd
+      - ica/11_loops_and_Iter_1/11-iteration-1-notes.qmd
+      - ica/12_loops_and_iter_2/12-iteration-2-notes.qmd
+      - ica/14_apis_2/14-apis-2-notes.qmd
+      - ica/15_web_scraping/15-scraping-notes.qmd
+      - ica/16_databases_and_sql/16-databases-notes.qmd
+      - ica/18_interactive_viz/18-interactive-viz-notes.qmd
+
 
 
     - part: "Extras"
