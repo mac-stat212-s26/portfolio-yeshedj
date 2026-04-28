@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>HW03-P2 Adv Map Viz – COMP/STAT212 Portfolio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../homework-yeshedj/hw04/src/hw04-p1.html" rel="next">
+<link href="../../../homework-yeshedj/hw03/src/hw03-p1.html" rel="prev">
+<script src="../../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b1525fc7443f827935229f0f56e36607.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../../style/custom.css">
+</head>
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw01/src/hw1-tt.html">Homework</a></li><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw03/src/hw03-p2.html"><span class="chapter-title">HW03-P2 Adv Map Viz</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../../index.html" class="sidebar-logo-link">
+      <img src="../../../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../">Yeshe Jangchup</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Homework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw01/src/hw1-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW1 TidyTuesday Brazilian Companies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw02/src/hw02-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW02-P1 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw02/src/hw02-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW02-P2 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw03/src/hw03-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW03-P1 Adv Map Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw03/src/hw03-p2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">HW03-P2 Adv Map Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw04/src/hw04-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW04-P1 Data wrangling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw05/src/hw05-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW05-P1 Adv. Data wrangling &amp; Generalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw05/src/hw05-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW05-P2 Adv. Data Wrangling + Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw06/src/hw06.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW06 Functions + Iteration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw07/src/hw07-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW07-P1 Programming + JSON</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw07/src/hw07-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW07-P2 Navigating the Census API</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw08/src/hw08-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW08-P1 Scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw08/src/hw08-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW08-P2 Databases</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TidyTuesday</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw01/src/hw1-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW1 TidyTuesday Brazilian Companies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../tt/2025-07-15.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">TidyTuesday Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pre-Class Learnings</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/1_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/2_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/3_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/4_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/6_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/7_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/8_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/9_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/10_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/11_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/12_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/13_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">13_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/14_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/15_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/16_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/17_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">17_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/18_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18_pcl</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">In-Class Activities</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/02_review/cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2 Cleaning SFO Weather Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/03_adv_ggplot/code/03-adv-ggplot-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/04_adv_maps/code/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz P1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/06_adv_data_wrangling1/06-wrangling-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6 Adv Data wrangling I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/07_adv_data_wrangling2/07-wrangling-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7 Adv Data wrangling II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/08_missing_data/08-missing-data-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8 Missing Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/09_functions/09-functions-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/10_base_r/10-base-r-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10 Base R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/11_loops_and_Iter_1/11-iteration-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11 Loops+Iter I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/12_loops_and_iter_2/12-iteration-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12 Loops+Iter II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/14_apis_2/14-apis-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14 APIs II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/15_web_scraping/15-scraping-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15 Web scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/16_databases_and_sql/16-databases-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16 Databases and SQL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/18_interactive_viz/18-interactive-viz-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18 Interactive Viz</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extras</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../extra/extra-sample2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#download-read-data" id="toc-download-read-data" class="nav-link" data-scroll-target="#download-read-data">1 Download &amp; Read Data</a></li>
+  <li><a href="#mn-walkability" id="toc-mn-walkability" class="nav-link" data-scroll-target="#mn-walkability">2 MN Walkability</a></li>
+  <li><a href="#us-county-boundaries" id="toc-us-county-boundaries" class="nav-link" data-scroll-target="#us-county-boundaries">3 US County Boundaries</a></li>
+  <li><a href="#join-walkability-boundaries" id="toc-join-walkability-boundaries" class="nav-link" data-scroll-target="#join-walkability-boundaries">4 Join Walkability &amp; Boundaries</a></li>
+  <li><a href="#county-average-walkability" id="toc-county-average-walkability" class="nav-link" data-scroll-target="#county-average-walkability">5 County Average Walkability</a></li>
+  <li><a href="#walkability-variability-vs-average" id="toc-walkability-variability-vs-average" class="nav-link" data-scroll-target="#walkability-variability-vs-average">6 Walkability Variability vs Average</a></li>
+  <li><a href="#resources-reflection-required" id="toc-resources-reflection-required" class="nav-link" data-scroll-target="#resources-reflection-required">Resources Reflection (required)</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw01/src/hw1-tt.html">Homework</a></li><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw03/src/hw03-p2.html"><span class="chapter-title">HW03-P2 Adv Map Viz</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">HW03-P2 Adv Map Viz</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><div class="callout callout-style-default callout-important callout-titled" title="Important GitHub Note">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Important GitHub Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>DO NOT add, commit, and push anything in the <code>data/raw</code> folder. The files for this are too big, and you’ll run into file size restrictions. You can ignore them as follows:</p>
+<ul>
+<li>Open GitHub Desktop</li>
+<li>Right-click any file inside <code>data/raw</code> –&gt; select <code>Ignore folder (add to .gitignore)</code> –&gt; select <code>data/raw</code>
+</li>
+</ul>
+</div>
+</div>
+<section id="introduction" class="level2"><h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The US Walkability Index dataset provides relative walkability information for all 2019 census block groups. Through these exercises, we will explore walkability patterns across the United States.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Downloaded data and read it in</li>
+<li>MN plot of walkability (filtering + choropleth)</li>
+<li>save filtered dataset as R Data file</li>
+<li>Get US county boundaries, transform to have same CRS if necessary</li>
+<li>Spatial join (order matters), Weighted mean and SD by county</li>
+<li>County-level map of Average Walkability of a state of choice</li>
+<li>County-level map of SD in Walkability of a state of choice</li>
+<li>Scatterplot of SD and Average Walkability overall</li>
+<li>Scatterplot of SD and Average Walkability faceted by state</li>
+<li>Insight sentences about graphic</li>
+</ul></section><section id="download-read-data" class="level2"><h2 class="anchored" data-anchor-id="download-read-data">1 Download &amp; Read Data</h2>
+<p>Go to <a href="https://catalog.data.gov/dataset/">data.gov</a>, search for “walkability index”, and download the US Walkability Index dataset (the Zip file called <code>WalkabilityIndex.zip</code>). Unzip this file within the <code>data/raw</code> folder of this homework.</p>
+<p>Read in the dataset with <code>st_read()</code> by providing a relative path to the <code>WalkabilityIndex/Natl_WI.gdb</code> folder (as opposed to a file within that folder). This will take a few seconds. You should see a message <code>using driver OpenFileGDB</code> during this process.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(USAboundaries)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>walk_index <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"../data/raw/WalkabilityIndex/Natl_WI.gdb"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `NationalWalkabilityIndex' from data source 
+  `/Users/yeshejangchup/Documents/CLASSES/ds212/portfolio-yeshedj/homework-yeshedj/hw03/data/raw/WalkabilityIndex/Natl_WI.gdb' 
+  using driver `OpenFileGDB'
+Simple feature collection with 220739 features and 29 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -10434580 ymin: -83867.97 xmax: 3407868 ymax: 6755033
+Projected CRS: USA_Contiguous_Albers_Equal_Area_Conic_USGS_version</code></pre>
+</div>
+</div>
+</section><section id="mn-walkability" class="level2"><h2 class="anchored" data-anchor-id="mn-walkability">2 MN Walkability</h2>
+<p>Let’s first get a sense for the data by making a map of walkability indices for Minnesota. You will first need to filter the <code>walk_index</code> dataset by using the <code>STATEFP</code> variable. <code>STATEFP</code> contains the state’s <a href="https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt">FIPS code</a> which is <code>"27"</code> for Minnesota. The <code>NatWalkInd</code> variable contains the walkability indices. Save this smaller dataset in a <code>data/processed</code> folder as <code>walk_index_mn.RData</code>, which is an R Data file.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>walk_index_mn <span class="ot">&lt;-</span> walk_index <span class="sc">|&gt;</span> <span class="fu">filter</span>(STATEFP <span class="sc">==</span> <span class="st">"27"</span>) <span class="co"># Code for filtering to MN</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">dir.create</span>(<span class="st">"data/processed"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">save</span>(walk_index_mn, <span class="at">file =</span> <span class="st">'data/processed/walk_index_mn.RData'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">load</span>(<span class="st">'data/processed/walk_index_mn.RData'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># Plot walkability data for MN</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">ggplot</span>(walk_index_mn) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> NatWalkInd), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb4-8"><a href="#cb4-8"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#CC79A7"</span>, <span class="st">"#FFB000"</span>, <span class="st">"#FEFE62"</span>, <span class="st">"#785EF0"</span>, <span class="st">"#009E73"</span>),</span>
+<span id="cb4-9"><a href="#cb4-9"></a>        <span class="at">name =</span> <span class="st">"Index"</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Walkability Index in Minnesota"</span>) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw03-p2_files/figure-html/mn_wi_map-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="us-county-boundaries" class="level2"><h2 class="anchored" data-anchor-id="us-county-boundaries">3 US County Boundaries</h2>
+<p>We will start setting up to do a nationwide exploration of walkability. Use the <code>us_counties()</code> function within the <code>USAboundaries</code> package to obtain the most current low resolution county boundaries for all US counties. (Look up the documentation for this function to see how to structure the arguments.)</p>
+<p>If needed, transform <code>all_us_counties</code> to have the same CRS as the Walkability Index dataset.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>all_us_counties <span class="ot">&lt;-</span> <span class="fu">us_counties</span>(<span class="at">resolution =</span> <span class="st">"low"</span>, <span class="at">states =</span> <span class="cn">NULL</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">st_crs</span>(all_us_counties) <span class="sc">==</span> <span class="fu">st_crs</span>(walk_index)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>all_us_counties <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(all_us_counties, <span class="fu">st_crs</span>(walk_index))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="join-walkability-boundaries" class="level2"><h2 class="anchored" data-anchor-id="join-walkability-boundaries">4 Join Walkability &amp; Boundaries</h2>
+<p>Use <code>st_join()</code> within the <code>sf</code> package to insert walkability information into the <code>all_us_counties</code> dataset. Because the walkability information is available over regions that are smaller than counties, this join will merge in multiple regions of walkability information for each county.</p>
+<p>After the join, summarize the walkability index within each county with the weighted mean and weighted standard deviation, where the weights are given by the <code>Shape_Area</code> variable.</p>
+<p><em>Background information about weighted summary measures:</em> In an ordinary (unweighted) mean and standard deviation, each observation gets a weight of 1–that is, every observation contributes equally to the calculation. We want to compute a weighted measure because the regions within a county have different areas.</p>
+<p><em>Techinical implementation:</em> You can install the <code>Hmisc</code> package and use the following:</p>
+<ul>
+<li><code>Hmisc::wtd.mean(x, weights)</code></li>
+<li>
+<code>Hmisc::wtd.var(x, weights)</code>
+<ul>
+<li>This computes a weighted variance–you’ll need to take the square root after this.</li>
+</ul>
+</li>
+</ul>
+<p>Note: DON’T add <code><a href="https://hbiostat.org/R/Hmisc/">library(Hmisc)</a></code> to your package loading code chunk. <code>Hmisc</code> contains a function called <code>summarize()</code> that will conflict with <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">dplyr::summarize()</a></code>.</p>
+<p>In both functions, <code>x</code> represents the vector of numerical entries you want to summarize, and <code>weights</code> is a vector of the same length as <code>x</code> that gives the weight for each entry of <code>x</code>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Use st_join to merge county boundaries and regions where we have walkability index data</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>all_us_counties_walk_index <span class="ot">&lt;-</span> <span class="fu">st_join</span>(all_us_counties, walk_index)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># Use Hmisc::wtd.mean() and Hmisc::wtd.var() to compute the weighted mean and SD of the walkability index (weighted by Shape_Area)</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>all_us_counties_walk_index_summ <span class="ot">&lt;-</span> all_us_counties_walk_index <span class="sc">|&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="fu">group_by</span>(geoid, name, state_abbr) <span class="sc">|&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb8-11"><a href="#cb8-11"></a>        <span class="at">mean_walk =</span> Hmisc<span class="sc">::</span><span class="fu">wtd.mean</span>(NatWalkInd, <span class="at">weights =</span> Shape_Area, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-12"><a href="#cb8-12"></a>        <span class="at">sd_walk =</span> <span class="fu">sqrt</span>(Hmisc<span class="sc">::</span><span class="fu">wtd.var</span>(NatWalkInd, <span class="at">weights =</span> Shape_Area, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb8-13"><a href="#cb8-13"></a>        <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>    <span class="fu">left_join</span>(all_us_counties <span class="sc">|&gt;</span> <span class="fu">select</span>(geoid, geometry), <span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="fu">st_as_sf</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="county-average-walkability" class="level2"><h2 class="anchored" data-anchor-id="county-average-walkability">5 County Average Walkability</h2>
+<p>Pick one state. For this state, make a map that allows you to see average walkability within a county and a map that allows you to see the variability in walkability across a county. (The goal of this part is to get a sense of the county-level walkability data before zooming out to do a nationwide exploration.)</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Filter down to one state and make maps</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>mn_counties <span class="ot">&lt;-</span> all_us_counties_walk_index_summ <span class="sc">|&gt;</span> <span class="fu">filter</span>(state_abbr <span class="sc">==</span> <span class="st">"MN"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Map of avg walkability</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">ggplot</span>(mn_counties) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> mean_walk), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb9-8"><a href="#cb9-8"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#CC79A7"</span>, <span class="st">"#FFB000"</span>, <span class="st">"#FEFE62"</span>, <span class="st">"#40B0A6"</span>),</span>
+<span id="cb9-9"><a href="#cb9-9"></a>        <span class="at">name =</span> <span class="st">"Avg Walkability"</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>    ) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Walkability by County in Minnesota"</span>) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw03-p2_files/figure-html/one_state_county_summary-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Map of variability(SD) in walkability</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">ggplot</span>(mn_counties) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> sd_walk), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#FEFE62"</span>, <span class="st">"#FFB000"</span>, <span class="st">"#CC79A7"</span>),</span>
+<span id="cb10-6"><a href="#cb10-6"></a>        <span class="at">name =</span> <span class="st">"SD Walkability"</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    ) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Variability in Walkability by County in Minnesota"</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw03-p2_files/figure-html/one_state_county_summary-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="walkability-variability-vs-average" class="level2"><h2 class="anchored" data-anchor-id="walkability-variability-vs-average">6 Walkability Variability vs Average</h2>
+<p>Make plots (not maps) that allow you to explore if there is a relationship between the variability in walkability in a county and the average level of walkability in a county. One plot should depict the United States as a whole, and a second plot should break down this relationship across states. Summarize your findings and what you would be curious to explore next based on your explorations.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Plots for the US and by states</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># US as a whole scatterplot</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="fu">ggplot</span>(all_us_counties_walk_index_summ, <span class="fu">aes</span>(<span class="at">x =</span> mean_walk, <span class="at">y =</span> sd_walk)) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"#1E88E5"</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#D81B60"</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="fu">labs</span>(</span>
+<span id="cb11-9"><a href="#cb11-9"></a>        <span class="at">title =</span> <span class="st">"Walkability Variability vs Average by County in the US"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10"></a>        <span class="at">x =</span> <span class="st">"Avg Walkability Index"</span>,</span>
+<span id="cb11-11"><a href="#cb11-11"></a>        <span class="at">y =</span> <span class="st">"SD Walkability Index"</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>    ) <span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw03-p2_files/figure-html/sd_vs_mean_us-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># by State</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>all_us_counties_walk_index_summ <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="fu">filter</span>(state_abbr <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"MN"</span>, <span class="st">"CA"</span>, <span class="st">"TX"</span>, <span class="st">"NY"</span>, <span class="st">"FL"</span>, <span class="st">"WA"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_walk, <span class="at">y =</span> sd_walk)) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#1E88E5"</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#D81B60"</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>state_abbr) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>    <span class="fu">labs</span>(</span>
+<span id="cb12-9"><a href="#cb12-9"></a>        <span class="at">title =</span> <span class="st">"Walkability Variability vs Average by State in the US"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10"></a>        <span class="at">x =</span> <span class="st">"Avg Walkability Index"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11"></a>        <span class="at">y =</span> <span class="st">"SD Walkability Index"</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>    ) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw03-p2_files/figure-html/sd_vs_mean_us-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>The counties with a higher average walkability show a greater variability in the walkability, which suggests that more walkable areas will have a mix of very walkable and less walkable groups, likely due to the dense urban parts that are surrounded by less walkable neighborhoods.</p>
+<p>I would be curious to explore whether this pattern would be similar for counties that have larger and more populated cities but are low in its walkability.</p>
+</blockquote>
+</section><section id="resources-reflection-required" class="level2"><h2 class="anchored" data-anchor-id="resources-reflection-required">Resources Reflection (required)</h2>
+<p>List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.</p>
+<p><strong>Resources:</strong></p>
+<ul>
+<li><p>R documentation</p></li>
+<li><p>Textbook</p></li>
+<li><p>In class activities</p></li>
+</ul>
+<p><strong>Reflection:</strong> Similar to HW3 part 1, the most helpful resource was again the R documentation due to its very useful explanations of how functions work, how it can be used, and the example codes. The in-class activities were also useful to reference like the Spatial Viz activity. I also referred back to the textbook as well to review and remind myself of some concepts.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      <a href="../../../homework-yeshedj/hw03/src/hw03-p1.html" class="pagination-link" aria-label="HW03-P1 Adv Map Viz">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">HW03-P1 Adv Map Viz</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../homework-yeshedj/hw04/src/hw04-p1.html" class="pagination-link" aria-label="HW04-P1 Data wrangling">
+        <span class="nav-page-text"><span class="chapter-title">HW04-P1 Data wrangling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">---</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="an">title:</span><span class="co"> "HW03-P2 Adv Map Viz"</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">  html: {}</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">---</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>::: {.callout-important title="Important GitHub Note"}</span>
+<span id="cb13-8"><a href="#cb13-8"></a>DO NOT add, commit, and push anything in the <span class="in">`data/raw`</span> folder.</span>
+<span id="cb13-9"><a href="#cb13-9"></a>The files for this are too big, and you'll run into file size restrictions.</span>
+<span id="cb13-10"><a href="#cb13-10"></a>You can ignore them as follows:</span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="ss">-   </span>Open GitHub Desktop</span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="ss">-   </span>Right-click any file inside <span class="in">`data/raw`</span> --<span class="sc">\&gt;</span> select <span class="in">`Ignore folder (add to .gitignore)`</span> --<span class="sc">\&gt;</span> select <span class="in">`data/raw`</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>:::</span>
+<span id="cb13-15"><a href="#cb13-15"></a></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="fu">## Introduction</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-18"><a href="#cb13-18"></a>The US Walkability Index dataset provides relative walkability information for all 2019 census block groups.</span>
+<span id="cb13-19"><a href="#cb13-19"></a>Through these exercises, we will explore walkability patterns across the United States.</span>
+<span id="cb13-20"><a href="#cb13-20"></a></span>
+<span id="cb13-21"><a href="#cb13-21"></a>**Requirements:**</span>
+<span id="cb13-22"><a href="#cb13-22"></a></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="ss">-   </span>Downloaded data and read it in</span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="ss">-   </span>MN plot of walkability (filtering + choropleth)</span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="ss">-   </span>save filtered dataset as R Data file</span>
+<span id="cb13-26"><a href="#cb13-26"></a><span class="ss">-   </span>Get US county boundaries, transform to have same CRS if necessary</span>
+<span id="cb13-27"><a href="#cb13-27"></a><span class="ss">-   </span>Spatial join (order matters), Weighted mean and SD by county</span>
+<span id="cb13-28"><a href="#cb13-28"></a><span class="ss">-   </span>County-level map of Average Walkability of a state of choice</span>
+<span id="cb13-29"><a href="#cb13-29"></a><span class="ss">-   </span>County-level map of SD in Walkability of a state of choice</span>
+<span id="cb13-30"><a href="#cb13-30"></a><span class="ss">-   </span>Scatterplot of SD and Average Walkability overall</span>
+<span id="cb13-31"><a href="#cb13-31"></a><span class="ss">-   </span>Scatterplot of SD and Average Walkability faceted by state</span>
+<span id="cb13-32"><a href="#cb13-32"></a><span class="ss">-   </span>Insight sentences about graphic</span>
+<span id="cb13-33"><a href="#cb13-33"></a></span>
+<span id="cb13-34"><a href="#cb13-34"></a><span class="fu">## 1 Download &amp; Read Data</span></span>
+<span id="cb13-35"><a href="#cb13-35"></a></span>
+<span id="cb13-36"><a href="#cb13-36"></a>Go to <span class="co">[</span><span class="ot">data.gov</span><span class="co">](https://catalog.data.gov/dataset/)</span>, search for "walkability index", and download the US Walkability Index dataset (the Zip file called <span class="in">`WalkabilityIndex.zip`</span>).</span>
+<span id="cb13-37"><a href="#cb13-37"></a>Unzip this file within the <span class="in">`data/raw`</span> folder of this homework.</span>
+<span id="cb13-38"><a href="#cb13-38"></a></span>
+<span id="cb13-39"><a href="#cb13-39"></a>Read in the dataset with <span class="in">`st_read()`</span> by providing a relative path to the <span class="in">`WalkabilityIndex/Natl_WI.gdb`</span> folder (as opposed to a file within that folder).</span>
+<span id="cb13-40"><a href="#cb13-40"></a>This will take a few seconds.</span>
+<span id="cb13-41"><a href="#cb13-41"></a>You should see a message <span class="in">`using driver OpenFileGDB`</span> during this process.</span>
+<span id="cb13-42"><a href="#cb13-42"></a></span>
+<span id="cb13-43"><a href="#cb13-43"></a><span class="in">```{r reading}</span></span>
+<span id="cb13-44"><a href="#cb13-44"></a><span class="fu">library</span>(sf)</span>
+<span id="cb13-45"><a href="#cb13-45"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-46"><a href="#cb13-46"></a><span class="fu">library</span>(USAboundaries)</span>
+<span id="cb13-47"><a href="#cb13-47"></a></span>
+<span id="cb13-48"><a href="#cb13-48"></a>walk_index <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"../data/raw/WalkabilityIndex/Natl_WI.gdb"</span>)</span>
+<span id="cb13-49"><a href="#cb13-49"></a><span class="in">```</span></span>
+<span id="cb13-50"><a href="#cb13-50"></a></span>
+<span id="cb13-51"><a href="#cb13-51"></a><span class="fu">## 2 MN Walkability</span></span>
+<span id="cb13-52"><a href="#cb13-52"></a></span>
+<span id="cb13-53"><a href="#cb13-53"></a>Let's first get a sense for the data by making a map of walkability indices for Minnesota.</span>
+<span id="cb13-54"><a href="#cb13-54"></a>You will first need to filter the <span class="in">`walk_index`</span> dataset by using the <span class="in">`STATEFP`</span> variable.</span>
+<span id="cb13-55"><a href="#cb13-55"></a><span class="in">`STATEFP`</span> contains the state's <span class="co">[</span><span class="ot">FIPS code</span><span class="co">](https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt)</span> which is <span class="in">`"27"`</span> for Minnesota.</span>
+<span id="cb13-56"><a href="#cb13-56"></a>The <span class="in">`NatWalkInd`</span> variable contains the walkability indices.</span>
+<span id="cb13-57"><a href="#cb13-57"></a>Save this smaller dataset in a <span class="in">`data/processed`</span> folder as <span class="in">`walk_index_mn.RData`</span>, which is an R Data file.</span>
+<span id="cb13-58"><a href="#cb13-58"></a></span>
+<span id="cb13-59"><a href="#cb13-59"></a><span class="in">```{r mn_wi_filter}</span></span>
+<span id="cb13-60"><a href="#cb13-60"></a>walk_index_mn <span class="ot">&lt;-</span> walk_index <span class="sc">|&gt;</span> <span class="fu">filter</span>(STATEFP <span class="sc">==</span> <span class="st">"27"</span>) <span class="co"># Code for filtering to MN</span></span>
+<span id="cb13-61"><a href="#cb13-61"></a></span>
+<span id="cb13-62"><a href="#cb13-62"></a><span class="fu">dir.create</span>(<span class="st">"data/processed"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-63"><a href="#cb13-63"></a></span>
+<span id="cb13-64"><a href="#cb13-64"></a><span class="fu">save</span>(walk_index_mn, <span class="at">file =</span> <span class="st">'data/processed/walk_index_mn.RData'</span>)</span>
+<span id="cb13-65"><a href="#cb13-65"></a><span class="in">```</span></span>
+<span id="cb13-66"><a href="#cb13-66"></a></span>
+<span id="cb13-67"><a href="#cb13-67"></a><span class="in">```{r mn_wi_map}</span></span>
+<span id="cb13-68"><a href="#cb13-68"></a><span class="fu">load</span>(<span class="st">'data/processed/walk_index_mn.RData'</span>)</span>
+<span id="cb13-69"><a href="#cb13-69"></a></span>
+<span id="cb13-70"><a href="#cb13-70"></a><span class="co"># Plot walkability data for MN</span></span>
+<span id="cb13-71"><a href="#cb13-71"></a></span>
+<span id="cb13-72"><a href="#cb13-72"></a><span class="fu">ggplot</span>(walk_index_mn) <span class="sc">+</span></span>
+<span id="cb13-73"><a href="#cb13-73"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> NatWalkInd), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb13-74"><a href="#cb13-74"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb13-75"><a href="#cb13-75"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#CC79A7"</span>, <span class="st">"#FFB000"</span>, <span class="st">"#FEFE62"</span>, <span class="st">"#785EF0"</span>, <span class="st">"#009E73"</span>),</span>
+<span id="cb13-76"><a href="#cb13-76"></a>        <span class="at">name =</span> <span class="st">"Index"</span></span>
+<span id="cb13-77"><a href="#cb13-77"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-78"><a href="#cb13-78"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Walkability Index in Minnesota"</span>) <span class="sc">+</span></span>
+<span id="cb13-79"><a href="#cb13-79"></a>    <span class="fu">theme_void</span>()</span>
+<span id="cb13-80"><a href="#cb13-80"></a></span>
+<span id="cb13-81"><a href="#cb13-81"></a><span class="in">```</span></span>
+<span id="cb13-82"><a href="#cb13-82"></a></span>
+<span id="cb13-83"><a href="#cb13-83"></a><span class="fu">## 3 US County Boundaries</span></span>
+<span id="cb13-84"><a href="#cb13-84"></a></span>
+<span id="cb13-85"><a href="#cb13-85"></a>We will start setting up to do a nationwide exploration of walkability.</span>
+<span id="cb13-86"><a href="#cb13-86"></a>Use the <span class="in">`us_counties()`</span> function within the <span class="in">`USAboundaries`</span> package to obtain the most current low resolution county boundaries for all US counties.</span>
+<span id="cb13-87"><a href="#cb13-87"></a>(Look up the documentation for this function to see how to structure the arguments.)</span>
+<span id="cb13-88"><a href="#cb13-88"></a></span>
+<span id="cb13-89"><a href="#cb13-89"></a>If needed, transform <span class="in">`all_us_counties`</span> to have the same CRS as the Walkability Index dataset.</span>
+<span id="cb13-90"><a href="#cb13-90"></a></span>
+<span id="cb13-91"><a href="#cb13-91"></a><span class="in">```{r get_us_counties}</span></span>
+<span id="cb13-92"><a href="#cb13-92"></a>all_us_counties <span class="ot">&lt;-</span> <span class="fu">us_counties</span>(<span class="at">resolution =</span> <span class="st">"low"</span>, <span class="at">states =</span> <span class="cn">NULL</span>)</span>
+<span id="cb13-93"><a href="#cb13-93"></a></span>
+<span id="cb13-94"><a href="#cb13-94"></a><span class="fu">st_crs</span>(all_us_counties) <span class="sc">==</span> <span class="fu">st_crs</span>(walk_index)</span>
+<span id="cb13-95"><a href="#cb13-95"></a>all_us_counties <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(all_us_counties, <span class="fu">st_crs</span>(walk_index))</span>
+<span id="cb13-96"><a href="#cb13-96"></a><span class="in">```</span></span>
+<span id="cb13-97"><a href="#cb13-97"></a></span>
+<span id="cb13-98"><a href="#cb13-98"></a><span class="fu">## 4 Join Walkability &amp; Boundaries</span></span>
+<span id="cb13-99"><a href="#cb13-99"></a></span>
+<span id="cb13-100"><a href="#cb13-100"></a>Use <span class="in">`st_join()`</span> within the <span class="in">`sf`</span> package to insert walkability information into the <span class="in">`all_us_counties`</span> dataset.</span>
+<span id="cb13-101"><a href="#cb13-101"></a>Because the walkability information is available over regions that are smaller than counties, this join will merge in multiple regions of walkability information for each county.</span>
+<span id="cb13-102"><a href="#cb13-102"></a></span>
+<span id="cb13-103"><a href="#cb13-103"></a>After the join, summarize the walkability index within each county with the weighted mean and weighted standard deviation, where the weights are given by the <span class="in">`Shape_Area`</span> variable.</span>
+<span id="cb13-104"><a href="#cb13-104"></a></span>
+<span id="cb13-105"><a href="#cb13-105"></a>*Background information about weighted summary measures:* In an ordinary (unweighted) mean and standard deviation, each observation gets a weight of 1--that is, every observation contributes equally to the calculation.</span>
+<span id="cb13-106"><a href="#cb13-106"></a>We want to compute a weighted measure because the regions within a county have different areas.</span>
+<span id="cb13-107"><a href="#cb13-107"></a></span>
+<span id="cb13-108"><a href="#cb13-108"></a>*Techinical implementation:* You can install the <span class="in">`Hmisc`</span> package and use the following:</span>
+<span id="cb13-109"><a href="#cb13-109"></a></span>
+<span id="cb13-110"><a href="#cb13-110"></a><span class="ss">-   </span><span class="in">`Hmisc::wtd.mean(x, weights)`</span></span>
+<span id="cb13-111"><a href="#cb13-111"></a><span class="ss">-   </span><span class="in">`Hmisc::wtd.var(x, weights)`</span></span>
+<span id="cb13-112"><a href="#cb13-112"></a><span class="ss">    -   </span>This computes a weighted variance--you'll need to take the square root after this.</span>
+<span id="cb13-113"><a href="#cb13-113"></a></span>
+<span id="cb13-114"><a href="#cb13-114"></a>Note: DON'T add <span class="in">`library(Hmisc)`</span> to your package loading code chunk.</span>
+<span id="cb13-115"><a href="#cb13-115"></a><span class="in">`Hmisc`</span> contains a function called <span class="in">`summarize()`</span> that will conflict with <span class="in">`dplyr::summarize()`</span>.</span>
+<span id="cb13-116"><a href="#cb13-116"></a></span>
+<span id="cb13-117"><a href="#cb13-117"></a>In both functions, <span class="in">`x`</span> represents the vector of numerical entries you want to summarize, and <span class="in">`weights`</span> is a vector of the same length as <span class="in">`x`</span> that gives the weight for each entry of <span class="in">`x`</span>.</span>
+<span id="cb13-118"><a href="#cb13-118"></a></span>
+<span id="cb13-119"><a href="#cb13-119"></a><span class="in">```{r summary_over_counties}</span></span>
+<span id="cb13-120"><a href="#cb13-120"></a><span class="co"># Use st_join to merge county boundaries and regions where we have walkability index data</span></span>
+<span id="cb13-121"><a href="#cb13-121"></a>all_us_counties_walk_index <span class="ot">&lt;-</span> <span class="fu">st_join</span>(all_us_counties, walk_index)</span>
+<span id="cb13-122"><a href="#cb13-122"></a></span>
+<span id="cb13-123"><a href="#cb13-123"></a></span>
+<span id="cb13-124"><a href="#cb13-124"></a></span>
+<span id="cb13-125"><a href="#cb13-125"></a><span class="co"># Use Hmisc::wtd.mean() and Hmisc::wtd.var() to compute the weighted mean and SD of the walkability index (weighted by Shape_Area)</span></span>
+<span id="cb13-126"><a href="#cb13-126"></a>all_us_counties_walk_index_summ <span class="ot">&lt;-</span> all_us_counties_walk_index <span class="sc">|&gt;</span></span>
+<span id="cb13-127"><a href="#cb13-127"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-128"><a href="#cb13-128"></a>    <span class="fu">group_by</span>(geoid, name, state_abbr) <span class="sc">|&gt;</span></span>
+<span id="cb13-129"><a href="#cb13-129"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb13-130"><a href="#cb13-130"></a>        <span class="at">mean_walk =</span> Hmisc<span class="sc">::</span><span class="fu">wtd.mean</span>(NatWalkInd, <span class="at">weights =</span> Shape_Area, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-131"><a href="#cb13-131"></a>        <span class="at">sd_walk =</span> <span class="fu">sqrt</span>(Hmisc<span class="sc">::</span><span class="fu">wtd.var</span>(NatWalkInd, <span class="at">weights =</span> Shape_Area, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb13-132"><a href="#cb13-132"></a>        <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb13-133"><a href="#cb13-133"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb13-134"><a href="#cb13-134"></a>    <span class="fu">left_join</span>(all_us_counties <span class="sc">|&gt;</span> <span class="fu">select</span>(geoid, geometry), <span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-135"><a href="#cb13-135"></a>    <span class="fu">st_as_sf</span>()</span>
+<span id="cb13-136"><a href="#cb13-136"></a><span class="in">```</span></span>
+<span id="cb13-137"><a href="#cb13-137"></a></span>
+<span id="cb13-138"><a href="#cb13-138"></a><span class="fu">## 5 County Average Walkability</span></span>
+<span id="cb13-139"><a href="#cb13-139"></a></span>
+<span id="cb13-140"><a href="#cb13-140"></a>Pick one state.</span>
+<span id="cb13-141"><a href="#cb13-141"></a>For this state, make a map that allows you to see average walkability within a county and a map that allows you to see the variability in walkability across a county.</span>
+<span id="cb13-142"><a href="#cb13-142"></a>(The goal of this part is to get a sense of the county-level walkability data before zooming out to do a nationwide exploration.)</span>
+<span id="cb13-143"><a href="#cb13-143"></a></span>
+<span id="cb13-144"><a href="#cb13-144"></a><span class="in">```{r one_state_county_summary}</span></span>
+<span id="cb13-145"><a href="#cb13-145"></a><span class="co"># Filter down to one state and make maps</span></span>
+<span id="cb13-146"><a href="#cb13-146"></a>mn_counties <span class="ot">&lt;-</span> all_us_counties_walk_index_summ <span class="sc">|&gt;</span> <span class="fu">filter</span>(state_abbr <span class="sc">==</span> <span class="st">"MN"</span>)</span>
+<span id="cb13-147"><a href="#cb13-147"></a></span>
+<span id="cb13-148"><a href="#cb13-148"></a><span class="co"># Map of avg walkability</span></span>
+<span id="cb13-149"><a href="#cb13-149"></a><span class="fu">ggplot</span>(mn_counties) <span class="sc">+</span></span>
+<span id="cb13-150"><a href="#cb13-150"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> mean_walk), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb13-151"><a href="#cb13-151"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb13-152"><a href="#cb13-152"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#CC79A7"</span>, <span class="st">"#FFB000"</span>, <span class="st">"#FEFE62"</span>, <span class="st">"#40B0A6"</span>),</span>
+<span id="cb13-153"><a href="#cb13-153"></a>        <span class="at">name =</span> <span class="st">"Avg Walkability"</span></span>
+<span id="cb13-154"><a href="#cb13-154"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-155"><a href="#cb13-155"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Walkability by County in Minnesota"</span>) <span class="sc">+</span></span>
+<span id="cb13-156"><a href="#cb13-156"></a>    <span class="fu">theme_void</span>()</span>
+<span id="cb13-157"><a href="#cb13-157"></a></span>
+<span id="cb13-158"><a href="#cb13-158"></a><span class="co"># Map of variability(SD) in walkability</span></span>
+<span id="cb13-159"><a href="#cb13-159"></a><span class="fu">ggplot</span>(mn_counties) <span class="sc">+</span></span>
+<span id="cb13-160"><a href="#cb13-160"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> sd_walk), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb13-161"><a href="#cb13-161"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb13-162"><a href="#cb13-162"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#FEFE62"</span>, <span class="st">"#FFB000"</span>, <span class="st">"#CC79A7"</span>),</span>
+<span id="cb13-163"><a href="#cb13-163"></a>        <span class="at">name =</span> <span class="st">"SD Walkability"</span></span>
+<span id="cb13-164"><a href="#cb13-164"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-165"><a href="#cb13-165"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Variability in Walkability by County in Minnesota"</span>) <span class="sc">+</span></span>
+<span id="cb13-166"><a href="#cb13-166"></a>    <span class="fu">theme_void</span>()</span>
+<span id="cb13-167"><a href="#cb13-167"></a><span class="in">```</span></span>
+<span id="cb13-168"><a href="#cb13-168"></a></span>
+<span id="cb13-169"><a href="#cb13-169"></a><span class="fu">## 6 Walkability Variability vs Average</span></span>
+<span id="cb13-170"><a href="#cb13-170"></a></span>
+<span id="cb13-171"><a href="#cb13-171"></a>Make plots (not maps) that allow you to explore if there is a relationship between the variability in walkability in a county and the average level of walkability in a county.</span>
+<span id="cb13-172"><a href="#cb13-172"></a>One plot should depict the United States as a whole, and a second plot should break down this relationship across states.</span>
+<span id="cb13-173"><a href="#cb13-173"></a>Summarize your findings and what you would be curious to explore next based on your explorations.</span>
+<span id="cb13-174"><a href="#cb13-174"></a></span>
+<span id="cb13-175"><a href="#cb13-175"></a><span class="in">```{r sd_vs_mean_us}</span></span>
+<span id="cb13-176"><a href="#cb13-176"></a><span class="co"># Plots for the US and by states</span></span>
+<span id="cb13-177"><a href="#cb13-177"></a></span>
+<span id="cb13-178"><a href="#cb13-178"></a></span>
+<span id="cb13-179"><a href="#cb13-179"></a><span class="co"># US as a whole scatterplot</span></span>
+<span id="cb13-180"><a href="#cb13-180"></a><span class="fu">ggplot</span>(all_us_counties_walk_index_summ, <span class="fu">aes</span>(<span class="at">x =</span> mean_walk, <span class="at">y =</span> sd_walk)) <span class="sc">+</span></span>
+<span id="cb13-181"><a href="#cb13-181"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"#1E88E5"</span>) <span class="sc">+</span></span>
+<span id="cb13-182"><a href="#cb13-182"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#D81B60"</span>) <span class="sc">+</span></span>
+<span id="cb13-183"><a href="#cb13-183"></a>    <span class="fu">labs</span>(</span>
+<span id="cb13-184"><a href="#cb13-184"></a>        <span class="at">title =</span> <span class="st">"Walkability Variability vs Average by County in the US"</span>,</span>
+<span id="cb13-185"><a href="#cb13-185"></a>        <span class="at">x =</span> <span class="st">"Avg Walkability Index"</span>,</span>
+<span id="cb13-186"><a href="#cb13-186"></a>        <span class="at">y =</span> <span class="st">"SD Walkability Index"</span></span>
+<span id="cb13-187"><a href="#cb13-187"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-188"><a href="#cb13-188"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-189"><a href="#cb13-189"></a></span>
+<span id="cb13-190"><a href="#cb13-190"></a><span class="co"># by State</span></span>
+<span id="cb13-191"><a href="#cb13-191"></a>all_us_counties_walk_index_summ <span class="sc">|&gt;</span></span>
+<span id="cb13-192"><a href="#cb13-192"></a>    <span class="fu">filter</span>(state_abbr <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"MN"</span>, <span class="st">"CA"</span>, <span class="st">"TX"</span>, <span class="st">"NY"</span>, <span class="st">"FL"</span>, <span class="st">"WA"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-193"><a href="#cb13-193"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_walk, <span class="at">y =</span> sd_walk)) <span class="sc">+</span></span>
+<span id="cb13-194"><a href="#cb13-194"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#1E88E5"</span>) <span class="sc">+</span></span>
+<span id="cb13-195"><a href="#cb13-195"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#D81B60"</span>) <span class="sc">+</span></span>
+<span id="cb13-196"><a href="#cb13-196"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>state_abbr) <span class="sc">+</span></span>
+<span id="cb13-197"><a href="#cb13-197"></a>    <span class="fu">labs</span>(</span>
+<span id="cb13-198"><a href="#cb13-198"></a>        <span class="at">title =</span> <span class="st">"Walkability Variability vs Average by State in the US"</span>,</span>
+<span id="cb13-199"><a href="#cb13-199"></a>        <span class="at">x =</span> <span class="st">"Avg Walkability Index"</span>,</span>
+<span id="cb13-200"><a href="#cb13-200"></a>        <span class="at">y =</span> <span class="st">"SD Walkability Index"</span></span>
+<span id="cb13-201"><a href="#cb13-201"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-202"><a href="#cb13-202"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-203"><a href="#cb13-203"></a><span class="in">```</span></span>
+<span id="cb13-204"><a href="#cb13-204"></a></span>
+<span id="cb13-205"><a href="#cb13-205"></a><span class="at">&gt; The counties with a higher average walkability show a greater variability in the walkability, which suggests that more walkable areas will have a mix of very walkable and less walkable groups, likely due to the dense urban parts that are surrounded by less walkable neighborhoods.</span></span>
+<span id="cb13-206"><a href="#cb13-206"></a><span class="at">&gt;</span></span>
+<span id="cb13-207"><a href="#cb13-207"></a><span class="at">&gt; I would be curious to explore whether this pattern would be similar for counties that have larger and more populated cities but are low in its walkability.</span></span>
+<span id="cb13-208"><a href="#cb13-208"></a></span>
+<span id="cb13-209"><a href="#cb13-209"></a><span class="fu">## Resources Reflection (required)</span></span>
+<span id="cb13-210"><a href="#cb13-210"></a></span>
+<span id="cb13-211"><a href="#cb13-211"></a>List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.</span>
+<span id="cb13-212"><a href="#cb13-212"></a></span>
+<span id="cb13-213"><a href="#cb13-213"></a>**Resources:**</span>
+<span id="cb13-214"><a href="#cb13-214"></a></span>
+<span id="cb13-215"><a href="#cb13-215"></a><span class="ss">-   </span>R documentation</span>
+<span id="cb13-216"><a href="#cb13-216"></a></span>
+<span id="cb13-217"><a href="#cb13-217"></a><span class="ss">-   </span>Textbook</span>
+<span id="cb13-218"><a href="#cb13-218"></a></span>
+<span id="cb13-219"><a href="#cb13-219"></a><span class="ss">-   </span>In class activities</span>
+<span id="cb13-220"><a href="#cb13-220"></a></span>
+<span id="cb13-221"><a href="#cb13-221"></a>**Reflection:** Similar to HW3 part 1, the most helpful resource was again the R documentation due to its very useful explanations of how functions work, how it can be used, and the example codes.</span>
+<span id="cb13-222"><a href="#cb13-222"></a>The in-class activities were also useful to reference like the Spatial Viz activity.</span>
+<span id="cb13-223"><a href="#cb13-223"></a>I also referred back to the textbook as well to review and remind myself of some concepts.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

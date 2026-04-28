@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>HW05-P2 Adv. Data Wrangling + Functions – COMP/STAT212 Portfolio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../homework-yeshedj/hw06/src/hw06.html" rel="next">
+<link href="../../../homework-yeshedj/hw05/src/hw05-p1.html" rel="prev">
+<script src="../../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b1525fc7443f827935229f0f56e36607.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../../style/custom.css">
+</head>
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw01/src/hw1-tt.html">Homework</a></li><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw05/src/hw05-p2.html"><span class="chapter-title">HW05-P2 Adv. Data Wrangling + Functions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../../index.html" class="sidebar-logo-link">
+      <img src="../../../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../">Yeshe Jangchup</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Homework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw01/src/hw1-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW1 TidyTuesday Brazilian Companies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw02/src/hw02-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW02-P1 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw02/src/hw02-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW02-P2 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw03/src/hw03-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW03-P1 Adv Map Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw03/src/hw03-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW03-P2 Adv Map Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw04/src/hw04-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW04-P1 Data wrangling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw05/src/hw05-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW05-P1 Adv. Data wrangling &amp; Generalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw05/src/hw05-p2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">HW05-P2 Adv. Data Wrangling + Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw06/src/hw06.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW06 Functions + Iteration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw07/src/hw07-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW07-P1 Programming + JSON</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw07/src/hw07-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW07-P2 Navigating the Census API</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw08/src/hw08-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW08-P1 Scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw08/src/hw08-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW08-P2 Databases</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TidyTuesday</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw01/src/hw1-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW1 TidyTuesday Brazilian Companies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../tt/2025-07-15.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">TidyTuesday Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pre-Class Learnings</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/1_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/2_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/3_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/4_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/6_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/7_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/8_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/9_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/10_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/11_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/12_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/13_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">13_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/14_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/15_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/16_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/17_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">17_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/18_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18_pcl</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">In-Class Activities</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/02_review/cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2 Cleaning SFO Weather Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/03_adv_ggplot/code/03-adv-ggplot-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/04_adv_maps/code/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz P1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/06_adv_data_wrangling1/06-wrangling-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6 Adv Data wrangling I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/07_adv_data_wrangling2/07-wrangling-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7 Adv Data wrangling II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/08_missing_data/08-missing-data-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8 Missing Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/09_functions/09-functions-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/10_base_r/10-base-r-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10 Base R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/11_loops_and_Iter_1/11-iteration-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11 Loops+Iter I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/12_loops_and_iter_2/12-iteration-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12 Loops+Iter II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/14_apis_2/14-apis-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14 APIs II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/15_web_scraping/15-scraping-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15 Web scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/16_databases_and_sql/16-databases-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16 Databases and SQL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/18_interactive_viz/18-interactive-viz-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18 Interactive Viz</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extras</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../extra/extra-sample2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2-recycling_checker" id="toc-exercise-2-recycling_checker" class="nav-link" data-scroll-target="#exercise-2-recycling_checker">Exercise 2: <code>recycling_checker()</code></a></li>
+  <li><a href="#exercise-3-days_to_birthday" id="toc-exercise-3-days_to_birthday" class="nav-link" data-scroll-target="#exercise-3-days_to_birthday">Exercise 3: <code>days_to_birthday()</code></a></li>
+  <li><a href="#exercise-4-course_names_to_df" id="toc-exercise-4-course_names_to_df" class="nav-link" data-scroll-target="#exercise-4-course_names_to_df">Exercise 4: <code>course_names_to_df()</code></a></li>
+  <li><a href="#resources-reflection-required" id="toc-resources-reflection-required" class="nav-link" data-scroll-target="#resources-reflection-required">Resources Reflection (required)</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw01/src/hw1-tt.html">Homework</a></li><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw05/src/hw05-p2.html"><span class="chapter-title">HW05-P2 Adv. Data Wrangling + Functions</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">HW05-P2 Adv. Data Wrangling + Functions</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="instructions" class="level2"><h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p><strong>Requirements:</strong></p>
+<p>Exercise 1</p>
+<ul>
+<li>Wrote a function that completes all tasks</li>
+<li>At least two test cases together covered whole list (snake_case, % to percent, # to number, remove all non-alphanumeric characters, duplicated var names)</li>
+<li>Wrote desired output before testing function</li>
+<li>Get the desired output (dataset with new names)</li>
+<li>Challenge: duplicated vars changed to var1 and var2 (not using make.unique())</li>
+</ul>
+<p>Exercise 2</p>
+<ul>
+<li>Wrote a function that completes all tasks</li>
+<li>At least five test cases together covered whole list (len_x1 &lt; len_x2, len_x1 &gt; len_x2, len_x1 == len_x2, len_larger %% len_smaller == 0, len_larger %% len_smaller != 0</li>
+<li>Get the desired output (2 possible paragraphs text at least)</li>
+<li>Challenge: minimal text: function has only two paragraph text options (where the role of x1 and x2 is figured out by which one is longer) rather than four paragraphs where x1 and x2 are manually typed</li>
+</ul>
+<p>Exercise 3</p>
+<ul>
+<li>Wrote a function that completes all tasks</li>
+<li>Test cases together covered whole list (different formats, including from_when, using default from_when, birthday_month_day &lt; from_when_month_day, birthday_month_day &gt; from_when_month_day)</li>
+<li>Get the desired output (no negative time differences)</li>
+</ul>
+<p>Exercise 4</p>
+<ul>
+<li>Wrote a function that completes all tasks</li>
+<li>Tested the function with the provided course list (TRUE and FALSE for separate_cross_list)</li>
+<li>Get the desired output (data frame should match the desired output for the test case provided)</li>
+</ul></section><section id="exercise-1" class="level2"><h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
+<p>Look at the <a href="https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html#clean-dataframe-names-with-clean_names">example usage</a> for the <code>clean_names()</code> function, and look at the documentation for this function with <code>?clean_names</code>.</p>
+<p>Without using <code>clean_names</code>, write a general function that will clean the names of a data frame. Your function should:</p>
+<ul>
+<li>
+<strong>Inputs</strong>
+<ul>
+<li>Take a dataset as an input and return a dataset as the output</li>
+</ul>
+</li>
+<li>
+<strong>Function purpose</strong>:
+<ul>
+<li>In the output, the variable names should be <code>snake_case</code>, meaning <code>_</code> instead of spaces in the name.</li>
+<li>Convert <code>%</code> to “percent” and <code>#</code> to “number” to retain meaning.</li>
+<li>Remove non-alphanumeric characters (other than <code>%</code> and <code>#</code>).</li>
+<li>Append numbers to duplicated names. (e.g., If there are two variables called <code>var</code>, they should be renamed as <code>var1</code> and <code>var2</code>.)</li>
+</ul>
+</li>
+</ul>
+<p>DON’T worry about:</p>
+<ul>
+<li>Turning <code>firstName</code> into <code>first_name</code>.</li>
+<li>Handling special characters with accents.</li>
+</ul>
+<p>Make sure your function returns the dataset with cleaned names, not just the names themselves.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>clean_names2 <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="co"># Your code here, using 'data' as the name of the dataset</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">names</span>(data)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(cnames, <span class="st">"%"</span>, <span class="st">"percent"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(cnames, <span class="st">"#"</span>, <span class="st">"number"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(cnames, <span class="st">"[^a-zA-Z0-9]+"</span>, <span class="st">"_"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_to_lower</span>(cnames)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_remove_all</span>(cnames,<span class="st">"^_|_$"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="cf">for</span> (d <span class="cf">in</span> <span class="fu">unique</span>(cnames[<span class="fu">duplicated</span>(cnames)])) {</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    index <span class="ot">&lt;-</span> <span class="fu">which</span>(cnames <span class="sc">==</span> d)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    cnames[index] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(d, <span class="fu">seq_along</span>(index))</span>
+<span id="cb1-17"><a href="#cb1-17"></a>  }</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">names</span>(data) <span class="ot">&lt;-</span> cnames</span>
+<span id="cb1-20"><a href="#cb1-20"></a>  data</span>
+<span id="cb1-21"><a href="#cb1-21"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Demonstrate that your function works by showing output on test cases. You must create your test cases and they should cover all the items in the “Your function should:” section. Before the code for testing the functions, write a comment that describes the desired output (the cleaned names) for each test case.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>test_df_1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="st">`</span><span class="at">First Name</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="st">`</span><span class="at">Score %</span><span class="st">`</span>    <span class="ot">=</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="st">`</span><span class="at"># of Items</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="st">`</span><span class="at">hello!!</span><span class="st">`</span>    <span class="ot">=</span> <span class="dv">7</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a>test_df_2 <span class="ot">&lt;-</span> <span class="fu">setNames</span>(</span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>)), <span class="fu">c</span>(<span class="st">"var"</span>, <span class="st">"var"</span>, <span class="st">"Hello World"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="do">## Test your function with the test data</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># Desired Output for test_df_1 (written out): first_name, score_percent, number_of_items, hello</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="fu">clean_names2</span>(test_df_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  first_name score_percent number_of_items hello
+       &lt;int&gt;         &lt;int&gt;           &lt;int&gt; &lt;int&gt;
+1          1             3               5     7
+2          2             4               6     8</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Desired Output for test_df_2 (written out): var1, var2, hello_world</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">clean_names2</span>(test_df_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>  var1 var2 hello_world
+1    1    3           5
+2    2    4           6</code></pre>
+</div>
+</div>
+</section><section id="exercise-2-recycling_checker" class="level2"><h2 class="anchored" data-anchor-id="exercise-2-recycling_checker">Exercise 2: <code>recycling_checker()</code>
+</h2>
+<ul>
+<li>
+<strong>Inputs:</strong>
+<ul>
+<li>
+<code>x1</code> and <code>x2</code>: two numeric vectors</li>
+</ul>
+</li>
+<li>
+<strong>Function purpose:</strong> Print a helpful message to the user warning them if dangerous vector recycling will happen when they try to combine the two vectors with some arithmetic operation.
+<ul>
+<li>If the vectors are not of the same length, provide informational text. See examples below for how to format this text.
+<ul>
+<li>Example 1: <code>x1</code> is length 4 and <code>x2</code> is length 2. Informational text: “x1 and x2 are not the same length. To match the length of x1, x2 will be repeated 2 times. You will not get a warning when you combine these two vectors, but just be wary that vector recycling is occurring.”</li>
+<li>Example 2: <code>x1</code> is length 3 and <code>x2</code> is length 11. Informational text: “x1 and x2 are not the same length. To match the length of x2, x1 will be repeated 3 times fully with the first 2 elements repeated again. You will get a warning when you combine these two vectors.”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Write your function here</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>recycling_checker <span class="ot">&lt;-</span> <span class="cf">function</span>(x1, x2) {</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  len1 <span class="ot">&lt;-</span> <span class="fu">length</span>(x1)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  len2 <span class="ot">&lt;-</span> <span class="fu">length</span>(x2)</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="cf">if</span> (len1 <span class="sc">==</span> len2) {</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="fu">message</span>(<span class="st">"x1 and x2 are the same length. No recycling will occur."</span>)</span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="fu">return</span>(<span class="fu">invisible</span>(<span class="cn">NULL</span>))</span>
+<span id="cb6-10"><a href="#cb6-10"></a>  }</span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="cf">if</span> (len1 <span class="sc">&gt;</span> len2) {</span>
+<span id="cb6-13"><a href="#cb6-13"></a>    longer <span class="ot">&lt;-</span> <span class="st">"x1"</span>; shorter <span class="ot">&lt;-</span> <span class="st">"x2"</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>    len_larger <span class="ot">&lt;-</span> len1; len_smaller <span class="ot">&lt;-</span> len2</span>
+<span id="cb6-15"><a href="#cb6-15"></a>  } <span class="cf">else</span> {</span>
+<span id="cb6-16"><a href="#cb6-16"></a>    longer <span class="ot">&lt;-</span> <span class="st">"x2"</span>; shorter <span class="ot">&lt;-</span><span class="st">"x1"</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>    len_larger <span class="ot">&lt;-</span> len2; len_smaller <span class="ot">&lt;-</span> len1</span>
+<span id="cb6-18"><a href="#cb6-18"></a>  }</span>
+<span id="cb6-19"><a href="#cb6-19"></a></span>
+<span id="cb6-20"><a href="#cb6-20"></a>  times_full <span class="ot">&lt;-</span> len_larger <span class="sc">%/%</span> len_smaller</span>
+<span id="cb6-21"><a href="#cb6-21"></a>  remainder  <span class="ot">&lt;-</span> len_larger <span class="sc">%%</span>  len_smaller</span>
+<span id="cb6-22"><a href="#cb6-22"></a></span>
+<span id="cb6-23"><a href="#cb6-23"></a>  <span class="cf">if</span> (remainder <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb6-24"><a href="#cb6-24"></a>    <span class="fu">message</span>(<span class="fu">str_glue</span>(</span>
+<span id="cb6-25"><a href="#cb6-25"></a>      <span class="st">"x1 and x2 are not the same length. To match the length of {longer}, "</span>,</span>
+<span id="cb6-26"><a href="#cb6-26"></a>      <span class="st">"{shorter} will be repeated {times_full} times. "</span>,</span>
+<span id="cb6-27"><a href="#cb6-27"></a>      <span class="st">"You will not get a warning when you combine these two vectors, "</span>,</span>
+<span id="cb6-28"><a href="#cb6-28"></a>      <span class="st">"but just be wary that vector recycling is occurring."</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a>    ))</span>
+<span id="cb6-30"><a href="#cb6-30"></a>  } <span class="cf">else</span> {</span>
+<span id="cb6-31"><a href="#cb6-31"></a>    <span class="fu">message</span>(<span class="fu">str_glue</span>(</span>
+<span id="cb6-32"><a href="#cb6-32"></a>      <span class="st">"x1 and x2 are not the same length. To match the length of {longer}, "</span>,</span>
+<span id="cb6-33"><a href="#cb6-33"></a>      <span class="st">"{shorter} will be repeated {times_full} times fully with the first "</span>,</span>
+<span id="cb6-34"><a href="#cb6-34"></a>      <span class="st">"{remainder} element{if (remainder == 1) '' else 's'} repeated again. "</span>,</span>
+<span id="cb6-35"><a href="#cb6-35"></a>      <span class="st">"You will get a warning when you combine these two vectors."</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a>    ))</span>
+<span id="cb6-37"><a href="#cb6-37"></a>  }</span>
+<span id="cb6-38"><a href="#cb6-38"></a>}</span>
+<span id="cb6-39"><a href="#cb6-39"></a></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co"># Test cases</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>)</span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
+<span id="cb6-45"><a href="#cb6-45"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="exercise-3-days_to_birthday" class="level2"><h2 class="anchored" data-anchor-id="exercise-3-days_to_birthday">Exercise 3: <code>days_to_birthday()</code>
+</h2>
+<ul>
+<li>
+<strong>Function purpose:</strong> Display the number of days from a user-supplied day to the user’s next birthday. For example, if the user enters the day “Dec 24 2021” and a birthday of “January 1 2000,” it should return a time difference of 8 days until the user’s next birthday.<br>
+</li>
+<li>
+<strong>Inputs:</strong>
+<ul>
+<li>
+<code>birthday</code>: A string in month-day-year format giving the user’s birthday</li>
+<li>
+<code>from_when</code>: A string in month-day-year format. The number of days from this day to the user’s upcoming birthday will be printed for the user. Set the default value for this argument to be <code>today()</code>.</li>
+</ul>
+</li>
+<li>
+<strong>Notes:</strong>
+<ul>
+<li>Your function should be able to handle all of the following date formats: “Jan 1 2000”, “January 1 2000”, “Jan 1, 2000”, “January 1, 2000”, “1/1/2000”, “1-1-2000”.</li>
+<li>The two dates could be in different formats.</li>
+<li>The <code>lubridate</code> <a href="https://rstudio.github.io/cheatsheets/lubridate.pdf">cheat sheet</a> will be helpful.</li>
+<li>You can subtract date objects with <code>-</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Write your function here</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>days_to_birthday <span class="ot">&lt;-</span> <span class="cf">function</span>(birthday, <span class="at">from_when =</span> <span class="fu">today</span>()) {</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  parse_flex <span class="ot">&lt;-</span> <span class="cf">function</span>(d) {</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="fu">as_date</span>(<span class="fu">parse_date_time</span>(</span>
+<span id="cb7-6"><a href="#cb7-6"></a>      <span class="fu">as.character</span>(d), </span>
+<span id="cb7-7"><a href="#cb7-7"></a>      <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">"ymd"</span>, <span class="st">"mdy"</span>, <span class="st">"Bdy"</span>),</span>
+<span id="cb7-8"><a href="#cb7-8"></a>      <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-9"><a href="#cb7-9"></a>      )</span>
+<span id="cb7-10"><a href="#cb7-10"></a>    }</span>
+<span id="cb7-11"><a href="#cb7-11"></a></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  bday <span class="ot">&lt;-</span> <span class="fu">parse_flex</span>(birthday)</span>
+<span id="cb7-13"><a href="#cb7-13"></a>  from <span class="ot">&lt;-</span> <span class="fu">parse_flex</span>(<span class="fu">as.character</span>(from_when))</span>
+<span id="cb7-14"><a href="#cb7-14"></a></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  bday_this_year <span class="ot">&lt;-</span> <span class="fu">make_date</span>(<span class="fu">year</span>(from), <span class="fu">month</span>(bday), <span class="fu">day</span>(bday))</span>
+<span id="cb7-16"><a href="#cb7-16"></a>  bday_next <span class="ot">&lt;-</span> <span class="cf">if</span> (bday_this_year <span class="sc">&gt;</span> from) bday_this_year <span class="cf">else</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>               <span class="fu">make_date</span>(<span class="fu">year</span>(from) <span class="sc">+</span> <span class="dv">1</span>, </span>
+<span id="cb7-18"><a href="#cb7-18"></a>                         <span class="fu">month</span>(bday), <span class="fu">day</span>(bday))</span>
+<span id="cb7-19"><a href="#cb7-19"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a>  bday_next<span class="sc">-</span>from</span>
+<span id="cb7-21"><a href="#cb7-21"></a>}</span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="fu">days_to_birthday</span>(<span class="st">"January 1 2000"</span>, <span class="at">from_when =</span> <span class="st">"Dec 24 2021"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 8 days</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">days_to_birthday</span>(<span class="st">"Jan 1, 2000"</span>, <span class="at">from_when =</span> <span class="st">"December 24, 2021"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 8 days</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">days_to_birthday</span>(<span class="st">"1/1/2000"</span>, <span class="at">from_when =</span> <span class="st">"12/24/2021"</span>)        </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 8 days</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">days_to_birthday</span>(<span class="st">"1-1-2000"</span>, <span class="at">from_when =</span> <span class="st">"12-24-2021"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 8 days</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">days_to_birthday</span>(<span class="st">"July 4 2000"</span>, <span class="at">from_when =</span> <span class="st">"Jan 1 2024"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 185 days</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">days_to_birthday</span>(<span class="st">"July 4 2000"</span>, <span class="at">from_when =</span> <span class="st">"Oct 1 2024"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 276 days</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">days_to_birthday</span>(<span class="st">"July 4 2000"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 67 days</code></pre>
+</div>
+</div>
+</section><section id="exercise-4-course_names_to_df" class="level2"><h2 class="anchored" data-anchor-id="exercise-4-course_names_to_df">Exercise 4: <code>course_names_to_df()</code>
+</h2>
+<ul>
+<li>
+<strong>Function purpose:</strong> Take a character vector of course numbers and names and store the different pieces of information in a data frame. See code chunk below for example output.</li>
+<li>
+<strong>Inputs:</strong>
+<ul>
+<li>
+<code>courses</code>: A character vector of course numbers and names. See code chunk below for an example.</li>
+<li>
+<code>separate_cross_list</code>: A <code>TRUE/FALSE</code> indicator of whether a cross-listed course should have the two departments separated into 2 variables. Have the default value be <code>TRUE</code>.</li>
+</ul>
+</li>
+<li>
+<strong>Notes:</strong>
+<ul>
+<li>Use regular expressions with the <code>str_extract()</code> function in the <code>stringr</code> package to write this function.</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Write your function here</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>course_names_to_df <span class="ot">&lt;-</span> <span class="cf">function</span>(courses, <span class="at">separate_cross_list =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  dept_f <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(courses,<span class="st">"^[A-Z]+(/[A-Z]+)?"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4"></a>  course_num <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_extract</span>(courses, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>))</span>
+<span id="cb21-5"><a href="#cb21-5"></a>  course_name <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(courses, <span class="st">"(?&lt;=:</span><span class="sc">\\</span><span class="st">s).+$"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  </span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="cf">if</span> (separate_cross_list) { </span>
+<span id="cb21-8"><a href="#cb21-8"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb21-9"><a href="#cb21-9"></a>      <span class="at">dept1 =</span> <span class="fu">str_extract</span>(dept_f, <span class="st">"^[A-Z]+"</span>),</span>
+<span id="cb21-10"><a href="#cb21-10"></a>      <span class="at">dept2 =</span> <span class="fu">str_extract</span>(dept_f, <span class="st">"(?&lt;=/)[A-Z]+"</span>),</span>
+<span id="cb21-11"><a href="#cb21-11"></a>      course_num, course_name</span>
+<span id="cb21-12"><a href="#cb21-12"></a>    )</span>
+<span id="cb21-13"><a href="#cb21-13"></a>  } <span class="cf">else</span> {</span>
+<span id="cb21-14"><a href="#cb21-14"></a>    <span class="fu">tibble</span>(<span class="at">dept =</span> dept_f, </span>
+<span id="cb21-15"><a href="#cb21-15"></a>           course_num, course_name)</span>
+<span id="cb21-16"><a href="#cb21-16"></a>  }</span>
+<span id="cb21-17"><a href="#cb21-17"></a>}</span>
+<span id="cb21-18"><a href="#cb21-18"></a></span>
+<span id="cb21-19"><a href="#cb21-19"></a>course_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"STAT/COMP 212: Intermediate Data Science"</span>, </span>
+<span id="cb21-20"><a href="#cb21-20"></a>                  <span class="st">"STAT 155: Introduction to Statistical Modeling"</span>, </span>
+<span id="cb21-21"><a href="#cb21-21"></a>                  <span class="st">"LING 175: Sociolinguistics"</span>)</span>
+<span id="cb21-22"><a href="#cb21-22"></a></span>
+<span id="cb21-23"><a href="#cb21-23"></a><span class="fu">tibble</span>(</span>
+<span id="cb21-24"><a href="#cb21-24"></a>    <span class="at">dept1 =</span> <span class="fu">c</span>(<span class="st">"STAT"</span>, <span class="st">"STAT"</span>, <span class="st">"LING"</span>),</span>
+<span id="cb21-25"><a href="#cb21-25"></a>    <span class="at">dept2 =</span> <span class="fu">c</span>(<span class="st">"COMP"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb21-26"><a href="#cb21-26"></a>    <span class="at">course_num =</span> <span class="fu">c</span>(<span class="dv">212</span>, <span class="dv">155</span>, <span class="dv">175</span>),</span>
+<span id="cb21-27"><a href="#cb21-27"></a>    <span class="at">course_name =</span> <span class="fu">c</span>(<span class="st">"Intermediate Data Science"</span>, </span>
+<span id="cb21-28"><a href="#cb21-28"></a>                    <span class="st">"Introduction to Statistical Modeling"</span>, </span>
+<span id="cb21-29"><a href="#cb21-29"></a>                    <span class="st">"Sociolinguistics"</span>)</span>
+<span id="cb21-30"><a href="#cb21-30"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  dept1 dept2 course_num course_name                         
+  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;                               
+1 STAT  COMP         212 Intermediate Data Science           
+2 STAT  &lt;NA&gt;         155 Introduction to Statistical Modeling
+3 LING  &lt;NA&gt;         175 Sociolinguistics                    </code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb23-2"><a href="#cb23-2"></a>    <span class="at">dept =</span> <span class="fu">c</span>(<span class="st">"STAT/COMP"</span>, <span class="st">"STAT"</span>, <span class="st">"LING"</span>),</span>
+<span id="cb23-3"><a href="#cb23-3"></a>    <span class="at">course_num =</span> <span class="fu">c</span>(<span class="dv">212</span>, <span class="dv">155</span>, <span class="dv">175</span>),</span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="at">course_name =</span> <span class="fu">c</span>(<span class="st">"Intermediate Data Science"</span>, </span>
+<span id="cb23-5"><a href="#cb23-5"></a>                    <span class="st">"Introduction to Statistical Modeling"</span>, </span>
+<span id="cb23-6"><a href="#cb23-6"></a>                    <span class="st">"Sociolinguistics"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  dept      course_num course_name                         
+  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;                               
+1 STAT/COMP        212 Intermediate Data Science           
+2 STAT             155 Introduction to Statistical Modeling
+3 LING             175 Sociolinguistics                    </code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Test your function with the test data above with separate_cross_list as TRUE and FALSE</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="fu">course_names_to_df</span>(course_names, <span class="at">separate_cross_list =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  dept1 dept2 course_num course_name                         
+  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;                               
+1 STAT  COMP         212 Intermediate Data Science           
+2 STAT  &lt;NA&gt;         155 Introduction to Statistical Modeling
+3 LING  &lt;NA&gt;         175 Sociolinguistics                    </code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">course_names_to_df</span>(course_names, <span class="at">separate_cross_list =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  dept      course_num course_name                         
+  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;                               
+1 STAT/COMP        212 Intermediate Data Science           
+2 STAT             155 Introduction to Statistical Modeling
+3 LING             175 Sociolinguistics                    </code></pre>
+</div>
+</div>
+</section><section id="resources-reflection-required" class="level2"><h2 class="anchored" data-anchor-id="resources-reflection-required">Resources Reflection (required)</h2>
+<p>List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.</p>
+<p><strong>Resources:</strong></p>
+<ul>
+<li><p>janitor/stringr documentation</p></li>
+<li><p>in-class activites</p></li>
+<li><p>texbook</p></li>
+</ul>
+<p><strong>Reflection:</strong> Similar to part 1 of HW 5, the most useful resource was the janitor package documentation which walked you through the functions and provided examples you could reference. The stringr documentation was also useful for exercise 4 in understanding how the patterns worked iside of <code>str.extract()</code>. The in-class activities were also helpful to reference syntax and structure of code chunks, as well as the textbook at times for reviewing.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      <a href="../../../homework-yeshedj/hw05/src/hw05-p1.html" class="pagination-link" aria-label="HW05-P1 Adv. Data wrangling &amp; Generalization">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">HW05-P1 Adv. Data wrangling &amp; Generalization</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../homework-yeshedj/hw06/src/hw06.html" class="pagination-link" aria-label="HW06 Functions + Iteration">
+        <span class="nav-page-text"><span class="chapter-title">HW06 Functions + Iteration</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">---</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="an">title:</span><span class="co"> "HW05-P2 Adv. Data Wrangling + Functions"</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="co">  html: {}</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="co">---</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="fu">## Instructions</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a></span>
+<span id="cb29-9"><a href="#cb29-9"></a>**Requirements:**</span>
+<span id="cb29-10"><a href="#cb29-10"></a></span>
+<span id="cb29-11"><a href="#cb29-11"></a>Exercise 1</span>
+<span id="cb29-12"><a href="#cb29-12"></a></span>
+<span id="cb29-13"><a href="#cb29-13"></a><span class="ss">-   </span>Wrote a function that completes all tasks</span>
+<span id="cb29-14"><a href="#cb29-14"></a><span class="ss">-   </span>At least two test cases together covered whole list (snake_case, % to percent, <span class="sc">\#</span> to number, remove all non-alphanumeric characters, duplicated var names)</span>
+<span id="cb29-15"><a href="#cb29-15"></a><span class="ss">-   </span>Wrote desired output before testing function</span>
+<span id="cb29-16"><a href="#cb29-16"></a><span class="ss">-   </span>Get the desired output (dataset with new names)</span>
+<span id="cb29-17"><a href="#cb29-17"></a><span class="ss">-   </span>Challenge: duplicated vars changed to var1 and var2 (not using make.unique())</span>
+<span id="cb29-18"><a href="#cb29-18"></a></span>
+<span id="cb29-19"><a href="#cb29-19"></a>Exercise 2</span>
+<span id="cb29-20"><a href="#cb29-20"></a></span>
+<span id="cb29-21"><a href="#cb29-21"></a><span class="ss">-   </span>Wrote a function that completes all tasks</span>
+<span id="cb29-22"><a href="#cb29-22"></a><span class="ss">-   </span>At least five test cases together covered whole list (len_x1 <span class="sc">\&lt;</span> len_x2, len_x1 <span class="sc">\&gt;</span> len_x2, len_x1 <span class="al">== len_x2, len_larger %% len_smaller ==</span> 0, len_larger %% len_smaller != 0</span>
+<span id="cb29-23"><a href="#cb29-23"></a><span class="ss">-   </span>Get the desired output (2 possible paragraphs text at least)</span>
+<span id="cb29-24"><a href="#cb29-24"></a><span class="ss">-   </span>Challenge: minimal text: function has only two paragraph text options (where the role of x1 and x2 is figured out by which one is longer) rather than four paragraphs where x1 and x2 are manually typed</span>
+<span id="cb29-25"><a href="#cb29-25"></a></span>
+<span id="cb29-26"><a href="#cb29-26"></a>Exercise 3</span>
+<span id="cb29-27"><a href="#cb29-27"></a></span>
+<span id="cb29-28"><a href="#cb29-28"></a><span class="ss">-   </span>Wrote a function that completes all tasks</span>
+<span id="cb29-29"><a href="#cb29-29"></a><span class="ss">-   </span>Test cases together covered whole list (different formats, including from_when, using default from_when, birthday_month_day <span class="sc">\&lt;</span> from_when_month_day, birthday_month_day <span class="sc">\&gt;</span> from_when_month_day)</span>
+<span id="cb29-30"><a href="#cb29-30"></a><span class="ss">-   </span>Get the desired output (no negative time differences)</span>
+<span id="cb29-31"><a href="#cb29-31"></a></span>
+<span id="cb29-32"><a href="#cb29-32"></a>Exercise 4</span>
+<span id="cb29-33"><a href="#cb29-33"></a></span>
+<span id="cb29-34"><a href="#cb29-34"></a><span class="ss">-   </span>Wrote a function that completes all tasks</span>
+<span id="cb29-35"><a href="#cb29-35"></a><span class="ss">-   </span>Tested the function with the provided course list (TRUE and FALSE for separate_cross_list)</span>
+<span id="cb29-36"><a href="#cb29-36"></a><span class="ss">-   </span>Get the desired output (data frame should match the desired output for the test case provided)</span>
+<span id="cb29-37"><a href="#cb29-37"></a></span>
+<span id="cb29-38"><a href="#cb29-38"></a><span class="fu">## Exercise 1</span></span>
+<span id="cb29-39"><a href="#cb29-39"></a></span>
+<span id="cb29-40"><a href="#cb29-40"></a>Look at the <span class="co">[</span><span class="ot">example usage</span><span class="co">](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html#clean-dataframe-names-with-clean_names)</span> for the <span class="in">`clean_names()`</span> function, and look at the documentation for this function with <span class="in">`?clean_names`</span>.</span>
+<span id="cb29-41"><a href="#cb29-41"></a></span>
+<span id="cb29-42"><a href="#cb29-42"></a>Without using <span class="in">`clean_names`</span>, write a general function that will clean the names of a data frame. Your function should:</span>
+<span id="cb29-43"><a href="#cb29-43"></a></span>
+<span id="cb29-44"><a href="#cb29-44"></a><span class="ss">-   </span>**Inputs**</span>
+<span id="cb29-45"><a href="#cb29-45"></a><span class="ss">    -   </span>Take a dataset as an input and return a dataset as the output</span>
+<span id="cb29-46"><a href="#cb29-46"></a><span class="ss">-   </span>**Function purpose**:</span>
+<span id="cb29-47"><a href="#cb29-47"></a><span class="ss">    -   </span>In the output, the variable names should be <span class="in">`snake_case`</span>, meaning <span class="in">`_`</span> instead of spaces in the name.</span>
+<span id="cb29-48"><a href="#cb29-48"></a><span class="ss">    -   </span>Convert <span class="in">`%`</span> to "percent" and <span class="in">`#`</span> to "number" to retain meaning.</span>
+<span id="cb29-49"><a href="#cb29-49"></a><span class="ss">    -   </span>Remove non-alphanumeric characters (other than <span class="in">`%`</span> and <span class="in">`#`</span>).</span>
+<span id="cb29-50"><a href="#cb29-50"></a><span class="ss">    -   </span>Append numbers to duplicated names. (e.g., If there are two variables called <span class="in">`var`</span>, they should be renamed as <span class="in">`var1`</span> and <span class="in">`var2`</span>.)</span>
+<span id="cb29-51"><a href="#cb29-51"></a></span>
+<span id="cb29-52"><a href="#cb29-52"></a>DON'T worry about:</span>
+<span id="cb29-53"><a href="#cb29-53"></a></span>
+<span id="cb29-54"><a href="#cb29-54"></a><span class="ss">-   </span>Turning <span class="in">`firstName`</span> into <span class="in">`first_name`</span>.</span>
+<span id="cb29-55"><a href="#cb29-55"></a><span class="ss">-   </span>Handling special characters with accents.</span>
+<span id="cb29-56"><a href="#cb29-56"></a></span>
+<span id="cb29-57"><a href="#cb29-57"></a>Make sure your function returns the dataset with cleaned names, not just the names themselves.</span>
+<span id="cb29-58"><a href="#cb29-58"></a></span>
+<span id="cb29-59"><a href="#cb29-59"></a><span class="in">```{r clean_names}</span></span>
+<span id="cb29-60"><a href="#cb29-60"></a></span>
+<span id="cb29-61"><a href="#cb29-61"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb29-62"><a href="#cb29-62"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb29-63"><a href="#cb29-63"></a></span>
+<span id="cb29-64"><a href="#cb29-64"></a>clean_names2 <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb29-65"><a href="#cb29-65"></a>  <span class="co"># Your code here, using 'data' as the name of the dataset</span></span>
+<span id="cb29-66"><a href="#cb29-66"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">names</span>(data)</span>
+<span id="cb29-67"><a href="#cb29-67"></a></span>
+<span id="cb29-68"><a href="#cb29-68"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(cnames, <span class="st">"%"</span>, <span class="st">"percent"</span>)</span>
+<span id="cb29-69"><a href="#cb29-69"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(cnames, <span class="st">"#"</span>, <span class="st">"number"</span>)</span>
+<span id="cb29-70"><a href="#cb29-70"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(cnames, <span class="st">"[^a-zA-Z0-9]+"</span>, <span class="st">"_"</span>)</span>
+<span id="cb29-71"><a href="#cb29-71"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_to_lower</span>(cnames)</span>
+<span id="cb29-72"><a href="#cb29-72"></a>  cnames <span class="ot">&lt;-</span> <span class="fu">str_remove_all</span>(cnames,<span class="st">"^_|_$"</span>)</span>
+<span id="cb29-73"><a href="#cb29-73"></a></span>
+<span id="cb29-74"><a href="#cb29-74"></a>  <span class="cf">for</span> (d <span class="cf">in</span> <span class="fu">unique</span>(cnames[<span class="fu">duplicated</span>(cnames)])) {</span>
+<span id="cb29-75"><a href="#cb29-75"></a>    index <span class="ot">&lt;-</span> <span class="fu">which</span>(cnames <span class="sc">==</span> d)</span>
+<span id="cb29-76"><a href="#cb29-76"></a>    cnames[index] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(d, <span class="fu">seq_along</span>(index))</span>
+<span id="cb29-77"><a href="#cb29-77"></a>  }</span>
+<span id="cb29-78"><a href="#cb29-78"></a></span>
+<span id="cb29-79"><a href="#cb29-79"></a>  <span class="fu">names</span>(data) <span class="ot">&lt;-</span> cnames</span>
+<span id="cb29-80"><a href="#cb29-80"></a>  data</span>
+<span id="cb29-81"><a href="#cb29-81"></a>}</span>
+<span id="cb29-82"><a href="#cb29-82"></a></span>
+<span id="cb29-83"><a href="#cb29-83"></a><span class="in">```</span></span>
+<span id="cb29-84"><a href="#cb29-84"></a></span>
+<span id="cb29-85"><a href="#cb29-85"></a>Demonstrate that your function works by showing output on test cases. You must create your test cases and they should cover all the items in the "Your function should:" section. Before the code for testing the functions, write a comment that describes the desired output (the cleaned names) for each test case.</span>
+<span id="cb29-86"><a href="#cb29-86"></a></span>
+<span id="cb29-87"><a href="#cb29-87"></a><span class="in">```{r clean_names_test}</span></span>
+<span id="cb29-88"><a href="#cb29-88"></a></span>
+<span id="cb29-89"><a href="#cb29-89"></a>test_df_1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb29-90"><a href="#cb29-90"></a>  <span class="st">`</span><span class="at">First Name</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb29-91"><a href="#cb29-91"></a>  <span class="st">`</span><span class="at">Score %</span><span class="st">`</span>    <span class="ot">=</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb29-92"><a href="#cb29-92"></a>  <span class="st">`</span><span class="at"># of Items</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb29-93"><a href="#cb29-93"></a>  <span class="st">`</span><span class="at">hello!!</span><span class="st">`</span>    <span class="ot">=</span> <span class="dv">7</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb29-94"><a href="#cb29-94"></a>)</span>
+<span id="cb29-95"><a href="#cb29-95"></a></span>
+<span id="cb29-96"><a href="#cb29-96"></a>test_df_2 <span class="ot">&lt;-</span> <span class="fu">setNames</span>(</span>
+<span id="cb29-97"><a href="#cb29-97"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb29-98"><a href="#cb29-98"></a>    <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>)), <span class="fu">c</span>(<span class="st">"var"</span>, <span class="st">"var"</span>, <span class="st">"Hello World"</span>)</span>
+<span id="cb29-99"><a href="#cb29-99"></a>)</span>
+<span id="cb29-100"><a href="#cb29-100"></a></span>
+<span id="cb29-101"><a href="#cb29-101"></a></span>
+<span id="cb29-102"><a href="#cb29-102"></a><span class="do">## Test your function with the test data</span></span>
+<span id="cb29-103"><a href="#cb29-103"></a></span>
+<span id="cb29-104"><a href="#cb29-104"></a><span class="co"># Desired Output for test_df_1 (written out): first_name, score_percent, number_of_items, hello</span></span>
+<span id="cb29-105"><a href="#cb29-105"></a><span class="fu">clean_names2</span>(test_df_1)</span>
+<span id="cb29-106"><a href="#cb29-106"></a><span class="co"># Desired Output for test_df_2 (written out): var1, var2, hello_world</span></span>
+<span id="cb29-107"><a href="#cb29-107"></a><span class="fu">clean_names2</span>(test_df_2)</span>
+<span id="cb29-108"><a href="#cb29-108"></a><span class="in">```</span></span>
+<span id="cb29-109"><a href="#cb29-109"></a></span>
+<span id="cb29-110"><a href="#cb29-110"></a><span class="fu">## Exercise 2: `recycling_checker()`</span></span>
+<span id="cb29-111"><a href="#cb29-111"></a></span>
+<span id="cb29-112"><a href="#cb29-112"></a><span class="ss">-   </span>**Inputs:**</span>
+<span id="cb29-113"><a href="#cb29-113"></a><span class="ss">    -   </span><span class="in">`x1`</span> and <span class="in">`x2`</span>: two numeric vectors</span>
+<span id="cb29-114"><a href="#cb29-114"></a><span class="ss">-   </span>**Function purpose:** Print a helpful message to the user warning them if dangerous vector recycling will happen when they try to combine the two vectors with some arithmetic operation.</span>
+<span id="cb29-115"><a href="#cb29-115"></a><span class="ss">    -   </span>If the vectors are not of the same length, provide informational text. See examples below for how to format this text.</span>
+<span id="cb29-116"><a href="#cb29-116"></a><span class="ss">        -   </span>Example 1: <span class="in">`x1`</span> is length 4 and <span class="in">`x2`</span> is length 2. Informational text: "x1 and x2 are not the same length. To match the length of x1, x2 will be repeated 2 times. You will not get a warning when you combine these two vectors, but just be wary that vector recycling is occurring."</span>
+<span id="cb29-117"><a href="#cb29-117"></a><span class="ss">        -   </span>Example 2: <span class="in">`x1`</span> is length 3 and <span class="in">`x2`</span> is length 11. Informational text: "x1 and x2 are not the same length. To match the length of x2, x1 will be repeated 3 times fully with the first 2 elements repeated again. You will get a warning when you combine these two vectors."</span>
+<span id="cb29-118"><a href="#cb29-118"></a></span>
+<span id="cb29-119"><a href="#cb29-119"></a><span class="in">```{r recycling_checker}</span></span>
+<span id="cb29-120"><a href="#cb29-120"></a><span class="co"># Write your function here</span></span>
+<span id="cb29-121"><a href="#cb29-121"></a></span>
+<span id="cb29-122"><a href="#cb29-122"></a>recycling_checker <span class="ot">&lt;-</span> <span class="cf">function</span>(x1, x2) {</span>
+<span id="cb29-123"><a href="#cb29-123"></a>  len1 <span class="ot">&lt;-</span> <span class="fu">length</span>(x1)</span>
+<span id="cb29-124"><a href="#cb29-124"></a>  len2 <span class="ot">&lt;-</span> <span class="fu">length</span>(x2)</span>
+<span id="cb29-125"><a href="#cb29-125"></a></span>
+<span id="cb29-126"><a href="#cb29-126"></a>  <span class="cf">if</span> (len1 <span class="sc">==</span> len2) {</span>
+<span id="cb29-127"><a href="#cb29-127"></a>    <span class="fu">message</span>(<span class="st">"x1 and x2 are the same length. No recycling will occur."</span>)</span>
+<span id="cb29-128"><a href="#cb29-128"></a>    <span class="fu">return</span>(<span class="fu">invisible</span>(<span class="cn">NULL</span>))</span>
+<span id="cb29-129"><a href="#cb29-129"></a>  }</span>
+<span id="cb29-130"><a href="#cb29-130"></a></span>
+<span id="cb29-131"><a href="#cb29-131"></a>  <span class="cf">if</span> (len1 <span class="sc">&gt;</span> len2) {</span>
+<span id="cb29-132"><a href="#cb29-132"></a>    longer <span class="ot">&lt;-</span> <span class="st">"x1"</span>; shorter <span class="ot">&lt;-</span> <span class="st">"x2"</span></span>
+<span id="cb29-133"><a href="#cb29-133"></a>    len_larger <span class="ot">&lt;-</span> len1; len_smaller <span class="ot">&lt;-</span> len2</span>
+<span id="cb29-134"><a href="#cb29-134"></a>  } <span class="cf">else</span> {</span>
+<span id="cb29-135"><a href="#cb29-135"></a>    longer <span class="ot">&lt;-</span> <span class="st">"x2"</span>; shorter <span class="ot">&lt;-</span><span class="st">"x1"</span></span>
+<span id="cb29-136"><a href="#cb29-136"></a>    len_larger <span class="ot">&lt;-</span> len2; len_smaller <span class="ot">&lt;-</span> len1</span>
+<span id="cb29-137"><a href="#cb29-137"></a>  }</span>
+<span id="cb29-138"><a href="#cb29-138"></a></span>
+<span id="cb29-139"><a href="#cb29-139"></a>  times_full <span class="ot">&lt;-</span> len_larger <span class="sc">%/%</span> len_smaller</span>
+<span id="cb29-140"><a href="#cb29-140"></a>  remainder  <span class="ot">&lt;-</span> len_larger <span class="sc">%%</span>  len_smaller</span>
+<span id="cb29-141"><a href="#cb29-141"></a></span>
+<span id="cb29-142"><a href="#cb29-142"></a>  <span class="cf">if</span> (remainder <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb29-143"><a href="#cb29-143"></a>    <span class="fu">message</span>(<span class="fu">str_glue</span>(</span>
+<span id="cb29-144"><a href="#cb29-144"></a>      <span class="st">"x1 and x2 are not the same length. To match the length of {longer}, "</span>,</span>
+<span id="cb29-145"><a href="#cb29-145"></a>      <span class="st">"{shorter} will be repeated {times_full} times. "</span>,</span>
+<span id="cb29-146"><a href="#cb29-146"></a>      <span class="st">"You will not get a warning when you combine these two vectors, "</span>,</span>
+<span id="cb29-147"><a href="#cb29-147"></a>      <span class="st">"but just be wary that vector recycling is occurring."</span></span>
+<span id="cb29-148"><a href="#cb29-148"></a>    ))</span>
+<span id="cb29-149"><a href="#cb29-149"></a>  } <span class="cf">else</span> {</span>
+<span id="cb29-150"><a href="#cb29-150"></a>    <span class="fu">message</span>(<span class="fu">str_glue</span>(</span>
+<span id="cb29-151"><a href="#cb29-151"></a>      <span class="st">"x1 and x2 are not the same length. To match the length of {longer}, "</span>,</span>
+<span id="cb29-152"><a href="#cb29-152"></a>      <span class="st">"{shorter} will be repeated {times_full} times fully with the first "</span>,</span>
+<span id="cb29-153"><a href="#cb29-153"></a>      <span class="st">"{remainder} element{if (remainder == 1) '' else 's'} repeated again. "</span>,</span>
+<span id="cb29-154"><a href="#cb29-154"></a>      <span class="st">"You will get a warning when you combine these two vectors."</span></span>
+<span id="cb29-155"><a href="#cb29-155"></a>    ))</span>
+<span id="cb29-156"><a href="#cb29-156"></a>  }</span>
+<span id="cb29-157"><a href="#cb29-157"></a>}</span>
+<span id="cb29-158"><a href="#cb29-158"></a></span>
+<span id="cb29-159"><a href="#cb29-159"></a><span class="co"># Test cases</span></span>
+<span id="cb29-160"><a href="#cb29-160"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb29-161"><a href="#cb29-161"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>)</span>
+<span id="cb29-162"><a href="#cb29-162"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb29-163"><a href="#cb29-163"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
+<span id="cb29-164"><a href="#cb29-164"></a><span class="fu">recycling_checker</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb29-165"><a href="#cb29-165"></a></span>
+<span id="cb29-166"><a href="#cb29-166"></a><span class="in">```</span></span>
+<span id="cb29-167"><a href="#cb29-167"></a></span>
+<span id="cb29-168"><a href="#cb29-168"></a><span class="fu">## Exercise 3: `days_to_birthday()`</span></span>
+<span id="cb29-169"><a href="#cb29-169"></a></span>
+<span id="cb29-170"><a href="#cb29-170"></a><span class="ss">-   </span>**Function purpose:** Display the number of days from a user-supplied day to the user's next birthday. For example, if the user enters the day "Dec 24 2021" and a birthday of "January 1 2000," it should return a time difference of 8 days until the user's next birthday.\</span>
+<span id="cb29-171"><a href="#cb29-171"></a><span class="ss">-   </span>**Inputs:**</span>
+<span id="cb29-172"><a href="#cb29-172"></a><span class="ss">    -   </span><span class="in">`birthday`</span>: A string in month-day-year format giving the user's birthday</span>
+<span id="cb29-173"><a href="#cb29-173"></a><span class="ss">    -   </span><span class="in">`from_when`</span>: A string in month-day-year format. The number of days from this day to the user's upcoming birthday will be printed for the user. Set the default value for this argument to be <span class="in">`today()`</span>.</span>
+<span id="cb29-174"><a href="#cb29-174"></a><span class="ss">-   </span>**Notes:**</span>
+<span id="cb29-175"><a href="#cb29-175"></a><span class="ss">    -   </span>Your function should be able to handle all of the following date formats: "Jan 1 2000", "January 1 2000", "Jan 1, 2000", "January 1, 2000", "1/1/2000", "1-1-2000".</span>
+<span id="cb29-176"><a href="#cb29-176"></a><span class="ss">    -   </span>The two dates could be in different formats.</span>
+<span id="cb29-177"><a href="#cb29-177"></a><span class="ss">    -   </span>The <span class="in">`lubridate`</span> <span class="co">[</span><span class="ot">cheat sheet</span><span class="co">](https://rstudio.github.io/cheatsheets/lubridate.pdf)</span> will be helpful.</span>
+<span id="cb29-178"><a href="#cb29-178"></a><span class="ss">    -   </span>You can subtract date objects with <span class="in">`-`</span>.</span>
+<span id="cb29-179"><a href="#cb29-179"></a></span>
+<span id="cb29-180"><a href="#cb29-180"></a><span class="in">```{r days_to_birthday}</span></span>
+<span id="cb29-181"><a href="#cb29-181"></a><span class="co"># Write your function here</span></span>
+<span id="cb29-182"><a href="#cb29-182"></a></span>
+<span id="cb29-183"><a href="#cb29-183"></a>days_to_birthday <span class="ot">&lt;-</span> <span class="cf">function</span>(birthday, <span class="at">from_when =</span> <span class="fu">today</span>()) {</span>
+<span id="cb29-184"><a href="#cb29-184"></a>  parse_flex <span class="ot">&lt;-</span> <span class="cf">function</span>(d) {</span>
+<span id="cb29-185"><a href="#cb29-185"></a>    <span class="fu">as_date</span>(<span class="fu">parse_date_time</span>(</span>
+<span id="cb29-186"><a href="#cb29-186"></a>      <span class="fu">as.character</span>(d), </span>
+<span id="cb29-187"><a href="#cb29-187"></a>      <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">"ymd"</span>, <span class="st">"mdy"</span>, <span class="st">"Bdy"</span>),</span>
+<span id="cb29-188"><a href="#cb29-188"></a>      <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-189"><a href="#cb29-189"></a>      )</span>
+<span id="cb29-190"><a href="#cb29-190"></a>    }</span>
+<span id="cb29-191"><a href="#cb29-191"></a></span>
+<span id="cb29-192"><a href="#cb29-192"></a>  bday <span class="ot">&lt;-</span> <span class="fu">parse_flex</span>(birthday)</span>
+<span id="cb29-193"><a href="#cb29-193"></a>  from <span class="ot">&lt;-</span> <span class="fu">parse_flex</span>(<span class="fu">as.character</span>(from_when))</span>
+<span id="cb29-194"><a href="#cb29-194"></a></span>
+<span id="cb29-195"><a href="#cb29-195"></a>  bday_this_year <span class="ot">&lt;-</span> <span class="fu">make_date</span>(<span class="fu">year</span>(from), <span class="fu">month</span>(bday), <span class="fu">day</span>(bday))</span>
+<span id="cb29-196"><a href="#cb29-196"></a>  bday_next <span class="ot">&lt;-</span> <span class="cf">if</span> (bday_this_year <span class="sc">&gt;</span> from) bday_this_year <span class="cf">else</span></span>
+<span id="cb29-197"><a href="#cb29-197"></a>               <span class="fu">make_date</span>(<span class="fu">year</span>(from) <span class="sc">+</span> <span class="dv">1</span>, </span>
+<span id="cb29-198"><a href="#cb29-198"></a>                         <span class="fu">month</span>(bday), <span class="fu">day</span>(bday))</span>
+<span id="cb29-199"><a href="#cb29-199"></a></span>
+<span id="cb29-200"><a href="#cb29-200"></a>  bday_next<span class="sc">-</span>from</span>
+<span id="cb29-201"><a href="#cb29-201"></a>}</span>
+<span id="cb29-202"><a href="#cb29-202"></a></span>
+<span id="cb29-203"><a href="#cb29-203"></a><span class="fu">days_to_birthday</span>(<span class="st">"January 1 2000"</span>, <span class="at">from_when =</span> <span class="st">"Dec 24 2021"</span>) </span>
+<span id="cb29-204"><a href="#cb29-204"></a><span class="fu">days_to_birthday</span>(<span class="st">"Jan 1, 2000"</span>, <span class="at">from_when =</span> <span class="st">"December 24, 2021"</span>) </span>
+<span id="cb29-205"><a href="#cb29-205"></a><span class="fu">days_to_birthday</span>(<span class="st">"1/1/2000"</span>, <span class="at">from_when =</span> <span class="st">"12/24/2021"</span>)        </span>
+<span id="cb29-206"><a href="#cb29-206"></a><span class="fu">days_to_birthday</span>(<span class="st">"1-1-2000"</span>, <span class="at">from_when =</span> <span class="st">"12-24-2021"</span>) </span>
+<span id="cb29-207"><a href="#cb29-207"></a><span class="fu">days_to_birthday</span>(<span class="st">"July 4 2000"</span>, <span class="at">from_when =</span> <span class="st">"Jan 1 2024"</span>)</span>
+<span id="cb29-208"><a href="#cb29-208"></a><span class="fu">days_to_birthday</span>(<span class="st">"July 4 2000"</span>, <span class="at">from_when =</span> <span class="st">"Oct 1 2024"</span>)</span>
+<span id="cb29-209"><a href="#cb29-209"></a></span>
+<span id="cb29-210"><a href="#cb29-210"></a><span class="fu">days_to_birthday</span>(<span class="st">"July 4 2000"</span>)</span>
+<span id="cb29-211"><a href="#cb29-211"></a></span>
+<span id="cb29-212"><a href="#cb29-212"></a><span class="in">```</span></span>
+<span id="cb29-213"><a href="#cb29-213"></a></span>
+<span id="cb29-214"><a href="#cb29-214"></a><span class="fu">## Exercise 4: `course_names_to_df()`</span></span>
+<span id="cb29-215"><a href="#cb29-215"></a></span>
+<span id="cb29-216"><a href="#cb29-216"></a><span class="ss">-   </span>**Function purpose:** Take a character vector of course numbers and names and store the different pieces of information in a data frame. See code chunk below for example output.</span>
+<span id="cb29-217"><a href="#cb29-217"></a><span class="ss">-   </span>**Inputs:**</span>
+<span id="cb29-218"><a href="#cb29-218"></a><span class="ss">    -   </span><span class="in">`courses`</span>: A character vector of course numbers and names. See code chunk below for an example.</span>
+<span id="cb29-219"><a href="#cb29-219"></a><span class="ss">    -   </span><span class="in">`separate_cross_list`</span>: A <span class="in">`TRUE/FALSE`</span> indicator of whether a cross-listed course should have the two departments separated into 2 variables. Have the default value be <span class="in">`TRUE`</span>.</span>
+<span id="cb29-220"><a href="#cb29-220"></a><span class="ss">-   </span>**Notes:**</span>
+<span id="cb29-221"><a href="#cb29-221"></a><span class="ss">    -   </span>Use regular expressions with the <span class="in">`str_extract()`</span> function in the <span class="in">`stringr`</span> package to write this function.</span>
+<span id="cb29-222"><a href="#cb29-222"></a></span>
+<span id="cb29-223"><a href="#cb29-223"></a><span class="in">```{r course_names_to_df}</span></span>
+<span id="cb29-224"><a href="#cb29-224"></a><span class="co"># Write your function here</span></span>
+<span id="cb29-225"><a href="#cb29-225"></a>course_names_to_df <span class="ot">&lt;-</span> <span class="cf">function</span>(courses, <span class="at">separate_cross_list =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb29-226"><a href="#cb29-226"></a>  dept_f <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(courses,<span class="st">"^[A-Z]+(/[A-Z]+)?"</span>)</span>
+<span id="cb29-227"><a href="#cb29-227"></a>  course_num <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_extract</span>(courses, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>))</span>
+<span id="cb29-228"><a href="#cb29-228"></a>  course_name <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(courses, <span class="st">"(?&lt;=:</span><span class="sc">\\</span><span class="st">s).+$"</span>)</span>
+<span id="cb29-229"><a href="#cb29-229"></a>  </span>
+<span id="cb29-230"><a href="#cb29-230"></a>  <span class="cf">if</span> (separate_cross_list) { </span>
+<span id="cb29-231"><a href="#cb29-231"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb29-232"><a href="#cb29-232"></a>      <span class="at">dept1 =</span> <span class="fu">str_extract</span>(dept_f, <span class="st">"^[A-Z]+"</span>),</span>
+<span id="cb29-233"><a href="#cb29-233"></a>      <span class="at">dept2 =</span> <span class="fu">str_extract</span>(dept_f, <span class="st">"(?&lt;=/)[A-Z]+"</span>),</span>
+<span id="cb29-234"><a href="#cb29-234"></a>      course_num, course_name</span>
+<span id="cb29-235"><a href="#cb29-235"></a>    )</span>
+<span id="cb29-236"><a href="#cb29-236"></a>  } <span class="cf">else</span> {</span>
+<span id="cb29-237"><a href="#cb29-237"></a>    <span class="fu">tibble</span>(<span class="at">dept =</span> dept_f, </span>
+<span id="cb29-238"><a href="#cb29-238"></a>           course_num, course_name)</span>
+<span id="cb29-239"><a href="#cb29-239"></a>  }</span>
+<span id="cb29-240"><a href="#cb29-240"></a>}</span>
+<span id="cb29-241"><a href="#cb29-241"></a></span>
+<span id="cb29-242"><a href="#cb29-242"></a>course_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"STAT/COMP 212: Intermediate Data Science"</span>, </span>
+<span id="cb29-243"><a href="#cb29-243"></a>                  <span class="st">"STAT 155: Introduction to Statistical Modeling"</span>, </span>
+<span id="cb29-244"><a href="#cb29-244"></a>                  <span class="st">"LING 175: Sociolinguistics"</span>)</span>
+<span id="cb29-245"><a href="#cb29-245"></a></span>
+<span id="cb29-246"><a href="#cb29-246"></a><span class="fu">tibble</span>(</span>
+<span id="cb29-247"><a href="#cb29-247"></a>    <span class="at">dept1 =</span> <span class="fu">c</span>(<span class="st">"STAT"</span>, <span class="st">"STAT"</span>, <span class="st">"LING"</span>),</span>
+<span id="cb29-248"><a href="#cb29-248"></a>    <span class="at">dept2 =</span> <span class="fu">c</span>(<span class="st">"COMP"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb29-249"><a href="#cb29-249"></a>    <span class="at">course_num =</span> <span class="fu">c</span>(<span class="dv">212</span>, <span class="dv">155</span>, <span class="dv">175</span>),</span>
+<span id="cb29-250"><a href="#cb29-250"></a>    <span class="at">course_name =</span> <span class="fu">c</span>(<span class="st">"Intermediate Data Science"</span>, </span>
+<span id="cb29-251"><a href="#cb29-251"></a>                    <span class="st">"Introduction to Statistical Modeling"</span>, </span>
+<span id="cb29-252"><a href="#cb29-252"></a>                    <span class="st">"Sociolinguistics"</span>)</span>
+<span id="cb29-253"><a href="#cb29-253"></a>)</span>
+<span id="cb29-254"><a href="#cb29-254"></a></span>
+<span id="cb29-255"><a href="#cb29-255"></a><span class="fu">tibble</span>(</span>
+<span id="cb29-256"><a href="#cb29-256"></a>    <span class="at">dept =</span> <span class="fu">c</span>(<span class="st">"STAT/COMP"</span>, <span class="st">"STAT"</span>, <span class="st">"LING"</span>),</span>
+<span id="cb29-257"><a href="#cb29-257"></a>    <span class="at">course_num =</span> <span class="fu">c</span>(<span class="dv">212</span>, <span class="dv">155</span>, <span class="dv">175</span>),</span>
+<span id="cb29-258"><a href="#cb29-258"></a>    <span class="at">course_name =</span> <span class="fu">c</span>(<span class="st">"Intermediate Data Science"</span>, </span>
+<span id="cb29-259"><a href="#cb29-259"></a>                    <span class="st">"Introduction to Statistical Modeling"</span>, </span>
+<span id="cb29-260"><a href="#cb29-260"></a>                    <span class="st">"Sociolinguistics"</span>)</span>
+<span id="cb29-261"><a href="#cb29-261"></a>)</span>
+<span id="cb29-262"><a href="#cb29-262"></a></span>
+<span id="cb29-263"><a href="#cb29-263"></a></span>
+<span id="cb29-264"><a href="#cb29-264"></a><span class="co"># Test your function with the test data above with separate_cross_list as TRUE and FALSE</span></span>
+<span id="cb29-265"><a href="#cb29-265"></a></span>
+<span id="cb29-266"><a href="#cb29-266"></a><span class="fu">course_names_to_df</span>(course_names, <span class="at">separate_cross_list =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-267"><a href="#cb29-267"></a><span class="fu">course_names_to_df</span>(course_names, <span class="at">separate_cross_list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-268"><a href="#cb29-268"></a></span>
+<span id="cb29-269"><a href="#cb29-269"></a></span>
+<span id="cb29-270"><a href="#cb29-270"></a><span class="in">```</span></span>
+<span id="cb29-271"><a href="#cb29-271"></a></span>
+<span id="cb29-272"><a href="#cb29-272"></a><span class="fu">## Resources Reflection (required)</span></span>
+<span id="cb29-273"><a href="#cb29-273"></a></span>
+<span id="cb29-274"><a href="#cb29-274"></a>List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.</span>
+<span id="cb29-275"><a href="#cb29-275"></a></span>
+<span id="cb29-276"><a href="#cb29-276"></a>**Resources:**</span>
+<span id="cb29-277"><a href="#cb29-277"></a></span>
+<span id="cb29-278"><a href="#cb29-278"></a><span class="ss">-   </span>janitor/stringr documentation</span>
+<span id="cb29-279"><a href="#cb29-279"></a></span>
+<span id="cb29-280"><a href="#cb29-280"></a><span class="ss">-   </span>in-class activites</span>
+<span id="cb29-281"><a href="#cb29-281"></a></span>
+<span id="cb29-282"><a href="#cb29-282"></a><span class="ss">-   </span>texbook</span>
+<span id="cb29-283"><a href="#cb29-283"></a></span>
+<span id="cb29-284"><a href="#cb29-284"></a>**Reflection:** Similar to part 1 of HW 5, the most useful resource was the janitor package documentation which walked you through the functions and provided examples you could reference. The stringr documentation was also useful for exercise 4 in understanding how the patterns worked iside of <span class="in">`str.extract()`</span>. The in-class activities were also helpful to reference syntax and structure of code chunks, as well as the textbook at times for reviewing.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

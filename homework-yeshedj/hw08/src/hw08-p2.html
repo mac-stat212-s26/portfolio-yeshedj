@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>HW08-P2 Databases – COMP/STAT212 Portfolio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../tt/2025-07-15.html" rel="next">
+<link href="../../../homework-yeshedj/hw08/src/hw08-p1.html" rel="prev">
+<script src="../../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b1525fc7443f827935229f0f56e36607.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-447330ed7f5b14f08626394f08367e28.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../../style/custom.css">
+</head>
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw01/src/hw1-tt.html">Homework</a></li><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw08/src/hw08-p2.html"><span class="chapter-title">HW08-P2 Databases</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../../index.html" class="sidebar-logo-link">
+      <img src="../../../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../../../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../">Yeshe Jangchup</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Homework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw01/src/hw1-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW1 TidyTuesday Brazilian Companies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw02/src/hw02-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW02-P1 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw02/src/hw02-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW02-P2 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw03/src/hw03-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW03-P1 Adv Map Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw03/src/hw03-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW03-P2 Adv Map Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw04/src/hw04-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW04-P1 Data wrangling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw05/src/hw05-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW05-P1 Adv. Data wrangling &amp; Generalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw05/src/hw05-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW05-P2 Adv. Data Wrangling + Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw06/src/hw06.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW06 Functions + Iteration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw07/src/hw07-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW07-P1 Programming + JSON</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw07/src/hw07-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW07-P2 Navigating the Census API</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw08/src/hw08-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW08-P1 Scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw08/src/hw08-p2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">HW08-P2 Databases</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TidyTuesday</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../homework-yeshedj/hw01/src/hw1-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW1 TidyTuesday Brazilian Companies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../tt/2025-07-15.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">TidyTuesday Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pre-Class Learnings</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/1_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/2_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/3_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/4_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/6_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/7_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/8_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/9_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/10_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/11_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/12_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/13_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">13_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/14_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/15_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/16_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/17_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">17_pcl</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pcl/18_pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18_pcl</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">In-Class Activities</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/02_review/cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2 Cleaning SFO Weather Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/03_adv_ggplot/code/03-adv-ggplot-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/04_adv_maps/code/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz P1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/06_adv_data_wrangling1/06-wrangling-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6 Adv Data wrangling I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/07_adv_data_wrangling2/07-wrangling-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7 Adv Data wrangling II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/08_missing_data/08-missing-data-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8 Missing Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/09_functions/09-functions-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/10_base_r/10-base-r-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10 Base R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/11_loops_and_Iter_1/11-iteration-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11 Loops+Iter I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/12_loops_and_iter_2/12-iteration-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12 Loops+Iter II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/14_apis_2/14-apis-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14 APIs II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/15_web_scraping/15-scraping-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15 Web scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/16_databases_and_sql/16-databases-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16 Databases and SQL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../ica/18_interactive_viz/18-interactive-viz-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18 Interactive Viz</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extras</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../extra/extra-sample2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal">Goal</a></li>
+  <li><a href="#ex-1" id="toc-ex-1" class="nav-link" data-scroll-target="#ex-1">Ex 1</a></li>
+  <li><a href="#ex-2" id="toc-ex-2" class="nav-link" data-scroll-target="#ex-2">Ex 2</a></li>
+  <li><a href="#ex-3" id="toc-ex-3" class="nav-link" data-scroll-target="#ex-3">Ex 3</a></li>
+  <li><a href="#ex-4" id="toc-ex-4" class="nav-link" data-scroll-target="#ex-4">Ex 4</a></li>
+  <li><a href="#ex-5" id="toc-ex-5" class="nav-link" data-scroll-target="#ex-5">Ex 5</a></li>
+  <li><a href="#ex-6" id="toc-ex-6" class="nav-link" data-scroll-target="#ex-6">Ex 6</a></li>
+  <li><a href="#ex-7" id="toc-ex-7" class="nav-link" data-scroll-target="#ex-7">Ex 7</a></li>
+  <li><a href="#ex-8" id="toc-ex-8" class="nav-link" data-scroll-target="#ex-8">Ex 8</a></li>
+  <li><a href="#ex-9" id="toc-ex-9" class="nav-link" data-scroll-target="#ex-9">Ex 9</a></li>
+  <li><a href="#resources-reflection-required" id="toc-resources-reflection-required" class="nav-link" data-scroll-target="#resources-reflection-required">Resources Reflection (required)</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw01/src/hw1-tt.html">Homework</a></li><li class="breadcrumb-item"><a href="../../../homework-yeshedj/hw08/src/hw08-p2.html"><span class="chapter-title">HW08-P2 Databases</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">HW08-P2 Databases</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="instructions" class="level2"><h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p><strong>Requirements</strong></p>
+<p>Ex 1</p>
+<ul>
+<li>Correct SQL to get total number of badges</li>
+</ul>
+<p>Ex 2</p>
+<ul>
+<li>Correct SQL to get total number of badges per name</li>
+<li>Correct SQL to ordered correctly</li>
+</ul>
+<p>Ex 3</p>
+<ul>
+<li>Correct SQL to get display name and date for a chosen type of badge</li>
+</ul>
+<p>Ex 4</p>
+<ul>
+<li>Correct SQL to get display name or id of users who have received the most badges</li>
+</ul>
+<p>Ex 5</p>
+<ul>
+<li>Correct SQL to get display name, user id, reputation, and creationdate, ordered by id</li>
+</ul>
+<p>Ex 6</p>
+<ul>
+<li>Correct SQL to get display name, user id and total number of badges ordered by id</li>
+</ul>
+<p>Ex 6 - Correct SQL to get user id, total number of posts, total upvotes, ordered by id</p>
+<p>Ex 7</p>
+<ul>
+<li>Correct SQL to get user id, total number of comments, total upvotes on comments, ordered by id</li>
+</ul>
+<p>Ex 8</p>
+<ul>
+<li>An appropriate visual of comments and posts.</li>
+</ul></section><section id="goal" class="level2"><h2 class="anchored" data-anchor-id="goal">Goal</h2>
+<p>Analyze Stack Overflow <a href="https://stackoverflow.com/help/badges">badges</a> and <a href="https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede">posts</a> data using SQL queries.</p>
+<p>Start at <a href="https://data.stackexchange.com/stackoverflow/query/new" class="uri">https://data.stackexchange.com/stackoverflow/query/new</a>. For each exercise, <strong>record the query you used</strong> in the qmd file; you run the query on <a href="https://data.stackexchange.com/stackoverflow/query/new" class="uri">https://data.stackexchange.com/stackoverflow/query/new</a> to ensure you get the desired result.</p>
+</section><section id="ex-1" class="level2"><h2 class="anchored" data-anchor-id="ex-1">Ex 1</h2>
+<p>Count the number of total badges that have been given out. Hint: count the number of rows in the relevant table.</p>
+<blockquote class="blockquote">
+<p>ANSWER: Each of the rows in the badges table represents one badge that is given out to one user so counting all of these rows will give us the total number of badges that were given out.</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TotalBadges</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">FROM</span> Badges</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="ex-2" class="level2"><h2 class="anchored" data-anchor-id="ex-2">Ex 2</h2>
+<p>Find how many times each badge has been awarded, sorted from most awarded to least awarded.</p>
+<blockquote class="blockquote">
+<p>ANSWER: This groups the badges by name and counts the rows in each group and then sorts descending so that the most-awarded badge shows up first</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> Name, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TimesAwarded</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> Badges</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Name</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TimesAwarded <span class="kw">DESC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="ex-3" class="level2"><h2 class="anchored" data-anchor-id="ex-3">Ex 3</h2>
+<p>Find a badge that looks interesting to you. Find all the user <strong>DisplayNames</strong> that have received the badge, along with the date at which they received it.</p>
+<blockquote class="blockquote">
+<p>ANSWER: “Lengendary’ badge is awarded for earning more than 200 reputation in a day which is a big achievement. This finds all th users who have earned this and when</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> u.DisplayName, b.<span class="dt">Date</span> <span class="kw">AS</span> DateAwarded</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> Badges b</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> b.UserId <span class="op">=</span> u.<span class="kw">Id</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">WHERE</span> b.Name <span class="op">=</span> <span class="st">'Legendary'</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> b.<span class="dt">Date</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="ex-4" class="level2"><h2 class="anchored" data-anchor-id="ex-4">Ex 4</h2>
+<p>Show the users who have received the most badges, along with how many they have received.</p>
+<blockquote class="blockquote">
+<p>ANSWER: This groups the badges by user and counts per each user and then sorts descending so that the users with the most badges appear first. Joining makes it so the DisplayName is readable alongside of the count.</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> u.<span class="kw">Id</span> <span class="kw">AS</span> UserId, u.DisplayName, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TotalBadges</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> Badges b</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> b.UserId <span class="op">=</span> u.<span class="kw">Id</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">GROUP</span> <span class="kw">BY</span> u.<span class="kw">Id</span>, u.DisplayName</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TotalBadges <span class="kw">DESC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The next few activities analyze user activity. These activities mimic the common workflow of creating datasets in SQL that you analyze in <code>R</code>.</p>
+</section><section id="ex-5" class="level2"><h2 class="anchored" data-anchor-id="ex-5">Ex 5</h2>
+<p>Export a CSV file containing information about each user: <code>DisplayName, Id, Reputation, and CreationDate</code>. Because any queries that return more than 50,000 results return a random subset of 50,000 results, include a sort on the user ID variable to ensure that the first 50,000 users are retrieved. Name your file <code>users.csv</code>.</p>
+<blockquote class="blockquote">
+<p>ANSWER: The ‘Top 50000’ with ‘order by id’ makes it so that we get 50000 users who have the lowest id’s</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> TOP <span class="dv">50000</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  DisplayName,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="kw">Id</span>,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  Reputation,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  CreationDate</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">FROM</span> Users</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">Id</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="ex-6" class="level2"><h2 class="anchored" data-anchor-id="ex-6">Ex 6</h2>
+<p>Make a table that has each user’s total number of badges, and export this file as a CSV named <code>badges.csv</code>. Continue to include a sort on the user ID variable so that this data has information on the same first 50,000 users. <em>Hint: Start with the badges table, join information from users, and perform some grouped summaries.</em></p>
+<blockquote class="blockquote">
+<p>ANSWER: This starts with badges and joins to users for the DisplayName. Then, it filters to the first 50000 users by a subquery and grouping by user as well as counting by the rows gives the total of the users badges.</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> b.UserId, u.DisplayName, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TotalBadges</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> Badges b</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> b.UserId <span class="op">=</span> u.<span class="kw">Id</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">WHERE</span> u.<span class="kw">Id</span> <span class="kw">IN</span> (<span class="kw">SELECT</span> TOP <span class="dv">50000</span> <span class="kw">Id</span> <span class="kw">FROM</span> Users <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">Id</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">GROUP</span> <span class="kw">BY</span> b.UserId, u.DisplayName</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> b.UserId</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="ex-7" class="level2"><h2 class="anchored" data-anchor-id="ex-7">Ex 7</h2>
+<p>Make a table that has each user’s total number of posts and total number of upvotes the user has cast, and export this file as a CSV named <code>posts.csv</code>. Continue to include a sort on the user ID variable so that this data has information on the same first 50,000 users. <em>Hint: Start with the posts table, join information from users, and perform some grouped summaries.</em></p>
+<blockquote class="blockquote">
+<p>ANSWER: This starts from posts and joins to users for display info. Then, it filters to the first 50000 users and groups them by user to count the posts and total up the score column.</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span> p.OwnerUserId <span class="kw">AS</span> UserId, u.DisplayName,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>)      <span class="kw">AS</span> TotalPosts,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>       <span class="fu">SUM</span>(p.Score)  <span class="kw">AS</span> TotalUpvotes</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">FROM</span> Posts p</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> p.OwnerUserId <span class="op">=</span> u.<span class="kw">Id</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">WHERE</span> u.<span class="kw">Id</span> <span class="kw">IN</span> (<span class="kw">SELECT</span> TOP <span class="dv">50000</span> <span class="kw">Id</span> <span class="kw">FROM</span> Users <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">Id</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span> p.OwnerUserId, u.DisplayName</span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">ORDER</span> <span class="kw">BY</span> p.OwnerUserId</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="ex-8" class="level2"><h2 class="anchored" data-anchor-id="ex-8">Ex 8</h2>
+<p>Calculate the number of comments made per user, and the total number of upvotes across all comments made per user (this is the sum of the <code>Score</code> variable under the Comments table) and export this as a CSV file named <code>comments.csv</code>. Continue to include a sort on the user ID variable so that this data has information on the same first 50,000 users.</p>
+<blockquote class="blockquote">
+<p>ANSWER: This starts from comments and joins to users. Then, it filters to the 50000 users and groups by the users to count the comments and totals up the score.</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">SELECT</span> c.UserId, u.DisplayName,</span>
+<span id="cb8-2"><a href="#cb8-2"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>)     <span class="kw">AS</span> TotalComments,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>       <span class="fu">SUM</span>(c.Score) <span class="kw">AS</span> TotalCommentUpvotes</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">FROM</span> Comments c</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> c.UserId <span class="op">=</span> u.<span class="kw">Id</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">WHERE</span> u.<span class="kw">Id</span> <span class="kw">IN</span> (<span class="kw">SELECT</span> TOP <span class="dv">50000</span> <span class="kw">Id</span> <span class="kw">FROM</span> Users <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">Id</span>)</span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.UserId, u.DisplayName</span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">ORDER</span> <span class="kw">BY</span> c.UserId</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="ex-9" class="level2"><h2 class="anchored" data-anchor-id="ex-9">Ex 9</h2>
+<p>Import these four datasets into <code>R</code>. Visualize the relationship between the four datasets. Include at least two visualizations.</p>
+<p>Your goal should be to weave together a compelling story about how users on Stackoverflow earn badges through their activity on the site.</p>
+<blockquote class="blockquote">
+<p>ANSWER: The plots show the posting activity as the strongest driver of accumulating the badges as users with more answers and questions will earn more badges. Another important factor for the badges is commenting which also has a strong positive relationship but has a slight more noise to the graph. This shows that commenting by itself may not be enough to earn the badges, rather the amount of posts and their frequency matter much more.</p>
+</blockquote>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>users <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"users.csv"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>badges<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"badges.csv"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>posts <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"posts.csv"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a>comments<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"comments.csv"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>activity <span class="ot">&lt;-</span> users <span class="sc">|&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="fu">left_join</span>(badges, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Id"</span> <span class="ot">=</span><span class="st">"UserId"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="fu">left_join</span>(posts,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Id"</span> <span class="ot">=</span> <span class="st">"UserId"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>  <span class="fu">left_join</span>(comments,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Id"</span> <span class="ot">=</span><span class="st">"UserId"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="at">TotalBadges =</span> <span class="fu">replace_na</span>(TotalBadges, <span class="dv">0</span>),</span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="at">TotalPosts =</span> <span class="fu">replace_na</span>(TotalPosts, <span class="dv">0</span>),</span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="at">TotalUpvotes =</span> <span class="fu">replace_na</span>(TotalUpvotes, <span class="dv">0</span>),</span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="at">TotalComments =</span> <span class="fu">replace_na</span>(TotalComments, <span class="dv">0</span>),</span>
+<span id="cb9-17"><a href="#cb9-17"></a>    <span class="at">TotalCommentUpvotes =</span> <span class="fu">replace_na</span>(TotalCommentUpvotes, <span class="dv">0</span>)</span>
+<span id="cb9-18"><a href="#cb9-18"></a>  )</span>
+<span id="cb9-19"><a href="#cb9-19"></a></span>
+<span id="cb9-20"><a href="#cb9-20"></a>activity <span class="sc">|&gt;</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>  <span class="fu">filter</span>(TotalPosts <span class="sc">&gt;</span> <span class="dv">0</span>, TotalBadges <span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> TotalPosts, <span class="at">y =</span> TotalBadges)) <span class="sc">+</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">size =</span> <span class="fl">0.8</span>,<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-28"><a href="#cb9-28"></a>    <span class="at">title =</span> <span class="st">"Relationship of More Post Activity and Badges"</span>,</span>
+<span id="cb9-29"><a href="#cb9-29"></a>    <span class="at">subtitle =</span> <span class="st">"Each point is one Stack Overflow user (log–log scale)"</span>,</span>
+<span id="cb9-30"><a href="#cb9-30"></a>    <span class="at">x =</span> <span class="st">"Total posts (log scale)"</span>,</span>
+<span id="cb9-31"><a href="#cb9-31"></a>    <span class="at">y=</span><span class="st">"Total badges earned (log scale)"</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw08-p2_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>activity <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(TotalComments <span class="sc">&gt;</span> <span class="dv">0</span>, TotalBadges <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span>TotalComments, <span class="at">y =</span> TotalBadges)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"forestgreen"</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"darkred"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="at">title =</span> <span class="st">"Relationship of Commenting and Badges"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10"></a>    <span class="at">subtitle =</span> <span class="st">"Each point is one Stack Overflow user (log-log scale)"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11"></a>    <span class="at">x =</span> <span class="st">"Total comments (log scale)"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12"></a>    <span class="at">y  =</span><span class="st">"Total badges earned (log scale)"</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw08-p2_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="resources-reflection-required" class="level2"><h2 class="anchored" data-anchor-id="resources-reflection-required">Resources Reflection (required)</h2>
+<p>List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.</p>
+<p><strong>Resources:</strong></p>
+<ul>
+<li><p>Documentation</p></li>
+<li><p>ICA</p></li>
+<li><p>Texbook</p></li>
+</ul>
+<p><strong>Reflection:</strong> Similarly to pt 1 of HW8, I referred to documentation and in-class activities for guidance and referrence when I was unsure how to use or format my code. The documentations are especially useful for figuring out the correct usage and structure as it provides defintions, exmaples, and explanations. I also used the textbook at times which is always helpful for review.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      <a href="../../../homework-yeshedj/hw08/src/hw08-p1.html" class="pagination-link" aria-label="HW08-P1 Scraping">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">HW08-P1 Scraping</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../tt/2025-07-15.html" class="pagination-link" aria-label="TidyTuesday Sample 2">
+        <span class="nav-page-text"><span class="chapter-title">TidyTuesday Sample 2</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="an">title:</span><span class="co"> "HW08-P2 Databases"</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">  html: {}</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">---</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="fu">## Instructions</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a>**Requirements**</span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a>Ex 1</span>
+<span id="cb11-12"><a href="#cb11-12"></a></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="ss">-   </span>Correct SQL to get total number of badges</span>
+<span id="cb11-14"><a href="#cb11-14"></a></span>
+<span id="cb11-15"><a href="#cb11-15"></a>Ex 2</span>
+<span id="cb11-16"><a href="#cb11-16"></a></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="ss">-   </span>Correct SQL to get total number of badges per name</span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="ss">-   </span>Correct SQL to ordered correctly</span>
+<span id="cb11-19"><a href="#cb11-19"></a></span>
+<span id="cb11-20"><a href="#cb11-20"></a>Ex 3</span>
+<span id="cb11-21"><a href="#cb11-21"></a></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="ss">-   </span>Correct SQL to get display name and date for a chosen type of badge</span>
+<span id="cb11-23"><a href="#cb11-23"></a></span>
+<span id="cb11-24"><a href="#cb11-24"></a>Ex 4</span>
+<span id="cb11-25"><a href="#cb11-25"></a></span>
+<span id="cb11-26"><a href="#cb11-26"></a><span class="ss">-   </span>Correct SQL to get display name or id of users who have received the most badges</span>
+<span id="cb11-27"><a href="#cb11-27"></a></span>
+<span id="cb11-28"><a href="#cb11-28"></a>Ex 5</span>
+<span id="cb11-29"><a href="#cb11-29"></a></span>
+<span id="cb11-30"><a href="#cb11-30"></a><span class="ss">-   </span>Correct SQL to get display name, user id, reputation, and creationdate, ordered by id</span>
+<span id="cb11-31"><a href="#cb11-31"></a></span>
+<span id="cb11-32"><a href="#cb11-32"></a>Ex 6</span>
+<span id="cb11-33"><a href="#cb11-33"></a></span>
+<span id="cb11-34"><a href="#cb11-34"></a><span class="ss">-   </span>Correct SQL to get display name, user id and total number of badges ordered by id</span>
+<span id="cb11-35"><a href="#cb11-35"></a></span>
+<span id="cb11-36"><a href="#cb11-36"></a>Ex 6 - Correct SQL to get user id, total number of posts, total upvotes, ordered by id</span>
+<span id="cb11-37"><a href="#cb11-37"></a></span>
+<span id="cb11-38"><a href="#cb11-38"></a>Ex 7</span>
+<span id="cb11-39"><a href="#cb11-39"></a></span>
+<span id="cb11-40"><a href="#cb11-40"></a><span class="ss">-   </span>Correct SQL to get user id, total number of comments, total upvotes on comments, ordered by id</span>
+<span id="cb11-41"><a href="#cb11-41"></a></span>
+<span id="cb11-42"><a href="#cb11-42"></a>Ex 8</span>
+<span id="cb11-43"><a href="#cb11-43"></a></span>
+<span id="cb11-44"><a href="#cb11-44"></a><span class="ss">-   </span>An appropriate visual of comments and posts.</span>
+<span id="cb11-45"><a href="#cb11-45"></a></span>
+<span id="cb11-46"><a href="#cb11-46"></a><span class="fu">## Goal</span></span>
+<span id="cb11-47"><a href="#cb11-47"></a></span>
+<span id="cb11-48"><a href="#cb11-48"></a>Analyze Stack Overflow <span class="co">[</span><span class="ot">badges</span><span class="co">](https://stackoverflow.com/help/badges)</span> and <span class="co">[</span><span class="ot">posts</span><span class="co">](https://meta.stackexchange.com/questions/2677/database-schema-documentation-for-the-public-data-dump-and-sede)</span> data using SQL queries.</span>
+<span id="cb11-49"><a href="#cb11-49"></a></span>
+<span id="cb11-50"><a href="#cb11-50"></a>Start at <span class="ot">&lt;https://data.stackexchange.com/stackoverflow/query/new&gt;</span>. For each exercise, **record the query you used** in the qmd file; you run the query on <span class="ot">&lt;https://data.stackexchange.com/stackoverflow/query/new&gt;</span> to ensure you get the desired result.</span>
+<span id="cb11-51"><a href="#cb11-51"></a></span>
+<span id="cb11-52"><a href="#cb11-52"></a><span class="fu">## Ex 1</span></span>
+<span id="cb11-53"><a href="#cb11-53"></a></span>
+<span id="cb11-54"><a href="#cb11-54"></a>Count the number of total badges that have been given out. Hint: count the number of rows in the relevant table.</span>
+<span id="cb11-55"><a href="#cb11-55"></a></span>
+<span id="cb11-56"><a href="#cb11-56"></a><span class="at">&gt; ANSWER: Each of the rows in the badges table represents one badge that is given out to one user so counting all of these rows will give us the total number of badges that were given out.</span></span>
+<span id="cb11-57"><a href="#cb11-57"></a></span>
+<span id="cb11-58"><a href="#cb11-58"></a><span class="in">``` sql</span></span>
+<span id="cb11-59"><a href="#cb11-59"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TotalBadges</span>
+<span id="cb11-60"><a href="#cb11-60"></a><span class="kw">FROM</span> Badges</span>
+<span id="cb11-61"><a href="#cb11-61"></a><span class="in">```</span></span>
+<span id="cb11-62"><a href="#cb11-62"></a></span>
+<span id="cb11-63"><a href="#cb11-63"></a><span class="fu">## Ex 2</span></span>
+<span id="cb11-64"><a href="#cb11-64"></a></span>
+<span id="cb11-65"><a href="#cb11-65"></a>Find how many times each badge has been awarded, sorted from most awarded to least awarded.</span>
+<span id="cb11-66"><a href="#cb11-66"></a></span>
+<span id="cb11-67"><a href="#cb11-67"></a><span class="at">&gt; ANSWER: This groups the badges by name and counts the rows in each group and then sorts descending so that the most-awarded badge shows up first</span></span>
+<span id="cb11-68"><a href="#cb11-68"></a></span>
+<span id="cb11-69"><a href="#cb11-69"></a><span class="in">``` sql</span></span>
+<span id="cb11-70"><a href="#cb11-70"></a><span class="kw">SELECT</span> Name, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TimesAwarded</span>
+<span id="cb11-71"><a href="#cb11-71"></a><span class="kw">FROM</span> Badges</span>
+<span id="cb11-72"><a href="#cb11-72"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Name</span>
+<span id="cb11-73"><a href="#cb11-73"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TimesAwarded <span class="kw">DESC</span></span>
+<span id="cb11-74"><a href="#cb11-74"></a><span class="in">```</span></span>
+<span id="cb11-75"><a href="#cb11-75"></a></span>
+<span id="cb11-76"><a href="#cb11-76"></a><span class="fu">## Ex 3</span></span>
+<span id="cb11-77"><a href="#cb11-77"></a></span>
+<span id="cb11-78"><a href="#cb11-78"></a>Find a badge that looks interesting to you. Find all the user **DisplayNames** that have received the badge, along with the date at which they received it.</span>
+<span id="cb11-79"><a href="#cb11-79"></a></span>
+<span id="cb11-80"><a href="#cb11-80"></a><span class="at">&gt; ANSWER: "Lengendary' badge is awarded for earning more than 200 reputation in a day which is a big achievement. This finds all th users who have earned this and when</span></span>
+<span id="cb11-81"><a href="#cb11-81"></a></span>
+<span id="cb11-82"><a href="#cb11-82"></a><span class="in">``` sql</span></span>
+<span id="cb11-83"><a href="#cb11-83"></a><span class="kw">SELECT</span> u<span class="ch">.</span>DisplayName, b<span class="ch">.</span><span class="dt">Date</span> <span class="kw">AS</span> DateAwarded</span>
+<span id="cb11-84"><a href="#cb11-84"></a><span class="kw">FROM</span> Badges b</span>
+<span id="cb11-85"><a href="#cb11-85"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> b<span class="ch">.</span>UserId <span class="op">=</span> u<span class="ch">.</span>Id</span>
+<span id="cb11-86"><a href="#cb11-86"></a><span class="kw">WHERE</span> b<span class="ch">.</span>Name <span class="op">=</span> <span class="st">'Legendary'</span></span>
+<span id="cb11-87"><a href="#cb11-87"></a><span class="kw">ORDER</span> <span class="kw">BY</span> b<span class="ch">.</span><span class="dt">Date</span></span>
+<span id="cb11-88"><a href="#cb11-88"></a><span class="in">```</span></span>
+<span id="cb11-89"><a href="#cb11-89"></a></span>
+<span id="cb11-90"><a href="#cb11-90"></a><span class="fu">## Ex 4</span></span>
+<span id="cb11-91"><a href="#cb11-91"></a></span>
+<span id="cb11-92"><a href="#cb11-92"></a>Show the users who have received the most badges, along with how many they have received.</span>
+<span id="cb11-93"><a href="#cb11-93"></a></span>
+<span id="cb11-94"><a href="#cb11-94"></a><span class="at">&gt; ANSWER: This groups the badges by user and counts per each user and then sorts descending so that the users with the most badges appear first. Joining makes it so the DisplayName is readable alongside of the count.</span></span>
+<span id="cb11-95"><a href="#cb11-95"></a></span>
+<span id="cb11-96"><a href="#cb11-96"></a><span class="in">``` sql</span></span>
+<span id="cb11-97"><a href="#cb11-97"></a><span class="kw">SELECT</span> u<span class="ch">.</span>Id <span class="kw">AS</span> UserId, u<span class="ch">.</span>DisplayName, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TotalBadges</span>
+<span id="cb11-98"><a href="#cb11-98"></a><span class="kw">FROM</span> Badges b</span>
+<span id="cb11-99"><a href="#cb11-99"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> b<span class="ch">.</span>UserId <span class="op">=</span> u<span class="ch">.</span>Id</span>
+<span id="cb11-100"><a href="#cb11-100"></a><span class="kw">GROUP</span> <span class="kw">BY</span> u<span class="ch">.</span>Id, u<span class="ch">.</span>DisplayName</span>
+<span id="cb11-101"><a href="#cb11-101"></a><span class="kw">ORDER</span> <span class="kw">BY</span> TotalBadges <span class="kw">DESC</span></span>
+<span id="cb11-102"><a href="#cb11-102"></a><span class="in">```</span></span>
+<span id="cb11-103"><a href="#cb11-103"></a></span>
+<span id="cb11-104"><a href="#cb11-104"></a>The next few activities analyze user activity. These activities mimic the common workflow of creating datasets in SQL that you analyze in <span class="in">`R`</span>.</span>
+<span id="cb11-105"><a href="#cb11-105"></a></span>
+<span id="cb11-106"><a href="#cb11-106"></a><span class="fu">## Ex 5</span></span>
+<span id="cb11-107"><a href="#cb11-107"></a></span>
+<span id="cb11-108"><a href="#cb11-108"></a>Export a CSV file containing information about each user: <span class="in">`DisplayName, Id, Reputation, and CreationDate`</span>. Because any queries that return more than 50,000 results return a random subset of 50,000 results, include a sort on the user ID variable to ensure that the first 50,000 users are retrieved. Name your file <span class="in">`users.csv`</span>.</span>
+<span id="cb11-109"><a href="#cb11-109"></a></span>
+<span id="cb11-110"><a href="#cb11-110"></a><span class="at">&gt; ANSWER: The 'Top 50000' with 'order by id' makes it so that we get 50000 users who have the lowest id's</span></span>
+<span id="cb11-111"><a href="#cb11-111"></a></span>
+<span id="cb11-112"><a href="#cb11-112"></a><span class="in">``` sql</span></span>
+<span id="cb11-113"><a href="#cb11-113"></a><span class="kw">SELECT</span> TOP <span class="dv">50000</span></span>
+<span id="cb11-114"><a href="#cb11-114"></a>  DisplayName,</span>
+<span id="cb11-115"><a href="#cb11-115"></a>  Id,</span>
+<span id="cb11-116"><a href="#cb11-116"></a>  Reputation,</span>
+<span id="cb11-117"><a href="#cb11-117"></a>  CreationDate</span>
+<span id="cb11-118"><a href="#cb11-118"></a><span class="kw">FROM</span> Users</span>
+<span id="cb11-119"><a href="#cb11-119"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Id</span>
+<span id="cb11-120"><a href="#cb11-120"></a><span class="in">```</span></span>
+<span id="cb11-121"><a href="#cb11-121"></a></span>
+<span id="cb11-122"><a href="#cb11-122"></a><span class="fu">## Ex 6</span></span>
+<span id="cb11-123"><a href="#cb11-123"></a></span>
+<span id="cb11-124"><a href="#cb11-124"></a>Make a table that has each user's total number of badges, and export this file as a CSV named <span class="in">`badges.csv`</span>. Continue to include a sort on the user ID variable so that this data has information on the same first 50,000 users. *Hint: Start with the badges table, join information from users, and perform some grouped summaries.*</span>
+<span id="cb11-125"><a href="#cb11-125"></a></span>
+<span id="cb11-126"><a href="#cb11-126"></a><span class="at">&gt; ANSWER: This starts with badges and joins to users for the DisplayName. Then, it filters to the first 50000 users by a subquery and grouping by user as well as counting by the rows gives the total of the users badges.</span></span>
+<span id="cb11-127"><a href="#cb11-127"></a></span>
+<span id="cb11-128"><a href="#cb11-128"></a><span class="in">``` sql</span></span>
+<span id="cb11-129"><a href="#cb11-129"></a><span class="kw">SELECT</span> b<span class="ch">.</span>UserId, u<span class="ch">.</span>DisplayName, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> TotalBadges</span>
+<span id="cb11-130"><a href="#cb11-130"></a><span class="kw">FROM</span> Badges b</span>
+<span id="cb11-131"><a href="#cb11-131"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> b<span class="ch">.</span>UserId <span class="op">=</span> u<span class="ch">.</span>Id</span>
+<span id="cb11-132"><a href="#cb11-132"></a><span class="kw">WHERE</span> u<span class="ch">.</span>Id <span class="kw">IN</span> (<span class="kw">SELECT</span> TOP <span class="dv">50000</span> Id <span class="kw">FROM</span> Users <span class="kw">ORDER</span> <span class="kw">BY</span> Id)</span>
+<span id="cb11-133"><a href="#cb11-133"></a><span class="kw">GROUP</span> <span class="kw">BY</span> b<span class="ch">.</span>UserId, u<span class="ch">.</span>DisplayName</span>
+<span id="cb11-134"><a href="#cb11-134"></a><span class="kw">ORDER</span> <span class="kw">BY</span> b<span class="ch">.</span>UserId</span>
+<span id="cb11-135"><a href="#cb11-135"></a><span class="in">```</span></span>
+<span id="cb11-136"><a href="#cb11-136"></a></span>
+<span id="cb11-137"><a href="#cb11-137"></a><span class="fu">## Ex 7</span></span>
+<span id="cb11-138"><a href="#cb11-138"></a></span>
+<span id="cb11-139"><a href="#cb11-139"></a>Make a table that has each user's total number of posts and total number of upvotes the user has cast, and export this file as a CSV named <span class="in">`posts.csv`</span>. Continue to include a sort on the user ID variable so that this data has information on the same first 50,000 users. *Hint: Start with the posts table, join information from users, and perform some grouped summaries.*</span>
+<span id="cb11-140"><a href="#cb11-140"></a></span>
+<span id="cb11-141"><a href="#cb11-141"></a><span class="at">&gt; ANSWER: This starts from posts and joins to users for display info. Then, it filters to the first 50000 users and groups them by user to count the posts and total up the score column.</span></span>
+<span id="cb11-142"><a href="#cb11-142"></a></span>
+<span id="cb11-143"><a href="#cb11-143"></a><span class="in">``` sql</span></span>
+<span id="cb11-144"><a href="#cb11-144"></a><span class="kw">SELECT</span> p<span class="ch">.</span>OwnerUserId <span class="kw">AS</span> UserId, u<span class="ch">.</span>DisplayName,</span>
+<span id="cb11-145"><a href="#cb11-145"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>)      <span class="kw">AS</span> TotalPosts,</span>
+<span id="cb11-146"><a href="#cb11-146"></a>       <span class="fu">SUM</span>(p<span class="ch">.</span>Score)  <span class="kw">AS</span> TotalUpvotes</span>
+<span id="cb11-147"><a href="#cb11-147"></a><span class="kw">FROM</span> Posts p</span>
+<span id="cb11-148"><a href="#cb11-148"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> p<span class="ch">.</span>OwnerUserId <span class="op">=</span> u<span class="ch">.</span>Id</span>
+<span id="cb11-149"><a href="#cb11-149"></a><span class="kw">WHERE</span> u<span class="ch">.</span>Id <span class="kw">IN</span> (<span class="kw">SELECT</span> TOP <span class="dv">50000</span> Id <span class="kw">FROM</span> Users <span class="kw">ORDER</span> <span class="kw">BY</span> Id)</span>
+<span id="cb11-150"><a href="#cb11-150"></a><span class="kw">GROUP</span> <span class="kw">BY</span> p<span class="ch">.</span>OwnerUserId, u<span class="ch">.</span>DisplayName</span>
+<span id="cb11-151"><a href="#cb11-151"></a><span class="kw">ORDER</span> <span class="kw">BY</span> p<span class="ch">.</span>OwnerUserId</span>
+<span id="cb11-152"><a href="#cb11-152"></a><span class="in">```</span></span>
+<span id="cb11-153"><a href="#cb11-153"></a></span>
+<span id="cb11-154"><a href="#cb11-154"></a><span class="fu">## Ex 8</span></span>
+<span id="cb11-155"><a href="#cb11-155"></a></span>
+<span id="cb11-156"><a href="#cb11-156"></a>Calculate the number of comments made per user, and the total number of upvotes across all comments made per user (this is the sum of the <span class="in">`Score`</span> variable under the Comments table) and export this as a CSV file named <span class="in">`comments.csv`</span>. Continue to include a sort on the user ID variable so that this data has information on the same first 50,000 users.</span>
+<span id="cb11-157"><a href="#cb11-157"></a></span>
+<span id="cb11-158"><a href="#cb11-158"></a><span class="at">&gt; ANSWER: This starts from comments and joins to users. Then, it filters to the 50000 users and groups by the users to count the comments and totals up the score.</span></span>
+<span id="cb11-159"><a href="#cb11-159"></a></span>
+<span id="cb11-160"><a href="#cb11-160"></a><span class="in">``` sql</span></span>
+<span id="cb11-161"><a href="#cb11-161"></a><span class="kw">SELECT</span> c<span class="ch">.</span>UserId, u<span class="ch">.</span>DisplayName,</span>
+<span id="cb11-162"><a href="#cb11-162"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>)     <span class="kw">AS</span> TotalComments,</span>
+<span id="cb11-163"><a href="#cb11-163"></a>       <span class="fu">SUM</span>(c<span class="ch">.</span>Score) <span class="kw">AS</span> TotalCommentUpvotes</span>
+<span id="cb11-164"><a href="#cb11-164"></a><span class="kw">FROM</span> Comments c</span>
+<span id="cb11-165"><a href="#cb11-165"></a><span class="kw">JOIN</span> Users u <span class="kw">ON</span> c<span class="ch">.</span>UserId <span class="op">=</span> u<span class="ch">.</span>Id</span>
+<span id="cb11-166"><a href="#cb11-166"></a><span class="kw">WHERE</span> u<span class="ch">.</span>Id <span class="kw">IN</span> (<span class="kw">SELECT</span> TOP <span class="dv">50000</span> Id <span class="kw">FROM</span> Users <span class="kw">ORDER</span> <span class="kw">BY</span> Id)</span>
+<span id="cb11-167"><a href="#cb11-167"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c<span class="ch">.</span>UserId, u<span class="ch">.</span>DisplayName</span>
+<span id="cb11-168"><a href="#cb11-168"></a><span class="kw">ORDER</span> <span class="kw">BY</span> c<span class="ch">.</span>UserId</span>
+<span id="cb11-169"><a href="#cb11-169"></a><span class="in">```</span></span>
+<span id="cb11-170"><a href="#cb11-170"></a></span>
+<span id="cb11-171"><a href="#cb11-171"></a><span class="fu">## Ex 9</span></span>
+<span id="cb11-172"><a href="#cb11-172"></a></span>
+<span id="cb11-173"><a href="#cb11-173"></a>Import these four datasets into <span class="in">`R`</span>. Visualize the relationship between the four datasets. Include at least two visualizations.</span>
+<span id="cb11-174"><a href="#cb11-174"></a></span>
+<span id="cb11-175"><a href="#cb11-175"></a>Your goal should be to weave together a compelling story about how users on Stackoverflow earn badges through their activity on the site.</span>
+<span id="cb11-176"><a href="#cb11-176"></a></span>
+<span id="cb11-177"><a href="#cb11-177"></a><span class="at">&gt; ANSWER: The plots show the posting activity as the strongest driver of accumulating the badges as users with more answers and questions will earn more badges. Another important factor for the badges is commenting which also has a strong positive relationship but has a slight more noise to the graph. This shows that commenting by itself may not be enough to earn the badges, rather the amount of posts and their frequency matter much more.</span></span>
+<span id="cb11-178"><a href="#cb11-178"></a></span>
+<span id="cb11-181"><a href="#cb11-181"></a><span class="in">```{r}</span></span>
+<span id="cb11-182"><a href="#cb11-182"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-183"><a href="#cb11-183"></a></span>
+<span id="cb11-184"><a href="#cb11-184"></a>users <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"users.csv"</span>)</span>
+<span id="cb11-185"><a href="#cb11-185"></a>badges<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"badges.csv"</span>)</span>
+<span id="cb11-186"><a href="#cb11-186"></a>posts <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"posts.csv"</span>)</span>
+<span id="cb11-187"><a href="#cb11-187"></a>comments<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"comments.csv"</span>)</span>
+<span id="cb11-188"><a href="#cb11-188"></a></span>
+<span id="cb11-189"><a href="#cb11-189"></a>activity <span class="ot">&lt;-</span> users <span class="sc">|&gt;</span></span>
+<span id="cb11-190"><a href="#cb11-190"></a>  <span class="fu">left_join</span>(badges, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Id"</span> <span class="ot">=</span><span class="st">"UserId"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-191"><a href="#cb11-191"></a>  <span class="fu">left_join</span>(posts,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Id"</span> <span class="ot">=</span> <span class="st">"UserId"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-192"><a href="#cb11-192"></a>  <span class="fu">left_join</span>(comments,<span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Id"</span> <span class="ot">=</span><span class="st">"UserId"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-193"><a href="#cb11-193"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-194"><a href="#cb11-194"></a>    <span class="at">TotalBadges =</span> <span class="fu">replace_na</span>(TotalBadges, <span class="dv">0</span>),</span>
+<span id="cb11-195"><a href="#cb11-195"></a>    <span class="at">TotalPosts =</span> <span class="fu">replace_na</span>(TotalPosts, <span class="dv">0</span>),</span>
+<span id="cb11-196"><a href="#cb11-196"></a>    <span class="at">TotalUpvotes =</span> <span class="fu">replace_na</span>(TotalUpvotes, <span class="dv">0</span>),</span>
+<span id="cb11-197"><a href="#cb11-197"></a>    <span class="at">TotalComments =</span> <span class="fu">replace_na</span>(TotalComments, <span class="dv">0</span>),</span>
+<span id="cb11-198"><a href="#cb11-198"></a>    <span class="at">TotalCommentUpvotes =</span> <span class="fu">replace_na</span>(TotalCommentUpvotes, <span class="dv">0</span>)</span>
+<span id="cb11-199"><a href="#cb11-199"></a>  )</span>
+<span id="cb11-200"><a href="#cb11-200"></a></span>
+<span id="cb11-201"><a href="#cb11-201"></a>activity <span class="sc">|&gt;</span></span>
+<span id="cb11-202"><a href="#cb11-202"></a>  <span class="fu">filter</span>(TotalPosts <span class="sc">&gt;</span> <span class="dv">0</span>, TotalBadges <span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-203"><a href="#cb11-203"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> TotalPosts, <span class="at">y =</span> TotalBadges)) <span class="sc">+</span></span>
+<span id="cb11-204"><a href="#cb11-204"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">size =</span> <span class="fl">0.8</span>,<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb11-205"><a href="#cb11-205"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb11-206"><a href="#cb11-206"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb11-207"><a href="#cb11-207"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb11-208"><a href="#cb11-208"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-209"><a href="#cb11-209"></a>    <span class="at">title =</span> <span class="st">"Relationship of More Post Activity and Badges"</span>,</span>
+<span id="cb11-210"><a href="#cb11-210"></a>    <span class="at">subtitle =</span> <span class="st">"Each point is one Stack Overflow user (log–log scale)"</span>,</span>
+<span id="cb11-211"><a href="#cb11-211"></a>    <span class="at">x =</span> <span class="st">"Total posts (log scale)"</span>,</span>
+<span id="cb11-212"><a href="#cb11-212"></a>    <span class="at">y=</span><span class="st">"Total badges earned (log scale)"</span></span>
+<span id="cb11-213"><a href="#cb11-213"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-214"><a href="#cb11-214"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb11-215"><a href="#cb11-215"></a></span>
+<span id="cb11-216"><a href="#cb11-216"></a>activity <span class="sc">|&gt;</span></span>
+<span id="cb11-217"><a href="#cb11-217"></a>  <span class="fu">filter</span>(TotalComments <span class="sc">&gt;</span> <span class="dv">0</span>, TotalBadges <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-218"><a href="#cb11-218"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span>TotalComments, <span class="at">y =</span> TotalBadges)) <span class="sc">+</span></span>
+<span id="cb11-219"><a href="#cb11-219"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"forestgreen"</span>) <span class="sc">+</span></span>
+<span id="cb11-220"><a href="#cb11-220"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"darkred"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-221"><a href="#cb11-221"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb11-222"><a href="#cb11-222"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb11-223"><a href="#cb11-223"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-224"><a href="#cb11-224"></a>    <span class="at">title =</span> <span class="st">"Relationship of Commenting and Badges"</span>,</span>
+<span id="cb11-225"><a href="#cb11-225"></a>    <span class="at">subtitle =</span> <span class="st">"Each point is one Stack Overflow user (log-log scale)"</span>,</span>
+<span id="cb11-226"><a href="#cb11-226"></a>    <span class="at">x =</span> <span class="st">"Total comments (log scale)"</span>,</span>
+<span id="cb11-227"><a href="#cb11-227"></a>    <span class="at">y  =</span><span class="st">"Total badges earned (log scale)"</span></span>
+<span id="cb11-228"><a href="#cb11-228"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-229"><a href="#cb11-229"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb11-230"><a href="#cb11-230"></a><span class="in">```</span></span>
+<span id="cb11-231"><a href="#cb11-231"></a></span>
+<span id="cb11-232"><a href="#cb11-232"></a><span class="fu">## Resources Reflection (required)</span></span>
+<span id="cb11-233"><a href="#cb11-233"></a></span>
+<span id="cb11-234"><a href="#cb11-234"></a>List the resources you used to help with this assignment then write 3-5 sentence reflection on which resources were most helpful in finishing this task.</span>
+<span id="cb11-235"><a href="#cb11-235"></a></span>
+<span id="cb11-236"><a href="#cb11-236"></a>**Resources:**</span>
+<span id="cb11-237"><a href="#cb11-237"></a></span>
+<span id="cb11-238"><a href="#cb11-238"></a><span class="ss">-   </span>Documentation</span>
+<span id="cb11-239"><a href="#cb11-239"></a></span>
+<span id="cb11-240"><a href="#cb11-240"></a><span class="ss">-   </span>ICA</span>
+<span id="cb11-241"><a href="#cb11-241"></a></span>
+<span id="cb11-242"><a href="#cb11-242"></a><span class="ss">-   </span>Texbook</span>
+<span id="cb11-243"><a href="#cb11-243"></a></span>
+<span id="cb11-244"><a href="#cb11-244"></a>**Reflection:** Similarly to pt 1 of HW8, I referred to documentation and in-class activities for guidance and referrence when I was unsure how to use or format my code. The documentations are especially useful for figuring out the correct usage and structure as it provides defintions, exmaples, and explanations. I also used the textbook at times which is always helpful for review.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
